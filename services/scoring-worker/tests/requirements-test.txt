@@ -1,0 +1,5 @@
+pytest
+testcontainers[core]
+testcontainers[rabbitmq]
+pika
+requests

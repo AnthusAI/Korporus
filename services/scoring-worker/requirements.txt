@@ -1,0 +1,5 @@
+# Runtime dependencies (minimal)
+aio-pika==9.4.3
+
+# Plexus (installed from git for CI builds)
+git+https://github.com/AnthusAI/Plexus.git@main

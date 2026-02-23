@@ -1,0 +1,38 @@
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  scoring-worker:
+    build:
+      context: ../..
+      dockerfile: services/scoring-worker/Dockerfile
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    env_file:
+      - ./.env
+    environment:
+      PLEXUS_ACCOUNT_KEY: ${PLEXUS_ACCOUNT_KEY:?set in env or .env}
+      PLEXUS_API_KEY: ${PLEXUS_API_KEY:?set in env or .env}
+      PLEXUS_API_URL: ${PLEXUS_API_URL:?set in env or .env}
+      PLEXUS_LANGGRAPH_CHECKPOINTER_POSTGRES_URI: ${PLEXUS_LANGGRAPH_CHECKPOINTER_POSTGRES_URI:?set in env or .env}
+      PLEXUS_RABBITMQ_URL: amqp://guest:guest@rabbitmq:5672/
+      PLEXUS_RABBITMQ_REQUEST_QUEUE: plexus_scoring_requests
+      PLEXUS_RABBITMQ_RESPONSE_QUEUE: plexus_scoring_responses
+      # Disable GraphQL schema introspection for AppSync endpoints that don't support includeDeprecated
+      PLEXUS_FETCH_SCHEMA_FROM_TRANSPORT: "false"
+      # Optional for local testing without real backend
+      PLEXUS_SCORING_MODE: ${PLEXUS_SCORING_MODE:-mock}
+    ports:
+      - "8080:8080"
