@@ -108,6 +108,45 @@ make -f services/scoring-worker/Makefile build
 make -f services/scoring-worker/Makefile test
 ```
 
+## Terraform
+
+Terraform lives in `infra/scoring-worker`. We bootstrap an S3 backend +
+DynamoDB lock table first, then run the scoring-worker stack with a local
+tfvars file for RabbitMQ credentials.
+
+### Backend bootstrap (one-time)
+
+```bash
+# Create S3 + DynamoDB backend
+make -f services/scoring-worker/Makefile tf-backend-init
+make -f services/scoring-worker/Makefile tf-backend-apply
+
+# Initialize scoring-worker with backend config (will prompt to migrate local state)
+make -f services/scoring-worker/Makefile tf-init-backend
+```
+
+### Local tfvars for secrets
+
+Create `infra/scoring-worker/terraform.local.tfvars` (gitignored) with:
+
+```hcl
+rabbitmq_username = "scoring-worker"
+rabbitmq_password = "<password>"
+```
+
+### Plan/apply
+
+```bash
+make -f services/scoring-worker/Makefile tf-plan-local
+make -f services/scoring-worker/Makefile tf-apply-local
+```
+
+If Terraform reports a stale lock, you can clear it with:
+
+```bash
+terraform -chdir=infra/scoring-worker force-unlock <LOCK_ID>
+```
+
 ## Local dev with Docker Compose
 
 Bring up RabbitMQ (with management UI) and the scoring worker together:

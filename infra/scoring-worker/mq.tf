@@ -1,22 +1,12 @@
-# ── RabbitMQ credentials from Secrets Manager ────────────────────────────────
-# The secret must exist before running terraform apply.
-# Create it once manually:
+# ── RabbitMQ secret reference ────────────────────────────────────────────────
+# Secret must exist before running terraform apply.
+# Suggested shape (include amqp-url for ECS tasks):
 #   aws secretsmanager create-secret \
 #     --name "korporus/scoring-worker/rabbitmq" \
-#     --secret-string '{"username":"scoring-worker","password":"<strong-password>"}'
+#     --secret-string '{"username":"scoring-worker","password":"<strong-password>","amqp-url":"amqps://user:pass@host:5671/"}'
 
 data "aws_secretsmanager_secret" "rabbitmq" {
   name = "korporus/scoring-worker/rabbitmq"
-}
-
-data "aws_secretsmanager_secret_version" "rabbitmq" {
-  secret_id = data.aws_secretsmanager_secret.rabbitmq.id
-}
-
-locals {
-  rabbitmq_creds    = jsondecode(data.aws_secretsmanager_secret_version.rabbitmq.secret_string)
-  rabbitmq_username = local.rabbitmq_creds["username"]
-  rabbitmq_password = local.rabbitmq_creds["password"]
 }
 
 # ── Security group for the Amazon MQ broker ───────────────────────────────────
@@ -59,8 +49,8 @@ resource "aws_mq_broker" "scoring_worker" {
   security_groups    = [aws_security_group.mq.id]
 
   user {
-    username = local.rabbitmq_username
-    password = local.rabbitmq_password
+    username = var.rabbitmq_username
+    password = var.rabbitmq_password
   }
 
   maintenance_window_start_time {
@@ -76,24 +66,5 @@ resource "aws_mq_broker" "scoring_worker" {
   }
 }
 
-# ── Write the full AMQP URL back to Secrets Manager ──────────────────────────
-# ECS injects PLEXUS_RABBITMQ_URL from this key at task launch.
-# The URL format Amazon MQ requires: amqps://user:pass@endpoint:5671
-locals {
-  rabbitmq_amqp_url = "amqps://${local.rabbitmq_username}:${local.rabbitmq_password}@${replace(aws_mq_broker.scoring_worker.instances[0].endpoints[0], "amqps://", "")}/"
-}
-
-resource "aws_secretsmanager_secret_version" "rabbitmq_with_url" {
-  secret_id = data.aws_secretsmanager_secret.rabbitmq.id
-
-  secret_string = jsonencode({
-    username = local.rabbitmq_username
-    password = local.rabbitmq_password
-    amqp-url = local.rabbitmq_amqp_url
-  })
-
-  # Prevent replacement every apply when the value hasn't changed
-  lifecycle {
-    ignore_changes = [version_stages]
-  }
-}
+# NOTE: Terraform no longer writes the AMQP URL into Secrets Manager.
+# Keep the secret updated out-of-band to avoid secrets in state.

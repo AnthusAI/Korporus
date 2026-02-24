@@ -13,7 +13,7 @@ data "aws_iam_policy_document" "ecs_trust" {
 # container starts. Not visible to application code inside the container.
 
 resource "aws_iam_role" "execution" {
-  name               = "scoring-worker-execution-role"
+  name               = "${local.name_prefix}-execution-role"
   assume_role_policy = data.aws_iam_policy_document.ecs_trust.json
 
   tags = {
@@ -67,7 +67,7 @@ resource "aws_iam_role_policy" "execution_secrets" {
 # are required by the worker today; extend this role when that changes.
 
 resource "aws_iam_role" "task" {
-  name               = "scoring-worker-task-role"
+  name               = "${local.name_prefix}-task-role"
   assume_role_policy = data.aws_iam_policy_document.ecs_trust.json
 
   tags = {

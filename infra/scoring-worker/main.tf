@@ -7,6 +7,10 @@ terraform {
       version = "~> 5.0"
     }
   }
+
+  # Backend is configured via -backend-config or a backend config file.
+  # See infra/terraform-backend/README.md for bootstrap instructions.
+  backend "s3" {}
 }
 
 provider "aws" {

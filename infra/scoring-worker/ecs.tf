@@ -1,5 +1,5 @@
 resource "aws_ecs_cluster" "scoring_worker" {
-  name = "scoring-worker-cluster"
+  name = "${local.name_prefix}-cluster"
 
   setting {
     name  = "containerInsights"
@@ -20,10 +20,6 @@ resource "aws_ecs_task_definition" "scoring_worker" {
   memory                   = var.task_memory
   execution_role_arn       = aws_iam_role.execution.arn
   task_role_arn            = aws_iam_role.task.arn
-
-  # Ensure the amqp-url key is written to Secrets Manager before the task
-  # definition is registered, so ECS can resolve it at task launch.
-  depends_on = [aws_secretsmanager_secret_version.rabbitmq_with_url]
 
   container_definitions = jsonencode([
     {
@@ -64,7 +60,7 @@ resource "aws_ecs_task_definition" "scoring_worker" {
         },
         {
           # Full amqps:// URL written by Terraform after broker creation.
-          # Depends on aws_secretsmanager_secret_version.rabbitmq_with_url.
+          # Secret must be created/updated out-of-band.
           name      = "PLEXUS_RABBITMQ_URL"
           valueFrom = "${data.aws_secretsmanager_secret.rabbitmq.arn}:amqp-url::"
         },

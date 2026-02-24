@@ -1,4 +1,6 @@
-.PHONY: help build test test-install clean push publish tf-init tf-plan tf-apply tf-destroy
+.PHONY: help build test test-install clean push publish \
+	tf-backend-init tf-backend-apply tf-init-backend tf-plan-local tf-apply-local \
+	tf-init tf-plan tf-apply tf-destroy
 
 IMAGE_NAME  := scoring-worker
 IMAGE_TAG   := latest
@@ -6,8 +8,14 @@ AWS_REGION  := us-west-2
 # Build context is always the repo root
 REPO_ROOT   := $(shell git -C $(dir $(abspath $(lastword $(MAKEFILE_LIST)))) rev-parse --show-toplevel)
 TF_DIR      := $(REPO_ROOT)/infra/scoring-worker
+TF_BACKEND_DIR := $(REPO_ROOT)/infra/terraform-backend
 # ECR repo URL is read from Terraform state at push time — no hardcoded account ID
 ECR_REPO    := $(shell terraform -chdir=$(TF_DIR) output -raw ecr_repository_url 2>/dev/null)
+AWS_ACCOUNT_ID := $(shell aws sts get-caller-identity --query Account --output text 2>/dev/null)
+TF_STATE_BUCKET ?= korporus-tfstate-$(AWS_ACCOUNT_ID)
+TF_STATE_KEY    ?= scoring-worker/terraform.tfstate
+TF_LOCK_TABLE   ?= terraform-locks
+TF_REGION       ?= $(AWS_REGION)
 
 # ── publish defaults ──────────────────────────────────────────────────────────
 # Override on the command line: make publish SCORING_JOB_ID=<uuid> REQUEST_ID=<uuid>
@@ -77,3 +85,27 @@ tf-apply: ## Apply Terraform changes (prompts for confirmation)
 
 tf-destroy: ## Destroy all Terraform-managed resources (prompts for confirmation)
 	terraform -chdir=$(TF_DIR) destroy
+
+# ── Terraform backend bootstrap (S3 + DynamoDB) ──────────────────────────────
+tf-backend-init: ## Initialize Terraform for backend bootstrap
+	terraform -chdir=$(TF_BACKEND_DIR) init
+
+tf-backend-apply: ## Create backend resources (S3 + DynamoDB)
+	terraform -chdir=$(TF_BACKEND_DIR) apply \
+		-var="state_bucket_name=$(TF_STATE_BUCKET)" \
+		-var="lock_table_name=$(TF_LOCK_TABLE)" \
+		-var="aws_region=$(TF_REGION)"
+
+tf-init-backend: ## Init scoring-worker with S3 backend + state migration
+	terraform -chdir=$(TF_DIR) init \
+		-backend-config="bucket=$(TF_STATE_BUCKET)" \
+		-backend-config="key=$(TF_STATE_KEY)" \
+		-backend-config="region=$(TF_REGION)" \
+		-backend-config="dynamodb_table=$(TF_LOCK_TABLE)" \
+		-backend-config="encrypt=true"
+
+tf-plan-local: ## Plan using local tfvars (terraform.local.tfvars)
+	terraform -chdir=$(TF_DIR) plan -var-file=terraform.local.tfvars
+
+tf-apply-local: ## Apply using local tfvars (terraform.local.tfvars)
+	terraform -chdir=$(TF_DIR) apply -var-file=terraform.local.tfvars
