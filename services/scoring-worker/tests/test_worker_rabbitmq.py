@@ -4,52 +4,15 @@ RabbitMQ integration tests for the scoring worker.
 
 import json
 import time
-import warnings
 
 import pika
-import pytest
 import requests
-from testcontainers.core.container import DockerContainer
-from testcontainers.core.network import Network
-from testcontainers.core.waiting_utils import wait_for_logs
-from testcontainers.rabbitmq import RabbitMqContainer
 
-
-IMAGE_NAME = "scoring-worker:latest"
-
-REQUIRED_ENV = {
-    "PLEXUS_ACCOUNT_KEY": "test-account",
-    "PLEXUS_API_KEY": "test-api-key",
-    "PLEXUS_API_URL": "https://test.example.com/graphql",
-    "PLEXUS_LANGGRAPH_CHECKPOINTER_POSTGRES_URI": "postgresql://test:test@localhost/test",
-    "PLEXUS_RABBITMQ_URL": "amqp://guest:guest@rabbitmq:5672/",
-    "PLEXUS_RABBITMQ_REQUEST_QUEUE": "plexus_scoring_requests",
-    "PLEXUS_RABBITMQ_RESPONSE_QUEUE": "plexus_scoring_responses",
-    "PLEXUS_SCORING_MODE": "mock",
-}
-
-
-def wait_for_worker_ready(container, timeout=30):
-    with warnings.catch_warnings():
-        warnings.simplefilter("ignore", DeprecationWarning)
-        wait_for_logs(container, "RabbitMQ consumer started", timeout=timeout)
-
-
-@pytest.fixture(scope="module")
-def rabbitmq_setup():
-    with Network() as network:
-        rabbit = RabbitMqContainer("rabbitmq:3-management")
-        rabbit.with_network(network)
-        rabbit.with_network_aliases("rabbitmq")
-        with rabbit:
-            yield rabbit, network
-
-
-def container_with_env(env: dict, network: Network) -> DockerContainer:
-    c = DockerContainer(IMAGE_NAME).with_network(network).with_exposed_ports(8080)
-    for key, value in env.items():
-        c = c.with_env(key, value)
-    return c
+from .conftest import (
+    REQUIRED_ENV,
+    container_with_env,
+    wait_for_worker_ready,
+)
 
 
 def _connect_pika(rabbit):
@@ -135,8 +98,8 @@ def test_worker_failure_does_not_publish_success(rabbitmq_setup):
         connection.close()
 
 
-def test_readiness_reports_not_ready_when_rabbitmq_down(rabbitmq_setup):
-    rabbit, network = rabbitmq_setup
+def test_readiness_reports_not_ready_when_rabbitmq_down(rabbitmq_teardown_setup):
+    rabbit, network = rabbitmq_teardown_setup
     with container_with_env(REQUIRED_ENV, network) as container:
         wait_for_worker_ready(container)
         host = container.get_container_host_ip()

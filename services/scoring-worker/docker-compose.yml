@@ -5,8 +5,8 @@ services:
       - "5672:5672"
       - "15672:15672"
     environment:
-      RABBITMQ_DEFAULT_USER: guest
-      RABBITMQ_DEFAULT_PASS: guest
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER:-guest}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASS:-guest}
     healthcheck:
       test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
       interval: 10s
@@ -17,6 +17,7 @@ services:
     build:
       context: ../..
       dockerfile: services/scoring-worker/Dockerfile
+    restart: on-failure
     depends_on:
       rabbitmq:
         condition: service_healthy
@@ -27,7 +28,7 @@ services:
       PLEXUS_API_KEY: ${PLEXUS_API_KEY:?set in env or .env}
       PLEXUS_API_URL: ${PLEXUS_API_URL:?set in env or .env}
       PLEXUS_LANGGRAPH_CHECKPOINTER_POSTGRES_URI: ${PLEXUS_LANGGRAPH_CHECKPOINTER_POSTGRES_URI:?set in env or .env}
-      PLEXUS_RABBITMQ_URL: amqp://guest:guest@rabbitmq:5672/
+      PLEXUS_RABBITMQ_URL: amqp://${RABBITMQ_USER:-guest}:${RABBITMQ_PASS:-guest}@rabbitmq:5672/
       PLEXUS_RABBITMQ_REQUEST_QUEUE: plexus_scoring_requests
       PLEXUS_RABBITMQ_RESPONSE_QUEUE: plexus_scoring_responses
       # Disable GraphQL schema introspection for AppSync endpoints that don't support includeDeprecated
