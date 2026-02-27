@@ -84,6 +84,14 @@ Optional:
 | `PLEXUS_RABBITMQ_PREFETCH` | Prefetch count (default: 1) |
 | `PLEXUS_SCORING_MODE` | `real` or `mock` (default: `real`) |
 
+E2B workload demo (optional):
+
+| Variable | Description |
+|---|---|
+| `E2B_API_KEY` | E2B team API key |
+| `TEMPLATE_ID` | E2B template ID |
+| `E2B_DOMAIN` | E2B domain (default: `e2b.korpor.us`) |
+
 ## Build and run
 
 Build context must be the repo root:
@@ -106,6 +114,16 @@ Or via Makefile (also from repo root):
 ```bash
 make -f services/scoring-worker/Makefile build
 make -f services/scoring-worker/Makefile test
+```
+
+## Run a sandboxed workload (E2B)
+
+From the repo root, this will create a sandbox, run a Python workload, print output,
+then clean up:
+
+```bash
+E2B_API_KEY=... TEMPLATE_ID=... \
+make -f services/scoring-worker/Makefile e2b-workload
 ```
 
 ## Terraform
