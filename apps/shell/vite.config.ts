@@ -15,6 +15,7 @@ import path from "node:path";
 function devManifestRewritePlugin() {
   const devRemoteOrigins: Record<string, string> = {
     "hello-app": "http://localhost:3001",
+    "docs-app": "http://localhost:3002",
   };
 
   return {

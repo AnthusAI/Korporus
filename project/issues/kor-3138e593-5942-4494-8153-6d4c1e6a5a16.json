@@ -3,7 +3,7 @@
   "title": "Epic: Markdown Rendering in Main Slot",
   "description": "The main slot fetches and renders markdown documents with proper styling, a sidebar navigation tree, and a table of contents. Definition of done: users can browse all docs via sidebar, read rendered markdown, and see a floating TOC for longer documents.",
   "type": "epic",
-  "status": "open",
+  "status": "closed",
   "priority": 2,
   "assignee": null,
   "creator": null,
@@ -12,7 +12,7 @@
   "dependencies": [],
   "comments": [],
   "created_at": "2026-02-28T20:39:37.754635Z",
-  "updated_at": "2026-02-28T20:39:37.754635Z",
-  "closed_at": null,
+  "updated_at": "2026-02-28T21:14:54.815116Z",
+  "closed_at": "2026-02-28T21:14:54.815116Z",
   "custom": {}
 }
