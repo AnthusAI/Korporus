@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "event_id": "b7fc527e-8511-4f8c-b7da-7346d53ee2f1",
+  "issue_id": "kor-156ab957-27b4-4674-8ada-0e81d9534b7b",
+  "event_type": "issue_created",
+  "occurred_at": "2026-02-28T01:58:50.076Z",
+  "actor_id": "ryan.porter",
+  "payload": {
+    "assignee": null,
+    "description": "",
+    "issue_type": "task",
+    "labels": [],
+    "parent": "kor-1c08f5c8-ab84-4a23-bced-04b2ccef776d",
+    "priority": 2,
+    "status": "open",
+    "title": "Standalone dev mode for the Hello app"
+  }
+}

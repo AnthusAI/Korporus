@@ -1,0 +1,529 @@
+{
+  "built_at": "2026-02-28T02:02:21Z",
+  "file_mtimes": {
+    "kor-12085096-a76f-49d8-8ce4-24fa96275295.json": 1772243872.622473,
+    "kor-156ab957-27b4-4674-8ada-0e81d9534b7b.json": 1772243979.123201,
+    "kor-1a087e0b-a1c9-419f-9ac3-bf9e34957ea2.json": 1772244128.889297,
+    "kor-1a464adb-9648-4520-aa8e-0ae2d84647d6.json": 1772243923.72175,
+    "kor-1c08f5c8-ab84-4a23-bced-04b2ccef776d.json": 1772243816.847485,
+    "kor-24505adf-b97b-4de2-85fe-17d10c4c2382.json": 1772243980.321561,
+    "kor-2afd0542-44e0-405e-bb89-eb773fc6378b.json": 1772243977.373516,
+    "kor-2d290612-7a8b-4512-b052-c7e40771482b.json": 1772242888.81534,
+    "kor-32ad3cbc-79b0-4773-8650-83c5b8e11709.json": 1772244133.030168,
+    "kor-4c01c4f1-c463-422a-90b3-cb1a3122aa71.json": 1772244135.762246,
+    "kor-51bc6cb4-1b28-42f3-a3a3-9c2af3545cde.json": 1772243819.283429,
+    "kor-51c8e16d-1858-4796-83d6-cbe92e8bde93.json": 1772243928.186696,
+    "kor-58e632a6-7986-4f8e-8e92-60b0763463c8.json": 1772243814.984063,
+    "kor-5ea317b3-0d99-4541-a87e-4c6bcfe426fc.json": 1772244137.52802,
+    "kor-9e5a09b6-0b4d-4c57-aa3a-4ef0bbb14147.json": 1772243818.105045,
+    "kor-a1207aea-0974-45c3-8f24-6373126bc65c.json": 1772243873.840131,
+    "kor-a81636cd-7dd8-4792-a189-adcaa7b13384.json": 1772243981.275411,
+    "kor-b9b026a8-67bc-4390-9a49-7c255562e667.json": 1772243813.221904,
+    "kor-b9f01487-fd00-43c5-97b6-405481db8fe8.json": 1772243926.816321,
+    "kor-e48e731c-8d56-4ae3-9b30-93a7b4ab2f0a.json": 1772243875.138862
+  },
+  "issues": [
+    {
+      "assignee": null,
+      "closed_at": null,
+      "comments": [
+        {
+          "author": "ryan.porter",
+          "created_at": "2026-02-28T01:57:52.622376Z",
+          "id": "1649353c-2f24-4b38-9001-015b98bccd22",
+          "text": "Set up the Korporus monorepo with pnpm workspaces and the initial directory structure:\n\n```\nkorporus/\n├── apps/\n│   ├── shell/              (Epic 2)\n│   ├── demo-angular/       (Epic 4)\n│   └── demo-react/         (Epic 4)\n├── packages/\n│   ├── app-hello/          (Epic 3)\n│   ├── app-manifest/       (Epic 1)\n│   └── web-component-wrapper/  (Epic 1)\n├── infra/                  (Epic 5)\n├── Dockerfile              (Epic 5)\n├── pnpm-workspace.yaml\n├── tsconfig.base.json\n└── README.md\n```\n\nConfigure TypeScript with a shared base config. Set up linting (ESLint + Prettier). Add a root README.md explaining the project structure and how to run things locally.\n\n### Acceptance Criteria\n- `pnpm install` succeeds from the root.\n- Each workspace package can import from sibling packages.\n- TypeScript builds pass with strict mode enabled.\n\n### Dependencies\nNone (first step)."
+        }
+      ],
+      "created_at": "2026-02-28T01:57:11.429472Z",
+      "creator": null,
+      "custom": {},
+      "dependencies": [],
+      "description": "",
+      "id": "kor-12085096-a76f-49d8-8ce4-24fa96275295",
+      "labels": [],
+      "parent": "kor-b9b026a8-67bc-4390-9a49-7c255562e667",
+      "priority": 2,
+      "status": "open",
+      "title": "Initialize the Korporus monorepo",
+      "type": "task",
+      "updated_at": "2026-02-28T01:57:52.622376Z"
+    },
+    {
+      "assignee": null,
+      "closed_at": null,
+      "comments": [
+        {
+          "author": "ryan.porter",
+          "created_at": "2026-02-28T01:59:39.123100Z",
+          "id": "2c30a352-39de-4c18-beb5-6b3b0b671c5f",
+          "text": "Add a standalone dev mode to `packages/app-hello` so developers can work on it independently, without running the shell. This is a simple HTML page (or React root) that mounts all three Web Components side by side, simulating the slot layout.\n\nThis mirrors how real app teams will develop: they build and test their app independently, then plug it into the shell (or any host) via the manifest.\n\n### Acceptance Criteria\n- `pnpm dev` in `packages/app-hello` opens a standalone page showing all three slot views.\n- Changes to the app's components hot-reload in this standalone mode.\n\n### Dependencies\n- Story 3.1"
+        }
+      ],
+      "created_at": "2026-02-28T01:58:50.075987Z",
+      "creator": null,
+      "custom": {},
+      "dependencies": [],
+      "description": "",
+      "id": "kor-156ab957-27b4-4674-8ada-0e81d9534b7b",
+      "labels": [],
+      "parent": "kor-1c08f5c8-ab84-4a23-bced-04b2ccef776d",
+      "priority": 2,
+      "status": "open",
+      "title": "Standalone dev mode for the Hello app",
+      "type": "task",
+      "updated_at": "2026-02-28T01:59:39.123100Z"
+    },
+    {
+      "assignee": null,
+      "closed_at": null,
+      "comments": [
+        {
+          "author": "ryan.porter",
+          "created_at": "2026-02-28T02:02:08.888967Z",
+          "id": "409ff0bc-2af1-47b6-8cf1-17feef75e389",
+          "text": "Create a multi-stage Dockerfile at the repo root that:\n\n1. **Build stage:** Installs dependencies, builds the shell app, builds the Hello app's federated module bundle, and builds any other static assets.\n2. **Runtime stage:** Uses a lightweight base image (e.g., `nginx:alpine` or `node:22-alpine` with a simple static server). Serves:\n   - The shell app at `/` (the root).\n   - The Hello app's `remoteEntry.js` and assets at a predictable path (e.g., `/apps/hello/`).\n   - App manifests at `/manifests/`.\n   - (Future: backend APIs, but not needed for this POC.)\n\nConfigure CORS headers so the Amplify demo apps can fetch the remote entry bundles cross-origin.\n\n### Acceptance Criteria\n- `docker build` succeeds and produces an image under 200MB.\n- `docker run -p 8080:8080` serves the shell app at `http://localhost:8080/`.\n- The Hello app's remote entry is accessible at `http://localhost:8080/apps/hello/remoteEntry.js`.\n- CORS headers allow requests from any origin (for the POC).\n\n### Dependencies\n- Epics 2 and 3 working locally"
+        }
+      ],
+      "created_at": "2026-02-28T01:59:42.452390Z",
+      "creator": null,
+      "custom": {},
+      "dependencies": [],
+      "description": "",
+      "id": "kor-1a087e0b-a1c9-419f-9ac3-bf9e34957ea2",
+      "labels": [],
+      "parent": "kor-51bc6cb4-1b28-42f3-a3a3-9c2af3545cde",
+      "priority": 2,
+      "status": "open",
+      "title": "Dockerfile for the Korporus container",
+      "type": "task",
+      "updated_at": "2026-02-28T02:02:08.888967Z"
+    },
+    {
+      "assignee": null,
+      "closed_at": null,
+      "comments": [
+        {
+          "author": "ryan.porter",
+          "created_at": "2026-02-28T01:58:43.721635Z",
+          "id": "667c368e-c001-4461-a6b7-5796486f30e4",
+          "text": "**As a** user booting the Korporus shell,\n**I want to** see a home screen with a grid of app icons,\n**so that** I can browse and launch available applications.\n\nCreate `apps/shell` as a React + Vite app using shadcn/ui for the design system. The shell has two primary views:\n\n1. **Home screen** — A grid of app icons with labels. Each icon is rendered from manifest data.\n2. **App view** — A layout with three named DOM slots: a titlebar area at the top, a main content area in the center, and a settings panel (toggled via a gear icon or similar affordance).\n\nUse shadcn/ui for all UI components (buttons, cards, layout primitives).\n\n### Gherkin\n\n```gherkin\nFeature: Shell app scaffolding with layout slots\n\n  Scenario: Home screen renders on boot\n    Given the Korporus shell is loaded in a browser\n    When the page finishes loading\n    Then a home screen with a grid of app icons is displayed\n\n  Scenario: Navigate to app view\n    Given the home screen is displayed\n    When the user clicks a placeholder app icon\n    Then the app view layout is shown with three named slots: titlebar, main content, and settings\n    And each slot displays placeholder content\n\n  Scenario: Return to home screen\n    Given the app view layout is displayed\n    When the user clicks the back/home affordance\n    Then the home screen is displayed again\n```\n\n### Acceptance Criteria\n- The shell app starts with `pnpm dev` and renders the home screen.\n- Clicking a placeholder app icon navigates to the app view layout.\n- The app view shows the three named slots with placeholder content.\n- A back/home affordance returns to the home screen.\n- The UI uses shadcn/ui components and looks clean.\n\n### Dependencies\n- Epic 1 must be complete"
+        }
+      ],
+      "created_at": "2026-02-28T01:57:56.936887Z",
+      "creator": null,
+      "custom": {},
+      "dependencies": [],
+      "description": "",
+      "id": "kor-1a464adb-9648-4520-aa8e-0ae2d84647d6",
+      "labels": [],
+      "parent": "kor-58e632a6-7986-4f8e-8e92-60b0763463c8",
+      "priority": 2,
+      "status": "open",
+      "title": "Shell app scaffolding with layout slots",
+      "type": "story",
+      "updated_at": "2026-02-28T01:58:43.721635Z"
+    },
+    {
+      "assignee": null,
+      "closed_at": null,
+      "comments": [
+        {
+          "author": "ryan.porter",
+          "created_at": "2026-02-28T01:56:56.847367Z",
+          "id": "34a2e61d-543b-4727-aee1-0692c0127e49",
+          "text": "Build a minimal toy application that conforms to the Korporus app standard. This app exists purely to validate the federated module contract end-to-end. It exposes three Web Components — a titlebar, a main view, and a settings view — via a Module Federation remote entry bundle.\n\nThe app is trivial on purpose: the main view says \"Hello, World!\" in a configurable language. The settings view lets you pick the language. The titlebar shows the app name and current language. This provides just enough interactivity to prove that state flows correctly within a federated app and that all three slots work.\n\n### Depends on\n- Epic 1, specifically Stories 1.2 and 1.3\n\n### Children\n- Story 3.1: Hello app with three Web Component slot views (after 1.2 and 1.3)\n- Task 3.2: Standalone dev mode for the Hello app (after 3.1)"
+        }
+      ],
+      "created_at": "2026-02-28T01:41:39.619552Z",
+      "creator": null,
+      "custom": {},
+      "dependencies": [],
+      "description": "",
+      "id": "kor-1c08f5c8-ab84-4a23-bced-04b2ccef776d",
+      "labels": [],
+      "parent": "kor-2d290612-7a8b-4512-b052-c7e40771482b",
+      "priority": 2,
+      "status": "open",
+      "title": "Hello World Toy App",
+      "type": "epic",
+      "updated_at": "2026-02-28T01:56:56.847367Z"
+    },
+    {
+      "assignee": null,
+      "closed_at": null,
+      "comments": [
+        {
+          "author": "ryan.porter",
+          "created_at": "2026-02-28T01:59:40.321437Z",
+          "id": "31fa4929-4b5e-4669-a602-0e51753558d4",
+          "text": "**As a** potential customer evaluating the platform,\n**I want to** see a Korporus app (the Hello app) running inside a standard React application,\n**so that** I can understand how federated modules embed into my own tech stack.\n\nCreate `apps/demo-react` as a Next.js app (for Amplify Gen2 compatibility). The app has a simple page layout with:\n- A header explaining what the demo is.\n- Embedded titlebar, main content, and settings areas that load the Hello app's custom elements from the remote Korporus container URL.\n- A loading state while the remote bundle loads, and an error state if the container is unreachable.\n\nUse the manifest schema from `packages/app-manifest` to configure which remote entry URL and custom elements to load.\n\n### Gherkin\n\n```gherkin\nFeature: React demo app on Amplify Gen2\n\n  Scenario: Hello app renders in React demo\n    Given the React demo app is loaded in a browser\n    And the Korporus container is running\n    When the page finishes loading\n    Then the Hello app's titlebar, main content, and settings views render correctly within the React demo's layout\n\n  Scenario: Cross-slot state works in external host\n    Given the Hello app is rendered inside the React demo\n    When the user selects a different language in the settings view\n    Then the greeting in the main view updates to the new language\n    And the titlebar badge updates to reflect the new language\n\n  Scenario: Loading state while remote entry loads\n    Given the React demo app is loaded\n    When the federated module bundle is still loading\n    Then a loading state is shown to the user\n\n  Scenario: Cold start handling\n    Given the App Runner container is scaled to zero\n    When the React demo app tries to load the remote entry\n    Then the user sees a meaningful \"warming up\" message\n    And the app eventually loads once the container is ready\n```\n\n### Acceptance Criteria\n- The app builds and deploys to Amplify Gen2.\n- The Hello app's three slot views render correctly within the React demo's layout.\n- Language selection in settings updates the greeting and titlebar.\n- A loading state is shown while the remote entry loads.\n- When the App Runner container is cold, the user sees a meaningful warming-up message.\n\n### Dependencies\n- Epic 3 complete"
+        }
+      ],
+      "created_at": "2026-02-28T01:58:50.872995Z",
+      "creator": null,
+      "custom": {},
+      "dependencies": [],
+      "description": "",
+      "id": "kor-24505adf-b97b-4de2-85fe-17d10c4c2382",
+      "labels": [],
+      "parent": "kor-9e5a09b6-0b4d-4c57-aa3a-4ef0bbb14147",
+      "priority": 2,
+      "status": "open",
+      "title": "React demo app on Amplify Gen2",
+      "type": "story",
+      "updated_at": "2026-02-28T01:59:40.321437Z"
+    },
+    {
+      "assignee": null,
+      "closed_at": null,
+      "comments": [
+        {
+          "author": "ryan.porter",
+          "created_at": "2026-02-28T01:59:37.373374Z",
+          "id": "f767e5ee-da8a-4d5e-a0dd-ac067a79168c",
+          "text": "**As a** host application (the shell, or a demo app),\n**I want to** load the Hello app's federated module and render its titlebar, main content, and settings views as custom elements,\n**so that** I can validate the full federated module contract.\n\nCreate `packages/app-hello` as a React + Vite app that:\n\n1. Implements three React components:\n   - **HelloTitlebar** — Shows \"Hello World\" and the currently selected language as a badge/label.\n   - **HelloMain** — Shows \"Hello, World!\" translated into the selected language, rendered large and centered.\n   - **HelloSettings** — A dropdown or radio group to select the greeting language (English, Spanish, French, Japanese, etc.).\n2. Wraps each component as a Web Component using the wrapper from `packages/web-component-wrapper`, registering them as `<hello-app-titlebar>`, `<hello-app-main>`, and `<hello-app-settings>`.\n3. Exposes the Web Components via a Module Federation remote entry.\n4. Includes a valid `app-manifest.json` at the package root.\n\n**State sharing between slots:** Use a simple event bus or a shared module-scoped store (e.g., Zustand) that all three components import from the same federated bundle.\n\n### Gherkin\n\n```gherkin\nFeature: Hello app with three Web Component slot views\n\n  Scenario: Manifest validates successfully\n    Given the Hello app has an app-manifest.json\n    When the manifest is validated against the app manifest schema\n    Then validation passes with no errors\n\n  Scenario: Custom elements render independently\n    Given a plain HTML page\n    When the three custom elements <hello-app-titlebar>, <hello-app-main>, and <hello-app-settings> are inserted into the DOM\n    Then each element renders its content correctly\n\n  Scenario: Changing language updates all slots\n    Given all three custom elements are mounted on the page\n    When the user selects a different language in <hello-app-settings>\n    Then <hello-app-main> displays the greeting in the newly selected language\n    And <hello-app-titlebar> updates the language badge to reflect the new selection\n\n  Scenario: Module Federation remote entry is loadable\n    Given the Hello app dev server is running\n    When a browser requests the remoteEntry.js URL from the manifest\n    Then the response is a valid JavaScript bundle\n```\n\n### Acceptance Criteria\n- The app has a valid `app-manifest.json` that passes schema validation.\n- Each of the three custom elements renders correctly when inserted into a plain HTML page.\n- Changing the language in `<hello-app-settings>` updates the greeting in `<hello-app-main>` and the badge in `<hello-app-titlebar>`.\n- The Module Federation remote entry is served and loadable at runtime.\n\n### Dependencies\n- Tasks 1.2 and 1.3"
+        }
+      ],
+      "created_at": "2026-02-28T01:58:49.261170Z",
+      "creator": null,
+      "custom": {},
+      "dependencies": [],
+      "description": "",
+      "id": "kor-2afd0542-44e0-405e-bb89-eb773fc6378b",
+      "labels": [],
+      "parent": "kor-1c08f5c8-ab84-4a23-bced-04b2ccef776d",
+      "priority": 2,
+      "status": "open",
+      "title": "Hello app with three Web Component slot views",
+      "type": "story",
+      "updated_at": "2026-02-28T01:59:37.373374Z"
+    },
+    {
+      "assignee": null,
+      "closed_at": null,
+      "comments": [
+        {
+          "author": "ryan.porter",
+          "created_at": "2026-02-28T01:41:28.815227Z",
+          "id": "4bc3b6fc-7eef-4e26-8292-d16fcfad0c20",
+          "text": "Deliver a proof-of-concept demonstrating that independently-built web applications can be loaded at runtime into a host shell (the Korporus shell) through a standardized federated module contract, and that those same applications can be embedded in third-party host apps built with different frameworks.\n\nThis validates the core architectural pattern that will underpin all future Korporus applications: Chatticus, Biblicus CI, Plexus, Caduceus, and any other app in the ecosystem.\n\n### Success Criteria\n\n- The Korporus shell boots in a browser, displays a home screen with app icons, and opens a toy app into standard layout slots (titlebar, main content, settings).\n- The same toy app renders correctly inside an Angular demo app and a React demo app, both hosted on Amplify.\n- The Korporus container runs on App Runner, scales to zero, and wakes on demand when a user accesses any of the three host apps.\n- All federated module loading happens at runtime over HTTP — no build-time coupling between host and remote.\n\n### Key Architectural Decisions\n\n- **Module Federation 2.0** (`@module-federation/enhanced`) for runtime remote module loading\n- **Web Components** at the boundary between host and remote apps\n- **App manifest** (JSON) declares app metadata and custom element mappings\n- **App Runner** for the Korporus container (scale-to-zero)\n- **Amplify Gen2** for the two demo apps (static SPA hosting on CDN)"
+        }
+      ],
+      "created_at": "2026-02-28T01:41:10.362082Z",
+      "creator": null,
+      "custom": {},
+      "dependencies": [],
+      "description": "",
+      "id": "kor-2d290612-7a8b-4512-b052-c7e40771482b",
+      "labels": [],
+      "parent": null,
+      "priority": 2,
+      "status": "open",
+      "title": "Korporus Federated Application Platform POC",
+      "type": "initiative",
+      "updated_at": "2026-02-28T01:41:28.815227Z"
+    },
+    {
+      "assignee": null,
+      "closed_at": null,
+      "comments": [
+        {
+          "author": "ryan.porter",
+          "created_at": "2026-02-28T02:02:13.030080Z",
+          "id": "a554a1ef-352a-47df-86c3-f3b8cde984f4",
+          "text": "Set up AWS infrastructure to deploy the Korporus container to App Runner.\n\nConfiguration:\n- **Source:** ECR image (push from CI or manually for now).\n- **Port:** 8080.\n- **Scale to zero:** Enabled (min instances = 0 if supported, otherwise min = 1 with low-cost instance).\n- **Health check:** `GET /` returns 200.\n- **Custom domain:** Not required for POC; the default App Runner URL is fine.\n\nSet up an ECR repository for the container image. Document the manual deploy process (build image → push to ECR → App Runner picks it up).\n\n### Acceptance Criteria\n- The Korporus container is running on App Runner with a public HTTPS URL.\n- Hitting the URL in a browser shows the Korporus shell.\n- The federated module bundle is loadable cross-origin from the App Runner URL.\n- After a period of inactivity, the container scales down. Hitting the URL again wakes it.\n\n### Dependencies\n- Task 5.1"
+        }
+      ],
+      "created_at": "2026-02-28T01:59:43.473033Z",
+      "creator": null,
+      "custom": {},
+      "dependencies": [],
+      "description": "",
+      "id": "kor-32ad3cbc-79b0-4773-8650-83c5b8e11709",
+      "labels": [],
+      "parent": "kor-51bc6cb4-1b28-42f3-a3a3-9c2af3545cde",
+      "priority": 2,
+      "status": "open",
+      "title": "Deploy Korporus container to AWS App Runner",
+      "type": "task",
+      "updated_at": "2026-02-28T02:02:13.030080Z"
+    },
+    {
+      "assignee": null,
+      "closed_at": null,
+      "comments": [
+        {
+          "author": "ryan.porter",
+          "created_at": "2026-02-28T02:02:15.762147Z",
+          "id": "865fdd2e-de33-472a-90e6-42bf8d883333",
+          "text": "Deploy both demo apps to Amplify Gen2. Configure each app with the Korporus App Runner URL as an environment variable or build-time config.\n\n- `apps/demo-react` → deployed to its own Amplify app.\n- `apps/demo-angular` → deployed to its own Amplify app.\n\n### Acceptance Criteria\n- Both demo apps are accessible at their Amplify URLs.\n- Each demo app loads the Hello app's federated modules from the App Runner container.\n- The full flow works: Amplify serves the SPA → browser loads remote modules from App Runner → Hello app renders.\n\n### Dependencies\n- Task 5.2 (needs the App Runner URL)"
+        }
+      ],
+      "created_at": "2026-02-28T01:59:44.514152Z",
+      "creator": null,
+      "custom": {},
+      "dependencies": [],
+      "description": "",
+      "id": "kor-4c01c4f1-c463-422a-90b3-cb1a3122aa71",
+      "labels": [],
+      "parent": "kor-51bc6cb4-1b28-42f3-a3a3-9c2af3545cde",
+      "priority": 2,
+      "status": "open",
+      "title": "Deploy demo apps to Amplify Gen2",
+      "type": "task",
+      "updated_at": "2026-02-28T02:02:15.762147Z"
+    },
+    {
+      "assignee": null,
+      "closed_at": null,
+      "comments": [
+        {
+          "author": "ryan.porter",
+          "created_at": "2026-02-28T01:56:59.283299Z",
+          "id": "66d107f5-57ed-4842-bcd2-4ba30c69e673",
+          "text": "Package the Korporus shell and its hosted apps into a Docker container and deploy it to AWS App Runner. Set up the Amplify demo apps to point at the App Runner URL. Validate the full end-to-end flow: user hits an Amplify demo URL → browser loads the SPA from CDN → SPA fetches federated modules from App Runner (waking the container if scaled to zero) → app renders.\n\n### Depends on\n- Epic 2 and Epic 3 (shell + toy app working locally)\n\n### Children\n- Task 5.1: Dockerfile for the Korporus container (after Epics 2 and 3)\n- Task 5.2: Deploy Korporus container to AWS App Runner (after 5.1)\n- Task 5.3: Deploy demo apps to Amplify Gen2 (after 5.2)\n- Task 5.4: End-to-end smoke test of the full deployment (after 5.2 and 5.3)"
+        }
+      ],
+      "created_at": "2026-02-28T01:41:42.240482Z",
+      "creator": null,
+      "custom": {},
+      "dependencies": [],
+      "description": "",
+      "id": "kor-51bc6cb4-1b28-42f3-a3a3-9c2af3545cde",
+      "labels": [],
+      "parent": "kor-2d290612-7a8b-4512-b052-c7e40771482b",
+      "priority": 2,
+      "status": "open",
+      "title": "Containerization & Cloud Deployment",
+      "type": "epic",
+      "updated_at": "2026-02-28T01:56:59.283299Z"
+    },
+    {
+      "assignee": null,
+      "closed_at": null,
+      "comments": [
+        {
+          "author": "ryan.porter",
+          "created_at": "2026-02-28T01:58:48.186560Z",
+          "id": "7b6d9d9e-bee8-4530-b12b-42cadd4ddacb",
+          "text": "**As a** user opening an app in the Korporus shell,\n**I want to** see the app's actual content appear in the titlebar, main content area, and settings panel,\n**so that** the app fills the shell's layout the way a native OS app fills its window.\n\nWhen the user clicks an app icon, the shell:\n1. Reads the app's `remoteEntry` URL from its manifest.\n2. Dynamically loads the remote entry bundle using Module Federation 2.0's runtime API.\n3. Resolves each slot's custom element tag name from the manifest's `slots` object.\n4. Renders those custom elements into the corresponding DOM slots.\n\nHandle loading states (show a spinner in each slot while the remote bundle loads) and error states (show an error message if the remote entry fails to load).\n\n### Gherkin\n\n```gherkin\nFeature: Runtime federated module loading into shell slots\n\n  Scenario: App's federated modules load into shell slots\n    Given the user is on the home screen\n    And a valid app manifest with a reachable remoteEntry URL exists\n    When the user clicks the app icon\n    Then the app's federated module bundle is loaded at runtime over HTTP\n    And the app's custom elements render in the titlebar, main content, and settings slots\n\n  Scenario: Loading state while bundle loads\n    Given the user clicks an app icon\n    When the federated module bundle is still loading\n    Then a loading indicator is visible in each slot\n\n  Scenario: Error state when remote entry is unreachable\n    Given an app manifest with an unreachable remoteEntry URL\n    When the user clicks that app icon\n    Then an error message is displayed instead of a blank screen\n\n  Scenario: No build-time coupling\n    Given the shell app is built without the remote app present\n    When the shell loads and the user opens the app\n    Then the app loads successfully at runtime via its remoteEntry URL\n```\n\n### Acceptance Criteria\n- Clicking an app icon loads the app's federated module bundle at runtime (visible in the Network tab as a separate JS request).\n- The app's custom elements render in the correct slots.\n- A loading state is visible while the bundle loads.\n- If the remote entry URL is unreachable, an error message appears instead of a blank screen.\n- No build-time dependency exists between the shell and the app.\n\n### Dependencies\n- Story 2.2"
+        }
+      ],
+      "created_at": "2026-02-28T01:58:00.308503Z",
+      "creator": null,
+      "custom": {},
+      "dependencies": [],
+      "description": "",
+      "id": "kor-51c8e16d-1858-4796-83d6-cbe92e8bde93",
+      "labels": [],
+      "parent": "kor-58e632a6-7986-4f8e-8e92-60b0763463c8",
+      "priority": 2,
+      "status": "open",
+      "title": "Runtime federated module loading into shell slots",
+      "type": "story",
+      "updated_at": "2026-02-28T01:58:48.186560Z"
+    },
+    {
+      "assignee": null,
+      "closed_at": null,
+      "comments": [
+        {
+          "author": "ryan.porter",
+          "created_at": "2026-02-28T01:56:54.983971Z",
+          "id": "2d5f606b-161b-4fdf-889c-88126473cc7d",
+          "text": "Build the Korporus shell — a React + Vite application that functions as an OS-like environment. It reads app manifests, displays a home screen with app icons, and when a user opens an app, loads the app's federated module bundle at runtime and renders the app's custom elements into standard layout slots.\n\nThink of this as the Finder shell on macOS, or the home screen on iOS. It provides the window dressing — the titlebar area, the main content area, the settings panel — and the apps fill those slots.\n\n### Depends on\n- Epic 1 (Monorepo Setup & Build Tooling)\n\n### Children\n- Story 2.1: Shell app scaffolding with layout slots (after Epic 1)\n- Story 2.2: Manifest discovery and app registry (after 2.1)\n- Story 2.3: Runtime federated module loading into shell slots (after 2.2)"
+        }
+      ],
+      "created_at": "2026-02-28T01:41:38.240494Z",
+      "creator": null,
+      "custom": {},
+      "dependencies": [],
+      "description": "",
+      "id": "kor-58e632a6-7986-4f8e-8e92-60b0763463c8",
+      "labels": [],
+      "parent": "kor-2d290612-7a8b-4512-b052-c7e40771482b",
+      "priority": 2,
+      "status": "open",
+      "title": "Korporus Shell App",
+      "type": "epic",
+      "updated_at": "2026-02-28T01:56:54.983971Z"
+    },
+    {
+      "assignee": null,
+      "closed_at": null,
+      "comments": [
+        {
+          "author": "ryan.porter",
+          "created_at": "2026-02-28T02:02:17.527900Z",
+          "id": "8e3394cb-dcd2-4719-976b-017089cc634c",
+          "text": "Validate the complete end-to-end experience across all three entry points:\n\n1. **Korporus shell (App Runner):** Navigate to the App Runner URL. Verify the shell boots, shows the Hello app icon, and clicking it loads the app into the shell slots. Change the language and confirm all three slots update.\n2. **React demo (Amplify):** Navigate to the React demo URL. Verify the Hello app loads and is interactive.\n3. **Angular demo (Amplify):** Navigate to the Angular demo URL. Verify the Hello app loads and is interactive.\n4. **Cold start:** Wait for the App Runner container to scale down. Access one of the Amplify demo apps and verify the loading/warming-up state works and the app eventually loads.\n\nDocument any issues found. Record cold-start times. Capture screenshots for the project record.\n\n### Acceptance Criteria\n- All three entry points render the Hello app correctly.\n- Cross-slot state (language selection) works in all three hosts.\n- Cold-start scenario is handled gracefully with user-visible feedback.\n- No console errors in any browser (Chrome, Firefox, Safari).\n\n### Dependencies\n- Tasks 5.2 and 5.3"
+        }
+      ],
+      "created_at": "2026-02-28T01:59:45.665307Z",
+      "creator": null,
+      "custom": {},
+      "dependencies": [],
+      "description": "",
+      "id": "kor-5ea317b3-0d99-4541-a87e-4c6bcfe426fc",
+      "labels": [],
+      "parent": "kor-51bc6cb4-1b28-42f3-a3a3-9c2af3545cde",
+      "priority": 2,
+      "status": "open",
+      "title": "End-to-end smoke test of the full deployment",
+      "type": "task",
+      "updated_at": "2026-02-28T02:02:17.527900Z"
+    },
+    {
+      "assignee": null,
+      "closed_at": null,
+      "comments": [
+        {
+          "author": "ryan.porter",
+          "created_at": "2026-02-28T01:56:58.104928Z",
+          "id": "c94ceacb-579c-4e90-b7d1-b8cf7327bc88",
+          "text": "Build two minimal demo applications — one in Angular, one in React — that embed the Hello app's federated modules. These prove that the same app can run outside the Korporus shell, inside any third-party web application, using the same manifest and Web Component contract.\n\nBoth apps are hosted on Amplify Gen2 as static SPAs. They load the Hello app's federated module bundle at runtime from the Korporus container's URL.\n\n### Depends on\n- Epic 3 (the Hello app must be working as a federated module)\n\n### Children\n- Story 4.1: React demo app on Amplify Gen2 (parallel with 4.2)\n- Story 4.2: Angular demo app on Amplify Gen2 (parallel with 4.1)"
+        }
+      ],
+      "created_at": "2026-02-28T01:41:40.932496Z",
+      "creator": null,
+      "custom": {},
+      "dependencies": [],
+      "description": "",
+      "id": "kor-9e5a09b6-0b4d-4c57-aa3a-4ef0bbb14147",
+      "labels": [],
+      "parent": "kor-2d290612-7a8b-4512-b052-c7e40771482b",
+      "priority": 2,
+      "status": "open",
+      "title": "Demo Host Applications (Angular + React on Amplify)",
+      "type": "epic",
+      "updated_at": "2026-02-28T01:56:58.104928Z"
+    },
+    {
+      "assignee": null,
+      "closed_at": null,
+      "comments": [
+        {
+          "author": "ryan.porter",
+          "created_at": "2026-02-28T01:57:53.840042Z",
+          "id": "268053e0-c4ad-4696-b9eb-dc7ddbd64189",
+          "text": "Create the `packages/web-component-wrapper` package. This is a small utility that takes a React component (or any framework's component) and registers it as a custom element (Web Component).\n\nThis is the critical bridge that makes federated modules framework-agnostic at the consumption boundary. Every app will use this utility to wrap its slot views before exposing them.\n\nThe wrapper should:\n- Accept a React component and a custom element tag name.\n- Register the custom element via `customElements.define()`.\n- Mount/unmount the React component when the custom element connects/disconnects from the DOM.\n- Forward HTML attributes as props.\n- Support a `Shadow DOM: off` mode (so host app CSS can style the shell slots consistently if desired).\n\n### Acceptance Criteria\n- A React component wrapped with this utility can be rendered in a plain HTML file using `<my-element>` syntax.\n- The component mounts when added to the DOM and unmounts when removed.\n- Attribute changes propagate as prop updates.\n\n### Dependencies\n- Task 1.1 (monorepo must exist first)"
+        }
+      ],
+      "created_at": "2026-02-28T01:57:12.656811Z",
+      "creator": null,
+      "custom": {},
+      "dependencies": [],
+      "description": "",
+      "id": "kor-a1207aea-0974-45c3-8f24-6373126bc65c",
+      "labels": [],
+      "parent": "kor-b9b026a8-67bc-4390-9a49-7c255562e667",
+      "priority": 2,
+      "status": "open",
+      "title": "Create the Web Component wrapper utility",
+      "type": "task",
+      "updated_at": "2026-02-28T01:57:53.840042Z"
+    },
+    {
+      "assignee": null,
+      "closed_at": null,
+      "comments": [
+        {
+          "author": "ryan.porter",
+          "created_at": "2026-02-28T01:59:41.275286Z",
+          "id": "1ad0cdf9-54f7-4eda-ae61-b87e7724ff1c",
+          "text": "**As a** potential customer evaluating the platform,\n**I want to** see a Korporus app (the Hello app) running inside a standard Angular application,\n**so that** I can verify the federated module contract is truly framework-agnostic.\n\nCreate `apps/demo-angular` as an Angular application. Same concept as the React demo — a simple page layout that loads the Hello app's custom elements from the remote Korporus container URL.\n\nAngular has native support for custom elements via `CUSTOM_ELEMENTS_SCHEMA`. The Hello app's Web Components should render without any Angular-specific adapter.\n\n### Gherkin\n\n```gherkin\nFeature: Angular demo app on Amplify Gen2\n\n  Scenario: Hello app renders in Angular demo\n    Given the Angular demo app is loaded in a browser\n    And the Korporus container is running\n    When the page finishes loading\n    Then the Hello app's titlebar, main content, and settings views render correctly within the Angular demo's layout\n\n  Scenario: Cross-slot state works in Angular host\n    Given the Hello app is rendered inside the Angular demo\n    When the user selects a different language in the settings view\n    Then the greeting in the main view updates to the new language\n    And the titlebar badge updates to reflect the new language\n\n  Scenario: No React runtime loaded by Angular app\n    Given the Angular demo app has loaded the Hello app\n    When inspecting the loaded scripts\n    Then the Angular app itself does not include a React runtime\n    And the Web Components are self-contained with their own React runtime inside the federated bundle\n\n  Scenario: Cold start handling\n    Given the App Runner container is scaled to zero\n    When the Angular demo app tries to load the remote entry\n    Then loading and error states are handled gracefully\n```\n\n### Acceptance Criteria\n- The app builds and deploys to Amplify Gen2.\n- The Hello app's three slot views render correctly within the Angular demo's layout.\n- Language selection in settings updates the greeting and titlebar.\n- Loading and error/cold-start states are handled gracefully.\n- No React runtime is loaded by the Angular app — the Web Components are self-contained.\n\n### Dependencies\n- Epic 3 complete"
+        }
+      ],
+      "created_at": "2026-02-28T01:58:51.613528Z",
+      "creator": null,
+      "custom": {},
+      "dependencies": [],
+      "description": "",
+      "id": "kor-a81636cd-7dd8-4792-a189-adcaa7b13384",
+      "labels": [],
+      "parent": "kor-9e5a09b6-0b4d-4c57-aa3a-4ef0bbb14147",
+      "priority": 2,
+      "status": "open",
+      "title": "Angular demo app on Amplify Gen2",
+      "type": "story",
+      "updated_at": "2026-02-28T01:59:41.275286Z"
+    },
+    {
+      "assignee": null,
+      "closed_at": null,
+      "comments": [
+        {
+          "author": "ryan.porter",
+          "created_at": "2026-02-28T01:56:53.221782Z",
+          "id": "86d2ddd1-065a-400e-b0a4-573fb7c313f2",
+          "text": "Establish the Korporus monorepo with the workspace structure, shared tooling, and Module Federation configuration needed for all subsequent work.\n\nThis epic produces no user-visible functionality. It creates the foundation: a working monorepo where multiple apps can be built, a shared Module Federation configuration pattern, and a Web Component wrapper utility that all apps will use to expose their views as custom elements.\n\n### Children\n- Task 1.1: Initialize the Korporus monorepo\n- Task 1.2: Create the Web Component wrapper utility (depends on 1.1)\n- Task 1.3: Define the app manifest schema (depends on 1.1, parallel with 1.2)"
+        }
+      ],
+      "created_at": "2026-02-28T01:41:36.151417Z",
+      "creator": null,
+      "custom": {},
+      "dependencies": [],
+      "description": "",
+      "id": "kor-b9b026a8-67bc-4390-9a49-7c255562e667",
+      "labels": [],
+      "parent": "kor-2d290612-7a8b-4512-b052-c7e40771482b",
+      "priority": 2,
+      "status": "open",
+      "title": "Monorepo Setup & Build Tooling",
+      "type": "epic",
+      "updated_at": "2026-02-28T01:56:53.221782Z"
+    },
+    {
+      "assignee": null,
+      "closed_at": null,
+      "comments": [
+        {
+          "author": "ryan.porter",
+          "created_at": "2026-02-28T01:58:46.816200Z",
+          "id": "61aab9bf-a2bc-44cb-8f63-a8c992458a89",
+          "text": "**As a** user booting the Korporus shell,\n**I want to** see the actual installed apps on my home screen (not placeholders),\n**so that** I know what's available to me.\n\nThe shell reads app manifests and builds an app registry. For the POC, manifests are loaded from a known location (e.g., a `/manifests/` directory served by the same container, or a static list in config). The home screen renders one icon per manifest entry, using the `name` and `icon` fields.\n\nUse the validation function from `packages/app-manifest` to validate each manifest at load time. Invalid manifests are skipped with a console warning.\n\n### Gherkin\n\n```gherkin\nFeature: Manifest discovery and app registry\n\n  Scenario: Home screen renders app icons from manifests\n    Given the shell has access to one or more valid app manifests\n    When the home screen loads\n    Then each valid manifest produces an app icon showing the app name and icon\n\n  Scenario: Invalid manifest is skipped\n    Given one of the loaded manifests is missing required fields\n    When the home screen loads\n    Then that invalid manifest is skipped\n    And a warning is logged to the console\n    And the remaining valid manifests still render as app icons\n```\n\n### Acceptance Criteria\n- The home screen dynamically renders app icons from loaded manifests.\n- Each icon shows the app name and icon from the manifest.\n- An invalid manifest is skipped and a warning is logged.\n\n### Dependencies\n- Story 2.1"
+        }
+      ],
+      "created_at": "2026-02-28T01:57:58.527404Z",
+      "creator": null,
+      "custom": {},
+      "dependencies": [],
+      "description": "",
+      "id": "kor-b9f01487-fd00-43c5-97b6-405481db8fe8",
+      "labels": [],
+      "parent": "kor-58e632a6-7986-4f8e-8e92-60b0763463c8",
+      "priority": 2,
+      "status": "open",
+      "title": "Manifest discovery and app registry",
+      "type": "story",
+      "updated_at": "2026-02-28T01:58:46.816200Z"
+    },
+    {
+      "assignee": null,
+      "closed_at": null,
+      "comments": [
+        {
+          "author": "ryan.porter",
+          "created_at": "2026-02-28T01:57:55.138752Z",
+          "id": "40fe71fd-0027-4916-b6f9-39aa26cf895f",
+          "text": "Create the `packages/app-manifest` package. Define the JSON schema and TypeScript types for an app manifest.\n\nAn app manifest declares everything a host shell (or any host app) needs to know to load and render an application's federated modules.\n\n**Manifest schema (initial version):**\n\n```jsonc\n{\n  \"id\": \"hello-app\",\n  \"name\": \"Hello World\",\n  \"icon\": \"./icon.svg\",\n  \"version\": \"1.0.0\",\n  \"remoteEntry\": \"http://localhost:3001/remoteEntry.js\",\n  \"slots\": {\n    \"titlebar\": \"hello-app-titlebar\",\n    \"main\": \"hello-app-main\",\n    \"settings\": \"hello-app-settings\"\n  }\n}\n```\n\nThis package should export:\n- The JSON Schema (for validation).\n- TypeScript types (`AppManifest`, `SlotName`, etc.).\n- A validation function that checks a manifest against the schema.\n\n**Accepted slot names for the POC:** `titlebar`, `main`, `settings`.\n\n### Acceptance Criteria\n- A valid manifest passes validation.\n- An invalid manifest (missing required fields, unknown slot names) fails validation with descriptive errors.\n- Types are importable from any workspace package.\n\n### Dependencies\n- Task 1.1 (monorepo must exist first, can be parallel with 1.2)"
+        }
+      ],
+      "created_at": "2026-02-28T01:57:13.776954Z",
+      "creator": null,
+      "custom": {},
+      "dependencies": [],
+      "description": "",
+      "id": "kor-e48e731c-8d56-4ae3-9b30-93a7b4ab2f0a",
+      "labels": [],
+      "parent": "kor-b9b026a8-67bc-4390-9a49-7c255562e667",
+      "priority": 2,
+      "status": "open",
+      "title": "Define the app manifest schema",
+      "type": "task",
+      "updated_at": "2026-02-28T01:57:55.138752Z"
+    }
+  ],
+  "reverse_deps": {},
+  "version": 1
+}

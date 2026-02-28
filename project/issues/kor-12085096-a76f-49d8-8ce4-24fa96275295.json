@@ -1,0 +1,25 @@
+{
+  "id": "kor-12085096-a76f-49d8-8ce4-24fa96275295",
+  "title": "Initialize the Korporus monorepo",
+  "description": "",
+  "type": "task",
+  "status": "open",
+  "priority": 2,
+  "assignee": null,
+  "creator": null,
+  "parent": "kor-b9b026a8-67bc-4390-9a49-7c255562e667",
+  "labels": [],
+  "dependencies": [],
+  "comments": [
+    {
+      "id": "1649353c-2f24-4b38-9001-015b98bccd22",
+      "author": "ryan.porter",
+      "text": "Set up the Korporus monorepo with pnpm workspaces and the initial directory structure:\n\n```\nkorporus/\n├── apps/\n│   ├── shell/              (Epic 2)\n│   ├── demo-angular/       (Epic 4)\n│   └── demo-react/         (Epic 4)\n├── packages/\n│   ├── app-hello/          (Epic 3)\n│   ├── app-manifest/       (Epic 1)\n│   └── web-component-wrapper/  (Epic 1)\n├── infra/                  (Epic 5)\n├── Dockerfile              (Epic 5)\n├── pnpm-workspace.yaml\n├── tsconfig.base.json\n└── README.md\n```\n\nConfigure TypeScript with a shared base config. Set up linting (ESLint + Prettier). Add a root README.md explaining the project structure and how to run things locally.\n\n### Acceptance Criteria\n- `pnpm install` succeeds from the root.\n- Each workspace package can import from sibling packages.\n- TypeScript builds pass with strict mode enabled.\n\n### Dependencies\nNone (first step).",
+      "created_at": "2026-02-28T01:57:52.622376Z"
+    }
+  ],
+  "created_at": "2026-02-28T01:57:11.429472Z",
+  "updated_at": "2026-02-28T01:57:52.622376Z",
+  "closed_at": null,
+  "custom": {}
+}

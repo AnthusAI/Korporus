@@ -1,0 +1,25 @@
+{
+  "id": "kor-1a464adb-9648-4520-aa8e-0ae2d84647d6",
+  "title": "Shell app scaffolding with layout slots",
+  "description": "",
+  "type": "story",
+  "status": "open",
+  "priority": 2,
+  "assignee": null,
+  "creator": null,
+  "parent": "kor-58e632a6-7986-4f8e-8e92-60b0763463c8",
+  "labels": [],
+  "dependencies": [],
+  "comments": [
+    {
+      "id": "667c368e-c001-4461-a6b7-5796486f30e4",
+      "author": "ryan.porter",
+      "text": "**As a** user booting the Korporus shell,\n**I want to** see a home screen with a grid of app icons,\n**so that** I can browse and launch available applications.\n\nCreate `apps/shell` as a React + Vite app using shadcn/ui for the design system. The shell has two primary views:\n\n1. **Home screen** — A grid of app icons with labels. Each icon is rendered from manifest data.\n2. **App view** — A layout with three named DOM slots: a titlebar area at the top, a main content area in the center, and a settings panel (toggled via a gear icon or similar affordance).\n\nUse shadcn/ui for all UI components (buttons, cards, layout primitives).\n\n### Gherkin\n\n```gherkin\nFeature: Shell app scaffolding with layout slots\n\n  Scenario: Home screen renders on boot\n    Given the Korporus shell is loaded in a browser\n    When the page finishes loading\n    Then a home screen with a grid of app icons is displayed\n\n  Scenario: Navigate to app view\n    Given the home screen is displayed\n    When the user clicks a placeholder app icon\n    Then the app view layout is shown with three named slots: titlebar, main content, and settings\n    And each slot displays placeholder content\n\n  Scenario: Return to home screen\n    Given the app view layout is displayed\n    When the user clicks the back/home affordance\n    Then the home screen is displayed again\n```\n\n### Acceptance Criteria\n- The shell app starts with `pnpm dev` and renders the home screen.\n- Clicking a placeholder app icon navigates to the app view layout.\n- The app view shows the three named slots with placeholder content.\n- A back/home affordance returns to the home screen.\n- The UI uses shadcn/ui components and looks clean.\n\n### Dependencies\n- Epic 1 must be complete",
+      "created_at": "2026-02-28T01:58:43.721635Z"
+    }
+  ],
+  "created_at": "2026-02-28T01:57:56.936887Z",
+  "updated_at": "2026-02-28T01:58:43.721635Z",
+  "closed_at": null,
+  "custom": {}
+}

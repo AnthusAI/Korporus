@@ -1,0 +1,25 @@
+{
+  "id": "kor-a1207aea-0974-45c3-8f24-6373126bc65c",
+  "title": "Create the Web Component wrapper utility",
+  "description": "",
+  "type": "task",
+  "status": "open",
+  "priority": 2,
+  "assignee": null,
+  "creator": null,
+  "parent": "kor-b9b026a8-67bc-4390-9a49-7c255562e667",
+  "labels": [],
+  "dependencies": [],
+  "comments": [
+    {
+      "id": "268053e0-c4ad-4696-b9eb-dc7ddbd64189",
+      "author": "ryan.porter",
+      "text": "Create the `packages/web-component-wrapper` package. This is a small utility that takes a React component (or any framework's component) and registers it as a custom element (Web Component).\n\nThis is the critical bridge that makes federated modules framework-agnostic at the consumption boundary. Every app will use this utility to wrap its slot views before exposing them.\n\nThe wrapper should:\n- Accept a React component and a custom element tag name.\n- Register the custom element via `customElements.define()`.\n- Mount/unmount the React component when the custom element connects/disconnects from the DOM.\n- Forward HTML attributes as props.\n- Support a `Shadow DOM: off` mode (so host app CSS can style the shell slots consistently if desired).\n\n### Acceptance Criteria\n- A React component wrapped with this utility can be rendered in a plain HTML file using `<my-element>` syntax.\n- The component mounts when added to the DOM and unmounts when removed.\n- Attribute changes propagate as prop updates.\n\n### Dependencies\n- Task 1.1 (monorepo must exist first)",
+      "created_at": "2026-02-28T01:57:53.840042Z"
+    }
+  ],
+  "created_at": "2026-02-28T01:57:12.656811Z",
+  "updated_at": "2026-02-28T01:57:53.840042Z",
+  "closed_at": null,
+  "custom": {}
+}

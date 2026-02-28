@@ -1,0 +1,25 @@
+{
+  "id": "kor-1c08f5c8-ab84-4a23-bced-04b2ccef776d",
+  "title": "Hello World Toy App",
+  "description": "",
+  "type": "epic",
+  "status": "open",
+  "priority": 2,
+  "assignee": null,
+  "creator": null,
+  "parent": "kor-2d290612-7a8b-4512-b052-c7e40771482b",
+  "labels": [],
+  "dependencies": [],
+  "comments": [
+    {
+      "id": "34a2e61d-543b-4727-aee1-0692c0127e49",
+      "author": "ryan.porter",
+      "text": "Build a minimal toy application that conforms to the Korporus app standard. This app exists purely to validate the federated module contract end-to-end. It exposes three Web Components — a titlebar, a main view, and a settings view — via a Module Federation remote entry bundle.\n\nThe app is trivial on purpose: the main view says \"Hello, World!\" in a configurable language. The settings view lets you pick the language. The titlebar shows the app name and current language. This provides just enough interactivity to prove that state flows correctly within a federated app and that all three slots work.\n\n### Depends on\n- Epic 1, specifically Stories 1.2 and 1.3\n\n### Children\n- Story 3.1: Hello app with three Web Component slot views (after 1.2 and 1.3)\n- Task 3.2: Standalone dev mode for the Hello app (after 3.1)",
+      "created_at": "2026-02-28T01:56:56.847367Z"
+    }
+  ],
+  "created_at": "2026-02-28T01:41:39.619552Z",
+  "updated_at": "2026-02-28T01:56:56.847367Z",
+  "closed_at": null,
+  "custom": {}
+}

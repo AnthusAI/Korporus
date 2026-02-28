@@ -1,0 +1,25 @@
+{
+  "id": "kor-1a087e0b-a1c9-419f-9ac3-bf9e34957ea2",
+  "title": "Dockerfile for the Korporus container",
+  "description": "",
+  "type": "task",
+  "status": "open",
+  "priority": 2,
+  "assignee": null,
+  "creator": null,
+  "parent": "kor-51bc6cb4-1b28-42f3-a3a3-9c2af3545cde",
+  "labels": [],
+  "dependencies": [],
+  "comments": [
+    {
+      "id": "409ff0bc-2af1-47b6-8cf1-17feef75e389",
+      "author": "ryan.porter",
+      "text": "Create a multi-stage Dockerfile at the repo root that:\n\n1. **Build stage:** Installs dependencies, builds the shell app, builds the Hello app's federated module bundle, and builds any other static assets.\n2. **Runtime stage:** Uses a lightweight base image (e.g., `nginx:alpine` or `node:22-alpine` with a simple static server). Serves:\n   - The shell app at `/` (the root).\n   - The Hello app's `remoteEntry.js` and assets at a predictable path (e.g., `/apps/hello/`).\n   - App manifests at `/manifests/`.\n   - (Future: backend APIs, but not needed for this POC.)\n\nConfigure CORS headers so the Amplify demo apps can fetch the remote entry bundles cross-origin.\n\n### Acceptance Criteria\n- `docker build` succeeds and produces an image under 200MB.\n- `docker run -p 8080:8080` serves the shell app at `http://localhost:8080/`.\n- The Hello app's remote entry is accessible at `http://localhost:8080/apps/hello/remoteEntry.js`.\n- CORS headers allow requests from any origin (for the POC).\n\n### Dependencies\n- Epics 2 and 3 working locally",
+      "created_at": "2026-02-28T02:02:08.888967Z"
+    }
+  ],
+  "created_at": "2026-02-28T01:59:42.452390Z",
+  "updated_at": "2026-02-28T02:02:08.888967Z",
+  "closed_at": null,
+  "custom": {}
+}

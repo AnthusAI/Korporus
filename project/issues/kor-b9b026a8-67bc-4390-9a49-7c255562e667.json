@@ -1,0 +1,25 @@
+{
+  "id": "kor-b9b026a8-67bc-4390-9a49-7c255562e667",
+  "title": "Monorepo Setup & Build Tooling",
+  "description": "",
+  "type": "epic",
+  "status": "open",
+  "priority": 2,
+  "assignee": null,
+  "creator": null,
+  "parent": "kor-2d290612-7a8b-4512-b052-c7e40771482b",
+  "labels": [],
+  "dependencies": [],
+  "comments": [
+    {
+      "id": "86d2ddd1-065a-400e-b0a4-573fb7c313f2",
+      "author": "ryan.porter",
+      "text": "Establish the Korporus monorepo with the workspace structure, shared tooling, and Module Federation configuration needed for all subsequent work.\n\nThis epic produces no user-visible functionality. It creates the foundation: a working monorepo where multiple apps can be built, a shared Module Federation configuration pattern, and a Web Component wrapper utility that all apps will use to expose their views as custom elements.\n\n### Children\n- Task 1.1: Initialize the Korporus monorepo\n- Task 1.2: Create the Web Component wrapper utility (depends on 1.1)\n- Task 1.3: Define the app manifest schema (depends on 1.1, parallel with 1.2)",
+      "created_at": "2026-02-28T01:56:53.221782Z"
+    }
+  ],
+  "created_at": "2026-02-28T01:41:36.151417Z",
+  "updated_at": "2026-02-28T01:56:53.221782Z",
+  "closed_at": null,
+  "custom": {}
+}

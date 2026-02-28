@@ -1,0 +1,25 @@
+{
+  "id": "kor-b9f01487-fd00-43c5-97b6-405481db8fe8",
+  "title": "Manifest discovery and app registry",
+  "description": "",
+  "type": "story",
+  "status": "open",
+  "priority": 2,
+  "assignee": null,
+  "creator": null,
+  "parent": "kor-58e632a6-7986-4f8e-8e92-60b0763463c8",
+  "labels": [],
+  "dependencies": [],
+  "comments": [
+    {
+      "id": "61aab9bf-a2bc-44cb-8f63-a8c992458a89",
+      "author": "ryan.porter",
+      "text": "**As a** user booting the Korporus shell,\n**I want to** see the actual installed apps on my home screen (not placeholders),\n**so that** I know what's available to me.\n\nThe shell reads app manifests and builds an app registry. For the POC, manifests are loaded from a known location (e.g., a `/manifests/` directory served by the same container, or a static list in config). The home screen renders one icon per manifest entry, using the `name` and `icon` fields.\n\nUse the validation function from `packages/app-manifest` to validate each manifest at load time. Invalid manifests are skipped with a console warning.\n\n### Gherkin\n\n```gherkin\nFeature: Manifest discovery and app registry\n\n  Scenario: Home screen renders app icons from manifests\n    Given the shell has access to one or more valid app manifests\n    When the home screen loads\n    Then each valid manifest produces an app icon showing the app name and icon\n\n  Scenario: Invalid manifest is skipped\n    Given one of the loaded manifests is missing required fields\n    When the home screen loads\n    Then that invalid manifest is skipped\n    And a warning is logged to the console\n    And the remaining valid manifests still render as app icons\n```\n\n### Acceptance Criteria\n- The home screen dynamically renders app icons from loaded manifests.\n- Each icon shows the app name and icon from the manifest.\n- An invalid manifest is skipped and a warning is logged.\n\n### Dependencies\n- Story 2.1",
+      "created_at": "2026-02-28T01:58:46.816200Z"
+    }
+  ],
+  "created_at": "2026-02-28T01:57:58.527404Z",
+  "updated_at": "2026-02-28T01:58:46.816200Z",
+  "closed_at": null,
+  "custom": {}
+}

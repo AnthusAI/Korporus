@@ -1,0 +1,25 @@
+{
+  "id": "kor-a81636cd-7dd8-4792-a189-adcaa7b13384",
+  "title": "Angular demo app on Amplify Gen2",
+  "description": "",
+  "type": "story",
+  "status": "open",
+  "priority": 2,
+  "assignee": null,
+  "creator": null,
+  "parent": "kor-9e5a09b6-0b4d-4c57-aa3a-4ef0bbb14147",
+  "labels": [],
+  "dependencies": [],
+  "comments": [
+    {
+      "id": "1ad0cdf9-54f7-4eda-ae61-b87e7724ff1c",
+      "author": "ryan.porter",
+      "text": "**As a** potential customer evaluating the platform,\n**I want to** see a Korporus app (the Hello app) running inside a standard Angular application,\n**so that** I can verify the federated module contract is truly framework-agnostic.\n\nCreate `apps/demo-angular` as an Angular application. Same concept as the React demo — a simple page layout that loads the Hello app's custom elements from the remote Korporus container URL.\n\nAngular has native support for custom elements via `CUSTOM_ELEMENTS_SCHEMA`. The Hello app's Web Components should render without any Angular-specific adapter.\n\n### Gherkin\n\n```gherkin\nFeature: Angular demo app on Amplify Gen2\n\n  Scenario: Hello app renders in Angular demo\n    Given the Angular demo app is loaded in a browser\n    And the Korporus container is running\n    When the page finishes loading\n    Then the Hello app's titlebar, main content, and settings views render correctly within the Angular demo's layout\n\n  Scenario: Cross-slot state works in Angular host\n    Given the Hello app is rendered inside the Angular demo\n    When the user selects a different language in the settings view\n    Then the greeting in the main view updates to the new language\n    And the titlebar badge updates to reflect the new language\n\n  Scenario: No React runtime loaded by Angular app\n    Given the Angular demo app has loaded the Hello app\n    When inspecting the loaded scripts\n    Then the Angular app itself does not include a React runtime\n    And the Web Components are self-contained with their own React runtime inside the federated bundle\n\n  Scenario: Cold start handling\n    Given the App Runner container is scaled to zero\n    When the Angular demo app tries to load the remote entry\n    Then loading and error states are handled gracefully\n```\n\n### Acceptance Criteria\n- The app builds and deploys to Amplify Gen2.\n- The Hello app's three slot views render correctly within the Angular demo's layout.\n- Language selection in settings updates the greeting and titlebar.\n- Loading and error/cold-start states are handled gracefully.\n- No React runtime is loaded by the Angular app — the Web Components are self-contained.\n\n### Dependencies\n- Epic 3 complete",
+      "created_at": "2026-02-28T01:59:41.275286Z"
+    }
+  ],
+  "created_at": "2026-02-28T01:58:51.613528Z",
+  "updated_at": "2026-02-28T01:59:41.275286Z",
+  "closed_at": null,
+  "custom": {}
+}

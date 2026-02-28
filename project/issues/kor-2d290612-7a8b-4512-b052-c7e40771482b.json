@@ -1,0 +1,25 @@
+{
+  "id": "kor-2d290612-7a8b-4512-b052-c7e40771482b",
+  "title": "Korporus Federated Application Platform POC",
+  "description": "",
+  "type": "initiative",
+  "status": "open",
+  "priority": 2,
+  "assignee": null,
+  "creator": null,
+  "parent": null,
+  "labels": [],
+  "dependencies": [],
+  "comments": [
+    {
+      "id": "4bc3b6fc-7eef-4e26-8292-d16fcfad0c20",
+      "author": "ryan.porter",
+      "text": "Deliver a proof-of-concept demonstrating that independently-built web applications can be loaded at runtime into a host shell (the Korporus shell) through a standardized federated module contract, and that those same applications can be embedded in third-party host apps built with different frameworks.\n\nThis validates the core architectural pattern that will underpin all future Korporus applications: Chatticus, Biblicus CI, Plexus, Caduceus, and any other app in the ecosystem.\n\n### Success Criteria\n\n- The Korporus shell boots in a browser, displays a home screen with app icons, and opens a toy app into standard layout slots (titlebar, main content, settings).\n- The same toy app renders correctly inside an Angular demo app and a React demo app, both hosted on Amplify.\n- The Korporus container runs on App Runner, scales to zero, and wakes on demand when a user accesses any of the three host apps.\n- All federated module loading happens at runtime over HTTP — no build-time coupling between host and remote.\n\n### Key Architectural Decisions\n\n- **Module Federation 2.0** (`@module-federation/enhanced`) for runtime remote module loading\n- **Web Components** at the boundary between host and remote apps\n- **App manifest** (JSON) declares app metadata and custom element mappings\n- **App Runner** for the Korporus container (scale-to-zero)\n- **Amplify Gen2** for the two demo apps (static SPA hosting on CDN)",
+      "created_at": "2026-02-28T01:41:28.815227Z"
+    }
+  ],
+  "created_at": "2026-02-28T01:41:10.362082Z",
+  "updated_at": "2026-02-28T01:41:28.815227Z",
+  "closed_at": null,
+  "custom": {}
+}
