@@ -1,0 +1,53 @@
+<div class="demo-page">
+  <header class="demo-header">
+    <div class="demo-header__inner">
+      <h1>Korporus Platform Demo</h1>
+      <p>Hello World app running as a federated module — Angular host</p>
+    </div>
+  </header>
+
+  <main class="demo-main">
+    <!-- Loading state -->
+    <div *ngIf="isLoading" class="state-container">
+      <div class="spinner"></div>
+      <p>Loading Hello World app…</p>
+    </div>
+
+    <!-- Error state -->
+    <div *ngIf="isError" class="state-container error">
+      <div class="error-icon">&#9888;&#65039;</div>
+      <p class="error-title">Failed to load app</p>
+      <p class="error-detail">{{ errorMessage() }}</p>
+      <p class="cold-start-msg">
+        The Korporus container may still be starting up.
+        This usually takes 10–30 seconds.
+      </p>
+      <button (click)="retry()" class="retry-btn">Try Again</button>
+    </div>
+
+    <!-- Loaded state: three slots -->
+    <div *ngIf="isLoaded" class="slots-layout">
+      <section class="slot-titlebar">
+        <div class="slot-label">Titlebar</div>
+        <div #titlebarsSlot class="slot-content"></div>
+      </section>
+
+      <div class="slot-body">
+        <section class="slot-main">
+          <div class="slot-label">Main Content</div>
+          <div #mainSlot class="slot-content slot-content--main"></div>
+        </section>
+
+        <aside class="slot-settings">
+          <div class="slot-label">Settings</div>
+          <div #settingsSlot class="slot-content"></div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <footer class="demo-footer">
+    <p>Remote entry: <code>{{ remoteEntry }}</code></p>
+    <p>Federated modules load at runtime — no React runtime in this Angular app.</p>
+  </footer>
+</div>

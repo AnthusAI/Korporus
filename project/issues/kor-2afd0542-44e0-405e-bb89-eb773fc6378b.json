@@ -3,7 +3,7 @@
   "title": "Hello app with three Web Component slot views",
   "description": "",
   "type": "story",
-  "status": "open",
+  "status": "closed",
   "priority": 2,
   "assignee": null,
   "creator": null,
@@ -16,10 +16,16 @@
       "author": "ryan.porter",
       "text": "**As a** host application (the shell, or a demo app),\n**I want to** load the Hello app's federated module and render its titlebar, main content, and settings views as custom elements,\n**so that** I can validate the full federated module contract.\n\nCreate `packages/app-hello` as a React + Vite app that:\n\n1. Implements three React components:\n   - **HelloTitlebar** — Shows \"Hello World\" and the currently selected language as a badge/label.\n   - **HelloMain** — Shows \"Hello, World!\" translated into the selected language, rendered large and centered.\n   - **HelloSettings** — A dropdown or radio group to select the greeting language (English, Spanish, French, Japanese, etc.).\n2. Wraps each component as a Web Component using the wrapper from `packages/web-component-wrapper`, registering them as `<hello-app-titlebar>`, `<hello-app-main>`, and `<hello-app-settings>`.\n3. Exposes the Web Components via a Module Federation remote entry.\n4. Includes a valid `app-manifest.json` at the package root.\n\n**State sharing between slots:** Use a simple event bus or a shared module-scoped store (e.g., Zustand) that all three components import from the same federated bundle.\n\n### Gherkin\n\n```gherkin\nFeature: Hello app with three Web Component slot views\n\n  Scenario: Manifest validates successfully\n    Given the Hello app has an app-manifest.json\n    When the manifest is validated against the app manifest schema\n    Then validation passes with no errors\n\n  Scenario: Custom elements render independently\n    Given a plain HTML page\n    When the three custom elements <hello-app-titlebar>, <hello-app-main>, and <hello-app-settings> are inserted into the DOM\n    Then each element renders its content correctly\n\n  Scenario: Changing language updates all slots\n    Given all three custom elements are mounted on the page\n    When the user selects a different language in <hello-app-settings>\n    Then <hello-app-main> displays the greeting in the newly selected language\n    And <hello-app-titlebar> updates the language badge to reflect the new selection\n\n  Scenario: Module Federation remote entry is loadable\n    Given the Hello app dev server is running\n    When a browser requests the remoteEntry.js URL from the manifest\n    Then the response is a valid JavaScript bundle\n```\n\n### Acceptance Criteria\n- The app has a valid `app-manifest.json` that passes schema validation.\n- Each of the three custom elements renders correctly when inserted into a plain HTML page.\n- Changing the language in `<hello-app-settings>` updates the greeting in `<hello-app-main>` and the badge in `<hello-app-titlebar>`.\n- The Module Federation remote entry is served and loadable at runtime.\n\n### Dependencies\n- Tasks 1.2 and 1.3",
       "created_at": "2026-02-28T01:59:37.373374Z"
+    },
+    {
+      "id": "b0070651-fddf-4c66-ba7b-5a2478d4a5a8",
+      "author": "ryan.porter",
+      "text": "Implemented packages/app-hello with Module Federation 2.0 (@module-federation/vite). Three React components (HelloTitlebar, HelloMain, HelloSettings) wrapped as Web Components via @korporus/web-component-wrapper. Zustand store shared across all three. bootstrap.ts exposed as federated module at remoteEntry.js on port 3001. Standalone dev main.tsx renders all three WCs side-by-side. Builds clean.",
+      "created_at": "2026-02-28T15:04:53.516638Z"
     }
   ],
   "created_at": "2026-02-28T01:58:49.261170Z",
-  "updated_at": "2026-02-28T01:59:37.373374Z",
-  "closed_at": null,
+  "updated_at": "2026-02-28T15:04:53.516638Z",
+  "closed_at": "2026-02-28T15:04:53.189568Z",
   "custom": {}
 }

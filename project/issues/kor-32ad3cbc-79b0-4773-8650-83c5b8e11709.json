@@ -3,7 +3,7 @@
   "title": "Deploy Korporus container to AWS App Runner",
   "description": "",
   "type": "task",
-  "status": "open",
+  "status": "closed",
   "priority": 2,
   "assignee": null,
   "creator": null,
@@ -16,10 +16,16 @@
       "author": "ryan.porter",
       "text": "Set up AWS infrastructure to deploy the Korporus container to App Runner.\n\nConfiguration:\n- **Source:** ECR image (push from CI or manually for now).\n- **Port:** 8080.\n- **Scale to zero:** Enabled (min instances = 0 if supported, otherwise min = 1 with low-cost instance).\n- **Health check:** `GET /` returns 200.\n- **Custom domain:** Not required for POC; the default App Runner URL is fine.\n\nSet up an ECR repository for the container image. Document the manual deploy process (build image → push to ECR → App Runner picks it up).\n\n### Acceptance Criteria\n- The Korporus container is running on App Runner with a public HTTPS URL.\n- Hitting the URL in a browser shows the Korporus shell.\n- The federated module bundle is loadable cross-origin from the App Runner URL.\n- After a period of inactivity, the container scales down. Hitting the URL again wakes it.\n\n### Dependencies\n- Task 5.1",
       "created_at": "2026-02-28T02:02:13.030080Z"
+    },
+    {
+      "id": "f264768f-0016-49af-be88-b266d18c0a8e",
+      "author": "ryan.porter",
+      "text": "Created infra/shell/ Terraform module:\n- main.tf (provider, backend, locals)\n- variables.tf (aws_region, environment, image_tag)\n- ecr.tf (ECR repo korporus/shell + lifecycle policy, keep last 10 images)\n- iam.tf (App Runner ECR access role + instance role)\n- apprunner.tf (App Runner service: 0.25vCPU/0.5GB, port 8080, /health check)\n- outputs.tf (ECR URL, App Runner service URL + ARN)\n- README.md (deploy runbook: build → push to ECR → terraform apply)\n\nScale-to-zero: use aws apprunner pause-service / resume-service (App Runner doesn't natively scale-to-zero; pause/resume simulates it for the POC).",
+      "created_at": "2026-02-28T18:49:16.094066Z"
     }
   ],
   "created_at": "2026-02-28T01:59:43.473033Z",
-  "updated_at": "2026-02-28T02:02:13.030080Z",
-  "closed_at": null,
+  "updated_at": "2026-02-28T18:49:16.094066Z",
+  "closed_at": "2026-02-28T18:49:15.990423Z",
   "custom": {}
 }

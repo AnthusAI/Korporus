@@ -3,7 +3,7 @@
   "title": "Define the app manifest schema",
   "description": "",
   "type": "task",
-  "status": "open",
+  "status": "closed",
   "priority": 2,
   "assignee": null,
   "creator": null,
@@ -16,10 +16,16 @@
       "author": "ryan.porter",
       "text": "Create the `packages/app-manifest` package. Define the JSON schema and TypeScript types for an app manifest.\n\nAn app manifest declares everything a host shell (or any host app) needs to know to load and render an application's federated modules.\n\n**Manifest schema (initial version):**\n\n```jsonc\n{\n  \"id\": \"hello-app\",\n  \"name\": \"Hello World\",\n  \"icon\": \"./icon.svg\",\n  \"version\": \"1.0.0\",\n  \"remoteEntry\": \"http://localhost:3001/remoteEntry.js\",\n  \"slots\": {\n    \"titlebar\": \"hello-app-titlebar\",\n    \"main\": \"hello-app-main\",\n    \"settings\": \"hello-app-settings\"\n  }\n}\n```\n\nThis package should export:\n- The JSON Schema (for validation).\n- TypeScript types (`AppManifest`, `SlotName`, etc.).\n- A validation function that checks a manifest against the schema.\n\n**Accepted slot names for the POC:** `titlebar`, `main`, `settings`.\n\n### Acceptance Criteria\n- A valid manifest passes validation.\n- An invalid manifest (missing required fields, unknown slot names) fails validation with descriptive errors.\n- Types are importable from any workspace package.\n\n### Dependencies\n- Task 1.1 (monorepo must exist first, can be parallel with 1.2)",
       "created_at": "2026-02-28T01:57:55.138752Z"
+    },
+    {
+      "id": "520dc461-100a-4411-bba6-238f7a6d033d",
+      "author": "ryan.porter",
+      "text": "Implemented packages/app-manifest/src/:\n- schema.ts — AppManifest type, SlotName union ('titlebar'|'main'|'settings'), APP_MANIFEST_SCHEMA JSON Schema object\n- validate.ts — validateManifest() (returns ValidationResult), parseManifest() (throws on invalid)\n- index.ts — clean public re-export\n\nZero runtime dependencies. 13 tests covering: valid manifest, partial slots, non-object input, missing fields, bad version, unknown slot names, empty slot values.\nAll 13 tests pass (vitest run). Strict TypeScript passes cleanly.",
+      "created_at": "2026-02-28T05:54:19.178077Z"
     }
   ],
   "created_at": "2026-02-28T01:57:13.776954Z",
-  "updated_at": "2026-02-28T01:57:55.138752Z",
-  "closed_at": null,
+  "updated_at": "2026-02-28T05:54:19.178077Z",
+  "closed_at": "2026-02-28T05:54:18.839197Z",
   "custom": {}
 }

@@ -3,7 +3,7 @@
   "title": "Manifest discovery and app registry",
   "description": "",
   "type": "story",
-  "status": "open",
+  "status": "closed",
   "priority": 2,
   "assignee": null,
   "creator": null,
@@ -16,10 +16,16 @@
       "author": "ryan.porter",
       "text": "**As a** user booting the Korporus shell,\n**I want to** see the actual installed apps on my home screen (not placeholders),\n**so that** I know what's available to me.\n\nThe shell reads app manifests and builds an app registry. For the POC, manifests are loaded from a known location (e.g., a `/manifests/` directory served by the same container, or a static list in config). The home screen renders one icon per manifest entry, using the `name` and `icon` fields.\n\nUse the validation function from `packages/app-manifest` to validate each manifest at load time. Invalid manifests are skipped with a console warning.\n\n### Gherkin\n\n```gherkin\nFeature: Manifest discovery and app registry\n\n  Scenario: Home screen renders app icons from manifests\n    Given the shell has access to one or more valid app manifests\n    When the home screen loads\n    Then each valid manifest produces an app icon showing the app name and icon\n\n  Scenario: Invalid manifest is skipped\n    Given one of the loaded manifests is missing required fields\n    When the home screen loads\n    Then that invalid manifest is skipped\n    And a warning is logged to the console\n    And the remaining valid manifests still render as app icons\n```\n\n### Acceptance Criteria\n- The home screen dynamically renders app icons from loaded manifests.\n- Each icon shows the app name and icon from the manifest.\n- An invalid manifest is skipped and a warning is logged.\n\n### Dependencies\n- Story 2.1",
       "created_at": "2026-02-28T01:58:46.816200Z"
+    },
+    {
+      "id": "ee18e610-ccdb-4510-861a-72a259ed0fec",
+      "author": "ryan.porter",
+      "text": "Implemented manifest loading in the shell. Created:\n- apps/shell/public/manifests/hello-app.json (static manifest served by the container)\n- apps/shell/public/manifests/hello-app-icon.svg\n- src/config/apps.ts (MANIFEST_URLS list)\n- src/services/manifestLoader.ts (fetch + parseManifest validation, skips invalid with warning)\n- src/store/registry.ts (Zustand store: AppManifest[], loaded flag)\nHome.tsx updated to render icons from manifest data; shell chrome shows manifest app name.",
+      "created_at": "2026-02-28T18:41:59.779417Z"
     }
   ],
   "created_at": "2026-02-28T01:57:58.527404Z",
-  "updated_at": "2026-02-28T01:58:46.816200Z",
-  "closed_at": null,
+  "updated_at": "2026-02-28T18:41:59.779417Z",
+  "closed_at": "2026-02-28T18:41:59.434457Z",
   "custom": {}
 }

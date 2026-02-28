@@ -1,0 +1,19 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - cd apps/demo-angular
+        - npm install -g @angular/cli
+        - pnpm install
+    build:
+      commands:
+        - cd apps/demo-angular
+        - pnpm build
+  artifacts:
+    baseDirectory: apps/demo-angular/dist/demo-angular/browser
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*

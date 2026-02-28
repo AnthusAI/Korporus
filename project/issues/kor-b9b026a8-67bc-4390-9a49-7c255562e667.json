@@ -3,7 +3,7 @@
   "title": "Monorepo Setup & Build Tooling",
   "description": "",
   "type": "epic",
-  "status": "open",
+  "status": "closed",
   "priority": 2,
   "assignee": null,
   "creator": null,
@@ -16,10 +16,16 @@
       "author": "ryan.porter",
       "text": "Establish the Korporus monorepo with the workspace structure, shared tooling, and Module Federation configuration needed for all subsequent work.\n\nThis epic produces no user-visible functionality. It creates the foundation: a working monorepo where multiple apps can be built, a shared Module Federation configuration pattern, and a Web Component wrapper utility that all apps will use to expose their views as custom elements.\n\n### Children\n- Task 1.1: Initialize the Korporus monorepo\n- Task 1.2: Create the Web Component wrapper utility (depends on 1.1)\n- Task 1.3: Define the app manifest schema (depends on 1.1, parallel with 1.2)",
       "created_at": "2026-02-28T01:56:53.221782Z"
+    },
+    {
+      "id": "9f363880-9284-4b86-9381-ebe29accdf09",
+      "author": "ryan.porter",
+      "text": "Epic complete. All three tasks closed:\n- kor-120850 (1.1): Monorepo scaffolded — pnpm workspaces, tsconfig.base.json, ESLint/Prettier, 6 workspace stubs\n- kor-a1207a (1.2): web-component-wrapper — registerCustomElement() bridges React → custom elements\n- kor-e48e73 (1.3): app-manifest — AppManifest types, JSON Schema, validateManifest/parseManifest, 13 passing tests\n\nStories 2.1 (shell scaffolding) and 3.1 (Hello app) can now begin.",
+      "created_at": "2026-02-28T05:54:34.884839Z"
     }
   ],
   "created_at": "2026-02-28T01:41:36.151417Z",
-  "updated_at": "2026-02-28T01:56:53.221782Z",
-  "closed_at": null,
+  "updated_at": "2026-02-28T05:54:34.884839Z",
+  "closed_at": "2026-02-28T05:54:34.762097Z",
   "custom": {}
 }

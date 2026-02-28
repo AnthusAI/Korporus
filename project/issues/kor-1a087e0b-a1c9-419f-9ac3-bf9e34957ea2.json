@@ -3,7 +3,7 @@
   "title": "Dockerfile for the Korporus container",
   "description": "",
   "type": "task",
-  "status": "open",
+  "status": "closed",
   "priority": 2,
   "assignee": null,
   "creator": null,
@@ -16,10 +16,16 @@
       "author": "ryan.porter",
       "text": "Create a multi-stage Dockerfile at the repo root that:\n\n1. **Build stage:** Installs dependencies, builds the shell app, builds the Hello app's federated module bundle, and builds any other static assets.\n2. **Runtime stage:** Uses a lightweight base image (e.g., `nginx:alpine` or `node:22-alpine` with a simple static server). Serves:\n   - The shell app at `/` (the root).\n   - The Hello app's `remoteEntry.js` and assets at a predictable path (e.g., `/apps/hello/`).\n   - App manifests at `/manifests/`.\n   - (Future: backend APIs, but not needed for this POC.)\n\nConfigure CORS headers so the Amplify demo apps can fetch the remote entry bundles cross-origin.\n\n### Acceptance Criteria\n- `docker build` succeeds and produces an image under 200MB.\n- `docker run -p 8080:8080` serves the shell app at `http://localhost:8080/`.\n- The Hello app's remote entry is accessible at `http://localhost:8080/apps/hello/remoteEntry.js`.\n- CORS headers allow requests from any origin (for the POC).\n\n### Dependencies\n- Epics 2 and 3 working locally",
       "created_at": "2026-02-28T02:02:08.888967Z"
+    },
+    {
+      "id": "1642da60-6bab-40b6-b497-9fa2d43dbdde",
+      "author": "ryan.porter",
+      "text": "Created Dockerfile (multi-stage: node:22-alpine build → nginx:1.27-alpine runtime) and infra/nginx.conf.\n\nBuild stage: pnpm install → build shell + hello app.\nRuntime stage:\n  - Shell SPA at / (index.html fallback for React Router)\n  - Hello app remote assets at /apps/hello/\n  - Manifests at /manifests/\n  - Health check at /health\n  - CORS headers: Access-Control-Allow-Origin: * on all routes\n  - Gzip enabled\n\nDev mode: shell Vite dev server proxies /apps/hello/ → localhost:3001 so the same relative manifest URL works both locally and in container.\n\nNext: Task 5.2 (ECR + App Runner deployment).",
+      "created_at": "2026-02-28T18:47:43.662467Z"
     }
   ],
   "created_at": "2026-02-28T01:59:42.452390Z",
-  "updated_at": "2026-02-28T02:02:08.888967Z",
-  "closed_at": null,
+  "updated_at": "2026-02-28T18:47:43.662467Z",
+  "closed_at": "2026-02-28T18:47:43.317780Z",
   "custom": {}
 }

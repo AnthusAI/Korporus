@@ -1,0 +1,18 @@
+{
+  "id": "kor-6a17382e-d000-46b2-aa52-1b5922648754",
+  "title": "Story 2.1: Shell app scaffolding with layout slots",
+  "description": "",
+  "type": "task",
+  "status": "closed",
+  "priority": 2,
+  "assignee": null,
+  "creator": null,
+  "parent": null,
+  "labels": [],
+  "dependencies": [],
+  "comments": [],
+  "created_at": "2026-02-28T06:54:44.014151Z",
+  "updated_at": "2026-02-28T07:18:03.592549Z",
+  "closed_at": "2026-02-28T07:18:03.592549Z",
+  "custom": {}
+}

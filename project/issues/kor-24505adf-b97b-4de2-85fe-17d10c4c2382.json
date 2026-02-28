@@ -3,7 +3,7 @@
   "title": "React demo app on Amplify Gen2",
   "description": "",
   "type": "story",
-  "status": "open",
+  "status": "closed",
   "priority": 2,
   "assignee": null,
   "creator": null,
@@ -16,10 +16,16 @@
       "author": "ryan.porter",
       "text": "**As a** potential customer evaluating the platform,\n**I want to** see a Korporus app (the Hello app) running inside a standard React application,\n**so that** I can understand how federated modules embed into my own tech stack.\n\nCreate `apps/demo-react` as a Next.js app (for Amplify Gen2 compatibility). The app has a simple page layout with:\n- A header explaining what the demo is.\n- Embedded titlebar, main content, and settings areas that load the Hello app's custom elements from the remote Korporus container URL.\n- A loading state while the remote bundle loads, and an error state if the container is unreachable.\n\nUse the manifest schema from `packages/app-manifest` to configure which remote entry URL and custom elements to load.\n\n### Gherkin\n\n```gherkin\nFeature: React demo app on Amplify Gen2\n\n  Scenario: Hello app renders in React demo\n    Given the React demo app is loaded in a browser\n    And the Korporus container is running\n    When the page finishes loading\n    Then the Hello app's titlebar, main content, and settings views render correctly within the React demo's layout\n\n  Scenario: Cross-slot state works in external host\n    Given the Hello app is rendered inside the React demo\n    When the user selects a different language in the settings view\n    Then the greeting in the main view updates to the new language\n    And the titlebar badge updates to reflect the new language\n\n  Scenario: Loading state while remote entry loads\n    Given the React demo app is loaded\n    When the federated module bundle is still loading\n    Then a loading state is shown to the user\n\n  Scenario: Cold start handling\n    Given the App Runner container is scaled to zero\n    When the React demo app tries to load the remote entry\n    Then the user sees a meaningful \"warming up\" message\n    And the app eventually loads once the container is ready\n```\n\n### Acceptance Criteria\n- The app builds and deploys to Amplify Gen2.\n- The Hello app's three slot views render correctly within the React demo's layout.\n- Language selection in settings updates the greeting and titlebar.\n- A loading state is shown while the remote entry loads.\n- When the App Runner container is cold, the user sees a meaningful warming-up message.\n\n### Dependencies\n- Epic 3 complete",
       "created_at": "2026-02-28T01:59:40.321437Z"
+    },
+    {
+      "id": "894c85d8-ad97-4108-b7f6-63d7b8b54e32",
+      "author": "ryan.porter",
+      "text": "Implemented apps/demo-react — React 19 + Vite + @module-federation/runtime. Single page loads hello-app Web Components at runtime from VITE_KORPORUS_REMOTE_ENTRY env var (defaults to /apps/hello/remoteEntry.js). Loading/error/cold-start states. amplify.yml included. Build: 264KB JS, clean.",
+      "created_at": "2026-02-28T19:33:43.416506Z"
     }
   ],
   "created_at": "2026-02-28T01:58:50.872995Z",
-  "updated_at": "2026-02-28T01:59:40.321437Z",
-  "closed_at": null,
+  "updated_at": "2026-02-28T19:33:43.416506Z",
+  "closed_at": "2026-02-28T19:33:43.311755Z",
   "custom": {}
 }

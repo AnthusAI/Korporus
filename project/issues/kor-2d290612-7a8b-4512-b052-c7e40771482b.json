@@ -3,7 +3,7 @@
   "title": "Korporus Federated Application Platform POC",
   "description": "",
   "type": "initiative",
-  "status": "open",
+  "status": "in_progress",
   "priority": 2,
   "assignee": null,
   "creator": null,
@@ -19,7 +19,7 @@
     }
   ],
   "created_at": "2026-02-28T01:41:10.362082Z",
-  "updated_at": "2026-02-28T01:41:28.815227Z",
+  "updated_at": "2026-02-28T19:34:29.476215Z",
   "closed_at": null,
   "custom": {}
 }

@@ -3,7 +3,7 @@
   "title": "Korporus Shell App",
   "description": "",
   "type": "epic",
-  "status": "open",
+  "status": "closed",
   "priority": 2,
   "assignee": null,
   "creator": null,
@@ -16,10 +16,16 @@
       "author": "ryan.porter",
       "text": "Build the Korporus shell — a React + Vite application that functions as an OS-like environment. It reads app manifests, displays a home screen with app icons, and when a user opens an app, loads the app's federated module bundle at runtime and renders the app's custom elements into standard layout slots.\n\nThink of this as the Finder shell on macOS, or the home screen on iOS. It provides the window dressing — the titlebar area, the main content area, the settings panel — and the apps fill those slots.\n\n### Depends on\n- Epic 1 (Monorepo Setup & Build Tooling)\n\n### Children\n- Story 2.1: Shell app scaffolding with layout slots (after Epic 1)\n- Story 2.2: Manifest discovery and app registry (after 2.1)\n- Story 2.3: Runtime federated module loading into shell slots (after 2.2)",
       "created_at": "2026-02-28T01:56:54.983971Z"
+    },
+    {
+      "id": "7a6dc15f-ff1c-4eaf-9185-73a1c3ec6338",
+      "author": "ryan.porter",
+      "text": "Epic complete. All three stories closed:\n- kor-1a464a (2.1): Shell scaffolded with home screen, three-slot layout, settings panel\n- kor-b9f014 (2.2): Manifest discovery and app registry via Zustand + static manifest files\n- kor-51c8e1 (2.3): Runtime MF loading - shell loads remoteEntry, registers WCs, renders into slots\n\nShell builds clean (tsc + vite). Full integration with Hello app ready to test locally.\nNext: Epic 5 (Dockerfile + App Runner).",
+      "created_at": "2026-02-28T18:44:51.572789Z"
     }
   ],
   "created_at": "2026-02-28T01:41:38.240494Z",
-  "updated_at": "2026-02-28T01:56:54.983971Z",
-  "closed_at": null,
+  "updated_at": "2026-02-28T18:44:51.572789Z",
+  "closed_at": "2026-02-28T18:44:51.229048Z",
   "custom": {}
 }

@@ -4,6 +4,13 @@ console.log
 **/__pycache__/
 *.pyc
 
+# Dependencies & build output
+node_modules/
+dist/
+.cache/
+.__mf__temp/
+.angular/
+
 # Terraform
 *.tfstate
 *.tfstate.backup
