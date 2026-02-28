@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "event_id": "f3f788e9-6f05-479f-a138-20a9b20804f4",
+  "issue_id": "kor-62893053-6f6e-4419-b957-389470ccfec1",
+  "event_type": "issue_created",
+  "occurred_at": "2026-02-28T20:40:25.912Z",
+  "actor_id": "ryan.porter",
+  "payload": {
+    "assignee": null,
+    "description": "Write docs/getting-started/installation.md (prerequisites, pnpm install) and docs/getting-started/first-app.md (creating your first Korporus app step-by-step).",
+    "issue_type": "task",
+    "labels": [],
+    "parent": "kor-91da8cc2-1484-4352-89e5-2dad0339418b",
+    "priority": 2,
+    "status": "open",
+    "title": "Getting Started documentation"
+  }
+}

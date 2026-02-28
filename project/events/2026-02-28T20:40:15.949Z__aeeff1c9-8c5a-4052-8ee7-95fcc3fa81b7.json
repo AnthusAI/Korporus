@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "event_id": "aeeff1c9-8c5a-4052-8ee7-95fcc3fa81b7",
+  "issue_id": "kor-e3290ff1-fefd-43e5-9544-9c0f03fbe8e3",
+  "event_type": "issue_created",
+  "occurred_at": "2026-02-28T20:40:15.949Z",
+  "actor_id": "ryan.porter",
+  "payload": {
+    "assignee": null,
+    "description": "Create docs/ directory at repo root with index.md, getting-started/, architecture/, guides/, reference/ sections, each with an index.md placeholder.",
+    "issue_type": "task",
+    "labels": [],
+    "parent": "kor-566b5893-7930-414c-ad3c-5df5170d1096",
+    "priority": 2,
+    "status": "open",
+    "title": "Initial documentation content structure"
+  }
+}

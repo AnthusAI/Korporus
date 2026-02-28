@@ -1,0 +1,18 @@
+{
+  "id": "kor-62893053-6f6e-4419-b957-389470ccfec1",
+  "title": "Getting Started documentation",
+  "description": "Write docs/getting-started/installation.md (prerequisites, pnpm install) and docs/getting-started/first-app.md (creating your first Korporus app step-by-step).",
+  "type": "task",
+  "status": "open",
+  "priority": 2,
+  "assignee": null,
+  "creator": null,
+  "parent": "kor-91da8cc2-1484-4352-89e5-2dad0339418b",
+  "labels": [],
+  "dependencies": [],
+  "comments": [],
+  "created_at": "2026-02-28T20:40:25.912756Z",
+  "updated_at": "2026-02-28T20:40:25.912756Z",
+  "closed_at": null,
+  "custom": {}
+}

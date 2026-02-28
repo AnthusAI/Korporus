@@ -1,0 +1,18 @@
+{
+  "id": "kor-0dc32789-150c-4002-98fc-046b3633143e",
+  "title": "Build pipeline generates docs manifest from markdown files",
+  "description": "Create src/plugins/vite-plugin-docs.ts: globs docs/**/*.md, extracts titles/headings/search content, emits docs-manifest.json. Serves manifest and .md files dynamically in dev mode.",
+  "type": "task",
+  "status": "open",
+  "priority": 2,
+  "assignee": null,
+  "creator": null,
+  "parent": "kor-566b5893-7930-414c-ad3c-5df5170d1096",
+  "labels": [],
+  "dependencies": [],
+  "comments": [],
+  "created_at": "2026-02-28T20:40:15.871895Z",
+  "updated_at": "2026-02-28T20:40:15.871895Z",
+  "closed_at": null,
+  "custom": {}
+}
