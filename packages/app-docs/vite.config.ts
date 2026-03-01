@@ -8,6 +8,7 @@ const APP_ID = "docs-app";
 const ports = getPortEntry(APP_ID);
 
 export default defineConfig(({ mode }) => ({
+  base: mode === "development" ? "/" : "/apps/docs/",
   plugins: [
     react(),
     docsPlugin(),

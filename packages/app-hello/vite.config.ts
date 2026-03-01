@@ -6,7 +6,8 @@ import { getPortEntry, getDevOrigin } from "@korporus/platform-config";
 const APP_ID = "hello-app";
 const ports = getPortEntry(APP_ID);
 
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
+  base: mode === "development" ? "/" : "/apps/hello/",
   plugins: [
     react(),
     federation({
@@ -41,4 +42,4 @@ export default defineConfig({
     port: ports.preview,
     cors: true,
   },
-});
+}));
