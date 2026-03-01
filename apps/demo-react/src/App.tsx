@@ -8,7 +8,8 @@ import { useEffect } from "react";
 type LoadState = "idle" | "loading" | "loaded" | "error";
 
 const remoteEntry =
-  import.meta.env.VITE_KORPORUS_REMOTE_ENTRY ?? "/apps/hello/remoteEntry.js";
+  import.meta.env.VITE_KORPORUS_REMOTE_ENTRY ??
+  "https://awdmyggmnm.us-east-1.awsapprunner.com/apps/hello/mf-manifest.json";
 
 export default function App() {
   const [loadState, setLoadState] = useState<LoadState>("idle");

@@ -30,8 +30,7 @@ export class AppComponent implements OnInit, AfterViewChecked {
   constructor(private cdr: ChangeDetectorRef) {}
 
   private resolveRemoteEntry(): string {
-    const envValue = '/apps/hello/remoteEntry.js'; // default
-    return envValue;
+    return 'https://awdmyggmnm.us-east-1.awsapprunner.com/apps/hello/mf-manifest.json';
   }
 
   ngOnInit(): void {
