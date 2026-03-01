@@ -42,7 +42,7 @@ export class AppComponent implements OnInit, AfterViewChecked {
     this.slotsMounted = false;
     this.loadState.set('loading');
     try {
-      const resolvedEntry = this.remoteEntry.startsWith('http')
+      const resolvedEntry = this.remoteEntry.startsWith('http://') || this.remoteEntry.startsWith('https://')
         ? this.remoteEntry
         : `${window.location.origin}${this.remoteEntry}`;
       await loadAppModule('hello_app', resolvedEntry);
