@@ -1,0 +1,25 @@
+{
+  "id": "kor-d7c40521-7e6e-41a7-b294-d22d46666003",
+  "title": "Verify parity, build, typecheck, and close website epic",
+  "description": "Run site typecheck/build and manual parity checks for navigation, theme, routes, docs behavior, media fallback, and frame pictogram stability; close tasks and epic after validation.",
+  "type": "task",
+  "status": "closed",
+  "priority": 2,
+  "assignee": null,
+  "creator": null,
+  "parent": "kor-3b94b69b-fe6f-4119-996e-410ff1427f59",
+  "labels": [],
+  "dependencies": [],
+  "comments": [
+    {
+      "id": "c0f872af-1d69-4d9a-9314-dc91ab7fc9b9",
+      "author": "ryan.porter",
+      "text": "Verified @korporus/site with successful typecheck/build, route generation checks for required pages/docs/features, theme/video wiring inspection, and frame-pictogram interface validation.",
+      "created_at": "2026-03-01T15:54:34.414863Z"
+    }
+  ],
+  "created_at": "2026-03-01T15:30:21.259422Z",
+  "updated_at": "2026-03-01T15:54:34.414863Z",
+  "closed_at": "2026-03-01T15:54:34.336068Z",
+  "custom": {}
+}

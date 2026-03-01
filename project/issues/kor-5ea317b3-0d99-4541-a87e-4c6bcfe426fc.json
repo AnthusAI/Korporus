@@ -3,7 +3,7 @@
   "title": "End-to-end smoke test of the full deployment",
   "description": "",
   "type": "task",
-  "status": "in_progress",
+  "status": "closed",
   "priority": 2,
   "assignee": null,
   "creator": null,
@@ -19,7 +19,7 @@
     }
   ],
   "created_at": "2026-02-28T01:59:45.665307Z",
-  "updated_at": "2026-02-28T19:34:11.792996Z",
-  "closed_at": null,
+  "updated_at": "2026-03-01T16:03:41.099965Z",
+  "closed_at": "2026-03-01T16:03:41.099965Z",
   "custom": {}
 }

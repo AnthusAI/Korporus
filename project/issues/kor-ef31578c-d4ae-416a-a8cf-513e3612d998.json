@@ -1,0 +1,25 @@
+{
+  "id": "kor-ef31578c-d4ae-416a-a8cf-513e3612d998",
+  "title": "Add frame-parameterized Korporus pictogram compatible with VideoML",
+  "description": "Implement deterministic frame-driven pictogram component with props {frame,fps,className,style} and runtime RAF wrapper when frame is omitted; integrate into high-visibility page sections.",
+  "type": "task",
+  "status": "closed",
+  "priority": 2,
+  "assignee": null,
+  "creator": null,
+  "parent": "kor-3b94b69b-fe6f-4119-996e-410ff1427f59",
+  "labels": [],
+  "dependencies": [],
+  "comments": [
+    {
+      "id": "eb4944db-adf8-44c0-8b2b-d0cb8440bcda",
+      "author": "ryan.porter",
+      "text": "Implemented KorporusFederationPictogram with frame/fps props, deterministic frame-derived animation state, and RAF-driven live mode when frame is omitted; integrated into high-visibility sections.",
+      "created_at": "2026-03-01T15:54:34.069555Z"
+    }
+  ],
+  "created_at": "2026-03-01T15:30:21.043065Z",
+  "updated_at": "2026-03-01T15:54:34.069555Z",
+  "closed_at": "2026-03-01T15:54:33.991071Z",
+  "custom": {}
+}
