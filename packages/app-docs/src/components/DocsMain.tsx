@@ -1,6 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useDocsStore } from "../store";
 import { MarkdownRenderer } from "./MarkdownRenderer";
+
+declare const __DOCS_BASE_URL__: string;
 
 export function DocsMain() {
   const currentPath = useDocsStore((s) => s.currentPath);
@@ -13,20 +15,35 @@ export function DocsMain() {
   const setCurrentPath = useDocsStore((s) => s.setCurrentPath);
   const sidebarOpen = useDocsStore((s) => s.sidebarOpen);
   const toggleSidebar = useDocsStore((s) => s.toggleSidebar);
+  const initialHashHandled = useRef(false);
 
   // Load manifest on mount
   useEffect(() => {
     if (manifest) return;
-    fetch("/docs-manifest.json")
+    fetch(`${__DOCS_BASE_URL__}/docs-manifest.json`)
       .then((r) => r.json())
       .then((data) => setManifest(data))
       .catch((err) => console.warn("[Docs] Failed to load manifest:", err));
   }, [manifest, setManifest]);
 
+  // Navigate to the document containing the URL hash anchor
+  useEffect(() => {
+    if (!manifest || initialHashHandled.current) return;
+    initialHashHandled.current = true;
+    const hash = window.location.hash.slice(1);
+    if (!hash) return;
+    const doc = manifest.docs.find((d) =>
+      d.headings.some((h) => h.id === hash)
+    );
+    if (doc && doc.path !== currentPath) {
+      setCurrentPath(doc.path);
+    }
+  }, [manifest, currentPath, setCurrentPath]);
+
   // Load document content when path changes
   useEffect(() => {
     setLoading(true);
-    fetch(`/docs/${currentPath}.md`)
+    fetch(`${__DOCS_BASE_URL__}/docs/${currentPath}.md`)
       .then((r) => {
         if (!r.ok) throw new Error(`HTTP ${r.status}`);
         return r.text();
@@ -40,6 +57,17 @@ export function DocsMain() {
         setLoading(false);
       });
   }, [currentPath, setContent, setLoading]);
+
+  // Scroll to hash anchor after content renders
+  useEffect(() => {
+    if (loading || !content) return;
+    const hash = window.location.hash.slice(1);
+    if (!hash) return;
+    // Wait one frame for the DOM to update after React render
+    requestAnimationFrame(() => {
+      document.getElementById(hash)?.scrollIntoView({ behavior: "smooth" });
+    });
+  }, [loading, content]);
 
   // Build sidebar sections from manifest
   const sections = buildSections(manifest);

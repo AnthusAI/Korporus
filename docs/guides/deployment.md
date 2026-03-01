@@ -4,7 +4,7 @@ Korporus runs in three different modes. Understanding the differences is essenti
 
 ## Development Mode
 
-Each app runs its own **Vite dev server** on a separate port. The shell runs on port 3000, and each app gets its own port (3001, 3002, etc.).
+Each app runs its own **Vite dev server** on a separate port. Port assignments are managed centrally in `@korporus/platform-config` (`packages/platform-config/src/ports.ts`).
 
 ### How it works
 
@@ -21,24 +21,33 @@ The fix: bypass the proxy entirely. Point the MF runtime directly at the app's d
 
 ### Dev server requirements
 
-Each app's `vite.config.ts` must set:
+Each app's `vite.config.ts` imports its port from the central registry:
 
 ```typescript
+import { getPortEntry, getDevOrigin } from "@korporus/platform-config";
+
+const APP_ID = "hello-app";
+const ports = getPortEntry(APP_ID);
+
+// in defineConfig:
 server: {
-  port: 3001,       // Unique port
-  cors: true,        // Allow cross-origin from shell
-  origin: "http://localhost:3001",  // Absolute publicPath in MF manifest
+  port: ports.dev,
+  strictPort: true,    // Fail if port taken, don't silently increment
+  cors: true,
+  origin: getDevOrigin(APP_ID),
 }
 ```
 
-The shell's `vite.config.ts` must list each app in `devRemoteOrigins`:
+The shell's `devManifestRewritePlugin` auto-discovers all app origins from the same registry:
 
 ```typescript
-const devRemoteOrigins: Record<string, string> = {
-  "hello-app": "http://localhost:3001",
-  "docs-app": "http://localhost:3002",
-};
+import { getDevRemoteOrigins } from "@korporus/platform-config";
+
+const devRemoteOrigins = getDevRemoteOrigins();
+// Returns: { "hello-app": "http://localhost:3001", "docs-app": "http://localhost:3002", ... }
 ```
+
+To add a new app, register it once in `packages/platform-config/src/ports.ts` — no manual wiring in the shell config.
 
 ## Container Mode
 

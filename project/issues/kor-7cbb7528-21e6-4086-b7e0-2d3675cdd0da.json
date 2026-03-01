@@ -3,7 +3,7 @@
   "title": "API reference documentation",
   "description": "Write docs/reference/app-manifest-schema.md (full schema reference), web-component-wrapper-api.md (registerCustomElement API), shell-api.md (shell integration points).",
   "type": "task",
-  "status": "open",
+  "status": "closed",
   "priority": 2,
   "assignee": null,
   "creator": null,
@@ -12,7 +12,7 @@
   "dependencies": [],
   "comments": [],
   "created_at": "2026-02-28T20:40:26.165817Z",
-  "updated_at": "2026-02-28T20:40:26.165817Z",
-  "closed_at": null,
+  "updated_at": "2026-02-28T21:22:35.755274Z",
+  "closed_at": "2026-02-28T21:22:35.755274Z",
   "custom": {}
 }

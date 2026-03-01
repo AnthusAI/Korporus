@@ -98,6 +98,7 @@ export function docsPlugin(): Plugin {
         if (req.url === "/docs-manifest.json") {
           const manifest = buildManifest();
           res.setHeader("Content-Type", "application/json");
+          res.setHeader("Access-Control-Allow-Origin", "*");
           res.end(JSON.stringify(manifest));
           return;
         }
@@ -106,9 +107,13 @@ export function docsPlugin(): Plugin {
         if (req.url?.startsWith("/docs/") && req.url.endsWith(".md")) {
           const relativePath = req.url.slice("/docs/".length);
           const filePath = path.join(DOCS_DIR, relativePath);
-          if (fs.existsSync(filePath)) {
+          // Also try directory/index.md (e.g. "architecture.md" → "architecture/index.md")
+          const asIndex = path.join(DOCS_DIR, relativePath.replace(/\.md$/, ""), "index.md");
+          const resolved = fs.existsSync(filePath) ? filePath : fs.existsSync(asIndex) ? asIndex : null;
+          if (resolved) {
             res.setHeader("Content-Type", "text/markdown");
-            res.end(fs.readFileSync(filePath, "utf-8"));
+            res.setHeader("Access-Control-Allow-Origin", "*");
+            res.end(fs.readFileSync(resolved, "utf-8"));
             return;
           }
         }
@@ -121,6 +126,7 @@ export function docsPlugin(): Plugin {
           const resolved = fs.existsSync(asFile) ? asFile : fs.existsSync(asIndex) ? asIndex : null;
           if (resolved) {
             res.setHeader("Content-Type", "text/markdown");
+            res.setHeader("Access-Control-Allow-Origin", "*");
             res.end(fs.readFileSync(resolved, "utf-8"));
             return;
           }

@@ -3,7 +3,7 @@
   "name": "Documentation",
   "icon": "./icon.svg",
   "version": "1.0.0",
-  "remoteEntry": "http://localhost:3002/remoteEntry.js",
+  "remoteEntry": "/apps/docs/remoteEntry.js",
   "slots": {
     "titlebar": "docs-app-titlebar",
     "main": "docs-app-main",

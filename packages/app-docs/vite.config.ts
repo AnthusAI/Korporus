@@ -2,8 +2,12 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { federation } from "@module-federation/vite";
 import { docsPlugin } from "./src/plugins/vite-plugin-docs";
+import { getPortEntry, getDevOrigin } from "@korporus/platform-config";
 
-export default defineConfig({
+const APP_ID = "docs-app";
+const ports = getPortEntry(APP_ID);
+
+export default defineConfig(({ mode }) => ({
   plugins: [
     react(),
     docsPlugin(),
@@ -22,18 +26,24 @@ export default defineConfig({
       dts: false,
     }),
   ],
+  define: {
+    __DOCS_BASE_URL__: JSON.stringify(
+      mode === "development" ? getDevOrigin(APP_ID) : "/apps/docs"
+    ),
+  },
   build: {
     target: "chrome89",
     minify: false,
     cssCodeSplit: false,
   },
   server: {
-    port: 3002,
+    port: ports.dev,
+    strictPort: true,
     cors: true,
-    origin: "http://localhost:3002",
+    origin: getDevOrigin(APP_ID),
   },
   preview: {
-    port: 3002,
+    port: ports.preview,
     cors: true,
   },
-});
+}));

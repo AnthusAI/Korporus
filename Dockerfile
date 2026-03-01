@@ -11,6 +11,7 @@ WORKDIR /app
 # Copy workspace manifests first so the dependency install layer is cacheable
 COPY pnpm-workspace.yaml package.json pnpm-lock.yaml ./
 COPY packages/app-manifest/package.json        ./packages/app-manifest/
+COPY packages/platform-config/package.json     ./packages/platform-config/
 COPY packages/web-component-wrapper/package.json ./packages/web-component-wrapper/
 COPY packages/app-hello/package.json            ./packages/app-hello/
 COPY packages/app-docs/package.json             ./packages/app-docs/
@@ -23,6 +24,9 @@ COPY tsconfig.base.json ./
 COPY packages/ ./packages/
 COPY apps/shell/ ./apps/shell/
 COPY docs/ ./docs/
+
+# Build platform-config first (other packages import it in vite.config.ts)
+RUN pnpm --filter @korporus/platform-config build
 
 # Build the shell (produces apps/shell/dist/)
 RUN pnpm --filter @korporus/shell build

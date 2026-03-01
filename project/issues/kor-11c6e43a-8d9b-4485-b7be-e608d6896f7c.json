@@ -3,7 +3,7 @@
   "title": "Settings slot provides full-text search across docs",
   "description": "Create searchIndex.ts (FlexSearch), useSearch.ts hook (debounced query), SearchPanel.tsx (input + results with highlighted snippets). Wire DocsSettings.tsx to render SearchPanel. Click result navigates to the matching document.",
   "type": "task",
-  "status": "open",
+  "status": "closed",
   "priority": 2,
   "assignee": null,
   "creator": null,
@@ -12,7 +12,7 @@
   "dependencies": [],
   "comments": [],
   "created_at": "2026-02-28T20:40:22.462730Z",
-  "updated_at": "2026-02-28T20:40:22.462730Z",
-  "closed_at": null,
+  "updated_at": "2026-02-28T21:22:34.214625Z",
+  "closed_at": "2026-02-28T21:22:34.214625Z",
   "custom": {}
 }

@@ -134,6 +134,9 @@ importers:
         specifier: ^5.0.0
         version: 5.0.11(@types/react@19.2.14)(react@19.2.4)
     devDependencies:
+      '@korporus/platform-config':
+        specifier: workspace:*
+        version: link:../../packages/platform-config
       '@module-federation/vite':
         specifier: ^1.0.0
         version: 1.11.0(rollup@4.59.0)(typescript@5.9.3)(vite@6.4.1(@types/node@25.3.2)(jiti@2.6.1)(less@4.2.2)(lightningcss@1.31.1)(sass@1.85.0)(terser@5.39.0))
@@ -189,6 +192,9 @@ importers:
         specifier: ^5.0.0
         version: 5.0.11(@types/react@19.2.14)(react@19.2.4)
     devDependencies:
+      '@korporus/platform-config':
+        specifier: workspace:*
+        version: link:../platform-config
       '@module-federation/enhanced':
         specifier: ^0.7.0
         version: 0.7.7(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@5.6.3)(webpack@5.105.0)
@@ -226,6 +232,9 @@ importers:
         specifier: ^5.0.0
         version: 5.0.11(@types/react@19.2.14)(react@19.2.4)
     devDependencies:
+      '@korporus/platform-config':
+        specifier: workspace:*
+        version: link:../platform-config
       '@module-federation/enhanced':
         specifier: ^0.7.0
         version: 0.7.7(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@5.9.3)(webpack@5.105.0)
@@ -253,6 +262,15 @@ importers:
       typescript:
         specifier: '*'
         version: 5.9.3
+      vitest:
+        specifier: ^3.0.0
+        version: 3.2.4(@types/debug@4.1.12)(@types/node@25.3.2)(jiti@2.6.1)(less@4.2.2)(lightningcss@1.31.1)(sass@1.85.0)(terser@5.39.0)
+
+  packages/platform-config:
+    devDependencies:
+      typescript:
+        specifier: '*'
+        version: 5.6.3
       vitest:
         specifier: ^3.0.0
         version: 3.2.4(@types/debug@4.1.12)(@types/node@25.3.2)(jiti@2.6.1)(less@4.2.2)(lightningcss@1.31.1)(sass@1.85.0)(terser@5.39.0)

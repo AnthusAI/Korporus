@@ -1,4 +1,4 @@
-import { createElement, type ReactNode } from "react";
+import { createElement, useState, type ReactNode } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
@@ -37,24 +37,36 @@ function HeadingWithAnchor({
 }) {
   const tag = `h${level}`;
   const style = level === 1 ? styles.h1 : level === 2 ? styles.h2 : level === 3 ? styles.h3 : styles.h4;
+  const [hovered, setHovered] = useState(false);
 
-  const copyAnchor = () => {
+  const handleClick = () => {
     if (id) {
-      navigator.clipboard.writeText(`${window.location.origin}${window.location.pathname}#${id}`);
+      window.location.hash = id;
     }
   };
 
   return createElement(
     tag,
-    { id, style: { ...style, position: "relative", cursor: id ? "pointer" : "default" } },
+    {
+      id,
+      style: { ...style, position: "relative", cursor: id ? "pointer" : "default" },
+      onMouseEnter: () => setHovered(true),
+      onMouseLeave: () => setHovered(false),
+      onClick: handleClick,
+    },
     children,
     id &&
       createElement(
         "span",
         {
-          onClick: copyAnchor,
-          style: { marginLeft: 8, color: "#94a3b8", fontSize: "0.75em", opacity: 0.5, cursor: "pointer" },
-          title: "Copy link",
+          style: {
+            marginLeft: 8,
+            color: "#94a3b8",
+            fontSize: "0.75em",
+            opacity: hovered ? 0.7 : 0,
+            transition: "opacity 0.15s",
+          },
+          "aria-hidden": "true",
         },
         "#",
       ),
@@ -88,7 +100,9 @@ export function MarkdownRenderer({ markdown }: { markdown: string }) {
       return <a href={href} target="_blank" rel="noopener noreferrer" style={styles.a}>{children}</a>;
     },
     code: ({ className, children }) => {
-      const isBlock = className?.startsWith("language-");
+      const content = Array.isArray(children) ? children[0] : children;
+      const isBlock = className?.startsWith("language-") ||
+        (typeof content === "string" && content.includes("\n"));
       if (isBlock) {
         return <code style={{ fontFamily: "'SF Mono', Consolas, monospace" }}>{children}</code>;
       }

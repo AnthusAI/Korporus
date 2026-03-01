@@ -3,7 +3,7 @@
   "title": "Architecture documentation",
   "description": "Write docs/architecture/module-federation.md, web-components.md, shell.md, manifests.md. Cover how MF2 works in Korporus, the slot/custom-element contract, shell internals, and manifest schema.",
   "type": "task",
-  "status": "open",
+  "status": "closed",
   "priority": 2,
   "assignee": null,
   "creator": null,
@@ -12,7 +12,7 @@
   "dependencies": [],
   "comments": [],
   "created_at": "2026-02-28T20:40:25.993124Z",
-  "updated_at": "2026-02-28T20:40:25.993124Z",
-  "closed_at": null,
+  "updated_at": "2026-02-28T21:22:36.995072Z",
+  "closed_at": "2026-02-28T21:22:36.995072Z",
   "custom": {}
 }

@@ -29,23 +29,29 @@ shared: {
 
 ### Development Mode
 
-In dev mode, each app runs its own Vite dev server on a separate port:
+In dev mode, each app runs its own Vite dev server on a separate port. Port assignments are managed centrally in `@korporus/platform-config` (`packages/platform-config/src/ports.ts`):
 
-| Component | Port |
-|-----------|------|
-| Shell     | 3000 |
-| Hello App | 3001 |
-| Docs App  | 3002 |
+| Component | Port | Source |
+|-----------|------|--------|
+| Shell     | 3000 | `getDevPort("shell")` |
+| Hello App | 3001 | `getDevPort("hello-app")` |
+| Docs App  | 3002 | `getDevPort("docs-app")` |
 
-The shell's Vite config includes a `devManifestRewritePlugin` that rewrites the `remoteEntry` field in manifest JSON files to point at the app's `mf-manifest.json` on its own dev server origin. This is necessary because Vite dev server remoteEntry files contain absolute virtual-module paths (like `/node_modules/.vite/deps/...`) that only resolve correctly on the app's own server.
+The shell's Vite config includes a `devManifestRewritePlugin` that rewrites the `remoteEntry` field in manifest JSON files to point at the app's `mf-manifest.json` on its own dev server origin. This is necessary because Vite dev server remoteEntry files contain absolute virtual-module paths (like `/node_modules/.vite/deps/...`) that only resolve correctly on the app's own server. The plugin auto-discovers all app origins from the port registry.
 
-Each app must also set `server.origin` in its Vite config so that the MF manifest's `publicPath` is absolute:
+Each app imports its port and origin from the registry, with `strictPort: true` to fail fast on conflicts:
 
 ```typescript
+import { getPortEntry, getDevOrigin } from "@korporus/platform-config";
+
+const APP_ID = "hello-app";
+const ports = getPortEntry(APP_ID);
+
 server: {
-  port: 3001,
+  port: ports.dev,
+  strictPort: true,
   cors: true,
-  origin: "http://localhost:3001",
+  origin: getDevOrigin(APP_ID),
 }
 ```
 

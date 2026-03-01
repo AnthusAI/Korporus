@@ -3,7 +3,7 @@
   "title": "Headings have anchor links with copy-to-clipboard",
   "description": "Add rehype-slug and rehype-autolink-headings to MarkdownRenderer pipeline. Create HeadingWithAnchor.tsx with hover-reveal link icon and clipboard copy of full URL with anchor fragment.",
   "type": "task",
-  "status": "open",
+  "status": "closed",
   "priority": 2,
   "assignee": null,
   "creator": null,
@@ -12,7 +12,7 @@
   "dependencies": [],
   "comments": [],
   "created_at": "2026-02-28T20:40:19.133093Z",
-  "updated_at": "2026-02-28T20:40:19.133093Z",
-  "closed_at": null,
+  "updated_at": "2026-02-28T21:22:36.909926Z",
+  "closed_at": "2026-02-28T21:22:36.909926Z",
   "custom": {}
 }

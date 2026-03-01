@@ -3,7 +3,7 @@
   "title": "Main slot renders markdown documents",
   "description": "Create MarkdownRenderer.tsx wrapping react-markdown with remark-gfm. Wire DocsMain.tsx to fetch manifest, load current document, and render. Add inline styles for all markdown elements, loading/error states.",
   "type": "task",
-  "status": "open",
+  "status": "closed",
   "priority": 2,
   "assignee": null,
   "creator": null,
@@ -12,7 +12,7 @@
   "dependencies": [],
   "comments": [],
   "created_at": "2026-02-28T20:40:17.238094Z",
-  "updated_at": "2026-02-28T20:40:17.238094Z",
-  "closed_at": null,
+  "updated_at": "2026-02-28T21:22:34.360535Z",
+  "closed_at": "2026-02-28T21:22:34.360535Z",
   "custom": {}
 }

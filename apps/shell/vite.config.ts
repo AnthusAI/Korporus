@@ -4,6 +4,7 @@ import tailwindcss from "@tailwindcss/vite";
 import { federation } from "@module-federation/vite";
 import fs from "node:fs";
 import path from "node:path";
+import { getDevPort, getDevRemoteOrigins } from "@korporus/platform-config";
 
 /**
  * In dev mode, rewrite the remoteEntry URLs in served manifest JSON files
@@ -13,10 +14,7 @@ import path from "node:path";
  * only resolve correctly on the origin dev server, not when proxied.
  */
 function devManifestRewritePlugin() {
-  const devRemoteOrigins: Record<string, string> = {
-    "hello-app": "http://localhost:3001",
-    "docs-app": "http://localhost:3002",
-  };
+  const devRemoteOrigins = getDevRemoteOrigins();
 
   return {
     name: "dev-manifest-rewrite",
@@ -74,6 +72,7 @@ export default defineConfig({
     target: "chrome89",
   },
   server: {
-    port: 3000,
+    port: getDevPort("shell"),
+    strictPort: true,
   },
 });

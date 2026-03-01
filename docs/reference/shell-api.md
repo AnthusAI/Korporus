@@ -63,11 +63,13 @@ const useAppManifest: (id: string) => AppManifest | undefined
 
 In dev mode, the `devManifestRewritePlugin` intercepts requests to `/manifests/*.json` and rewrites the `remoteEntry` field to point at the app's MF manifest on its own dev server. This is required because Vite dev server virtual modules can only be loaded from their own origin.
 
-To add a new app to the dev rewrite, add its ID and dev server URL to `devRemoteOrigins`:
+The plugin auto-discovers all app origins from `@korporus/platform-config`:
 
 ```typescript
-const devRemoteOrigins: Record<string, string> = {
-  "hello-app": "http://localhost:3001",
-  "docs-app": "http://localhost:3002",
-};
+import { getDevRemoteOrigins } from "@korporus/platform-config";
+
+const devRemoteOrigins = getDevRemoteOrigins();
+// { "hello-app": "http://localhost:3001", "docs-app": "http://localhost:3002" }
 ```
+
+To add a new app, register it in `packages/platform-config/src/ports.ts` — the shell picks it up automatically.
