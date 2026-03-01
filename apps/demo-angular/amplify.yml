@@ -3,13 +3,11 @@ frontend:
   phases:
     preBuild:
       commands:
-        - cd apps/demo-angular
-        - npm install -g @angular/cli
+        - npm install -g pnpm @angular/cli
         - pnpm install
     build:
       commands:
-        - cd apps/demo-angular
-        - pnpm build
+        - pnpm --filter @korporus/demo-angular build
   artifacts:
     baseDirectory: apps/demo-angular/dist/demo-angular/browser
     files:
@@ -17,3 +15,4 @@ frontend:
   cache:
     paths:
       - node_modules/**/*
+      - apps/demo-angular/node_modules/**/*
