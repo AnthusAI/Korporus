@@ -8,7 +8,7 @@ const APP_ID = "docs-app";
 const ports = getPortEntry(APP_ID);
 
 export default defineConfig(({ mode }) => ({
-  base: mode === "development" ? "/" : "/apps/docs/",
+  base: mode === "development" ? "/" : "https://awdmyggmnm.us-east-1.awsapprunner.com/apps/docs/",
   plugins: [
     react(),
     docsPlugin(),
@@ -29,7 +29,7 @@ export default defineConfig(({ mode }) => ({
   ],
   define: {
     __DOCS_BASE_URL__: JSON.stringify(
-      mode === "development" ? getDevOrigin(APP_ID) : "/apps/docs"
+      mode === "development" ? getDevOrigin(APP_ID) : "https://awdmyggmnm.us-east-1.awsapprunner.com/apps/docs"
     ),
   },
   build: {
