@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { Loader2, AlertCircle } from "lucide-react";
 import ShellChrome from "../components/ShellChrome";
 import SettingsPanel from "../components/SettingsPanel";
-import { useAppManifest } from "../store/registry.js";
+import { useRegistry } from "../store/registry.js";
 import { loadAppModule, toRemoteId } from "../services/moduleLoader.js";
 import type { AppManifest } from "@korporus/app-manifest";
 
@@ -57,7 +57,11 @@ export default function AppView() {
   const [loadState, setLoadState] = useState<LoadState>("idle");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const manifest = useAppManifest(appId ?? "");
+  const appKey = appId ?? "";
+  const { loaded: manifestsLoaded, manifest } = useRegistry((s) => ({
+    loaded: s.loaded,
+    manifest: s.apps.find((a) => a.id === appKey),
+  }));
 
   useEffect(() => {
     if (!manifest) return;
@@ -74,8 +78,8 @@ export default function AppView() {
       });
   }, [manifest]);
 
-  // Manifest not yet in registry (still loading from server)
-  if (!manifest) {
+  // Manifests still loading from server.
+  if (!manifestsLoaded) {
     return (
       <div className="flex flex-col h-screen">
         <ShellChrome />
@@ -86,8 +90,8 @@ export default function AppView() {
     );
   }
 
-  // Unknown app id
-  if (manifest === undefined) {
+  // Manifests are loaded, but this app id does not exist.
+  if (!manifest) {
     return (
       <div className="flex flex-col h-screen">
         <ShellChrome />
