@@ -1,14 +1,9 @@
 import * as React from "react";
-import { AnimatedKanbanIcon } from "./AnimatedKanbanIcon";
 
-const navigation = [
-  { label: "What Is This?", href: "/what-is-this" },
-  { label: "Philosophy", href: "/philosophy" },
-  { label: "Features", href: "/features" },
-  { label: "Getting Started", href: "/getting-started" }
+const topNavigation = [
+  { label: "Demo", href: "/demo" },
+  { label: "Developers", href: "/developers" }
 ];
-
-const desktopNavigation = navigation.filter((item) => item.label !== "Philosophy");
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -19,23 +14,22 @@ const Layout = ({ children }: LayoutProps) => {
 
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground font-sans">
-      <style>{`.footer-compact { line-height: 0.5; }`}</style>
+      <style>{`.footer-compact { line-height: 1.3; }`}</style>
       <header className="sticky top-0 z-50 w-full bg-card/90 backdrop-blur supports-[backdrop-filter]:backdrop-blur">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 h-16 flex items-center justify-between">
           <nav className="flex items-center gap-6 w-full">
             <a
               href="/"
-              className="hover:text-selected hover:drop-shadow-[0_0_2px_rgba(125,211,252,0.4)] transition-all duration-300 flex items-baseline gap-[3px]"
+              className="hover:text-selected hover:drop-shadow-[0_0_2px_rgba(125,211,252,0.4)] transition-all duration-300 flex items-center"
             >
               <span className="text-[25px] leading-none font-black tracking-[3px]" style={{ WebkitTextStroke: "1px currentColor" }}>
                 <span className="text-muted">KOR</span>
-                <span className="text-foreground">PORUS</span>
+                <span className="text-muted">PORUS</span>
               </span>
-              <AnimatedKanbanIcon className="w-[19px] h-[19px]" />
             </a>
 
             <div className="ml-auto flex items-center gap-3">
-              {desktopNavigation.map((item) => (
+              {topNavigation.map((item) => (
                 <a
                   key={item.href}
                   href={item.href}
@@ -72,18 +66,25 @@ const Layout = ({ children }: LayoutProps) => {
 
         {mobileOpen ? (
           <div className="md:hidden bg-card">
-            <div className="max-w-7xl mx-auto px-6 py-4 space-y-3">
-              {navigation.map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  className="block text-sm font-medium text-muted hover:text-foreground transition-colors"
-                  onClick={() => setMobileOpen(false)}
-                >
-                  {item.label}
-                </a>
-              ))}
-              <a href="https://github.com/AnthusAI/Korporus" className="block text-sm font-medium text-muted hover:text-foreground transition-colors">
+            <div className="max-w-7xl mx-auto px-6 py-4 space-y-5">
+              <div className="space-y-2">
+                <p className="text-[11px] uppercase tracking-wider text-muted font-semibold">Navigation</p>
+                {topNavigation.map((item) => (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    className="block text-sm font-medium text-muted hover:text-foreground transition-colors"
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    {item.label}
+                  </a>
+                ))}
+              </div>
+              <a
+                href="https://github.com/AnthusAI/Korporus"
+                className="block text-sm font-medium text-muted hover:text-foreground transition-colors"
+                onClick={() => setMobileOpen(false)}
+              >
                 GitHub
               </a>
             </div>
@@ -98,41 +99,51 @@ const Layout = ({ children }: LayoutProps) => {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-8 md:gap-y-6">
             <div className="col-span-2 text-muted">
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-y-0 gap-x-8 text-sm text-muted footer-compact">
-                <li className="font-semibold col-span-1 sm:col-span-2 opacity-75">Features</li>
-                <li><a href="/features/core-management" className="text-muted hover:text-selected block">Shell Host</a></li>
-                <li><a href="/features/kanban-board" className="text-muted hover:text-selected block">Runtime Composition</a></li>
-                <li><a href="/features/jira-sync" className="text-muted hover:text-selected block">Manifest Discovery</a></li>
-                <li><a href="/features/local-tasks" className="text-muted hover:text-selected block">Slot Contract</a></li>
-                <li><a href="/features/virtual-projects" className="text-muted hover:text-selected block">Cross-Framework Hosts</a></li>
-                <li><a href="/features/beads-compatibility" className="text-muted hover:text-selected block">Shared State</a></li>
-                <li><a href="/features/vscode-plugin" className="text-muted hover:text-selected block">Editor Integration</a></li>
-                <li><a href="/features/integrated-wiki" className="text-muted hover:text-selected block">Docs Pipeline</a></li>
-                <li><a href="/features/policy-as-code" className="text-muted hover:text-selected block">Deployment Topology</a></li>
+                <li className="font-semibold col-span-1 sm:col-span-2 opacity-75">Operating System</li>
+                <li><a href="/features#one-home" className="text-muted hover:text-selected block">One Home for Every App</a></li>
+                <li><a href="/features#one-click" className="text-muted hover:text-selected block">Open in One Click</a></li>
+                <li><a href="/features#consistent-controls" className="text-muted hover:text-selected block">Consistent Controls</a></li>
+                <li><a href="/features#settings-sidebar" className="text-muted hover:text-selected block">Focused Settings</a></li>
+                <li><a href="/features#responsive-views" className="text-muted hover:text-selected block">Responsive Views</a></li>
+                <li><a href="/features#visual-language" className="text-muted hover:text-selected block">Visual Language</a></li>
+                <li><a href="/features#workflow-process-monitoring" className="text-muted hover:text-selected block">Integrated Workflow Oversight</a></li>
+                <li><a href="/features#agent-procedure-studio" className="text-muted hover:text-selected block">Agent Procedure Studio</a></li>
+                <li><a href="/features#reliable-delivery" className="text-muted hover:text-selected block">Reliable Delivery</a></li>
               </ul>
+              <div className="mt-6 space-y-4">
+                <div className="h-20 sm:h-24 flex items-end">
+                  <img src="/images/logo.svg" alt="Korporus logo" className="h-full w-auto object-contain" />
+                </div>
+              </div>
             </div>
 
             <div className="col-span-2 flex flex-col h-full text-muted">
               <div className="grid grid-cols-2 gap-x-8">
                 <div className="col-span-1">
-                  <ul className="grid gap-y-0 text-sm text-muted footer-compact">
-                    <li className="font-semibold opacity-75">Reference</li>
-                    <li><a href="/what-is-this" className="text-muted hover:text-selected block">What Is This?</a></li>
-                    <li><a href="/architecture" className="text-muted hover:text-selected block">Architecture</a></li>
+                  <ul className="grid gap-y-1 text-sm text-muted footer-compact">
+                    <li className="font-semibold opacity-75">Developers</li>
+                    <li><a href="/developers" className="text-muted hover:text-selected block">Developer Portal</a></li>
+                    <li><a href="/features/core-management" className="text-muted hover:text-selected block">Shell Host Runtime</a></li>
+                    <li><a href="/features/kanban-board" className="text-muted hover:text-selected block">Federation Composition</a></li>
+                    <li><a href="/features/jira-sync" className="text-muted hover:text-selected block">Manifest Contract</a></li>
+                    <li><a href="/developers#agent-procedure-studio" className="text-muted hover:text-selected block">Procedure Runtime</a></li>
                     <li><a href="/docs" className="text-muted hover:text-selected block">Documentation</a></li>
-                    <li><a href="/philosophy" className="text-muted hover:text-selected block">Philosophy</a></li>
                   </ul>
                 </div>
                 <div className="col-span-1 md:text-right">
-                  <ul className="grid gap-y-0 text-sm text-muted footer-compact">
-                    <li className="font-semibold opacity-75">Community</li>
+                  <ul className="grid gap-y-1 text-sm text-muted footer-compact">
+                    <li className="font-semibold opacity-75">Reference</li>
+                    <li><a href="/demo" className="text-muted hover:text-selected block md:inline-block">Demo</a></li>
+                    <li><a href="/philosophy" className="text-muted hover:text-selected block md:inline-block">Philosophy</a></li>
+                    <li><a href="/architecture" className="text-muted hover:text-selected block md:inline-block">Architecture</a></li>
                     <li><a href="https://github.com/AnthusAI/Korporus" className="text-muted hover:text-selected block md:inline-block">GitHub</a></li>
                   </ul>
                 </div>
               </div>
 
-              <ul className="mt-auto grid gap-y-0 text-sm text-muted footer-compact">
-                <li className="flex items-center gap-2 justify-start md:justify-end">
-                  <span className="whitespace-nowrap">Federated platform for independently-built apps</span>
+              <div className="mt-6 text-sm text-muted space-y-4">
+                <div className="flex items-center gap-2 justify-start md:justify-end">
+                  <span className="whitespace-nowrap">Free and open-source software</span>
                   <a
                     href="https://github.com/AnthusAI/Korporus"
                     className="text-muted hover:text-foreground transition-colors shrink-0"
@@ -146,16 +157,16 @@ const Layout = ({ children }: LayoutProps) => {
                       />
                     </svg>
                   </a>
-                </li>
-                <li className="text-left md:text-right">
+                </div>
+                <div className="flex items-end justify-start sm:justify-end">
                   <a
                     href="https://anth.us/ryan/"
-                    className="text-muted hover:text-foreground transition-colors whitespace-nowrap block md:inline-block"
+                    className="text-muted hover:text-foreground transition-colors whitespace-nowrap block sm:text-right"
                   >
                     by Ryan Porter and Derek Norrbom
                   </a>
-                </li>
-              </ul>
+                </div>
+              </div>
             </div>
           </div>
         </div>

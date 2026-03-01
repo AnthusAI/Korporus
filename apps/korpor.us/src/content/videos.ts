@@ -10,9 +10,9 @@ export const VIDEOS: VideoEntry[] = [
   {
     id: "intro",
     title: "Intro to Korporus",
-    description: "Draft placeholder for the Korporus website intro video. Final production is intentionally out of scope for this implementation.",
-    filename: "korporus-intro.mp4",
-    poster: "korporus-intro.jpg"
+    description: "Draft story cut focused on asynchronous background agents, sandboxed execution, long-term goal orchestration, and system health monitoring.",
+    filename: "korporus-intro-draft.mp4",
+    poster: "korporus-intro-draft.svg"
   },
   {
     id: "core-management",

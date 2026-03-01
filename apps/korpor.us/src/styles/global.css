@@ -9,6 +9,7 @@
 @import "@radix-ui/colors/sky-dark.css";
 @import "@radix-ui/colors/red.css";
 @import "@radix-ui/colors/red-dark.css";
+@import "./kanban.css";
 @import "./content.css";
 
 @theme {
@@ -245,4 +246,20 @@ html.dark .pictogram {
   padding: 1rem;
   box-shadow: none;
   overflow: hidden;
+}
+
+.layout-frame {
+  height: 100%;
+}
+
+.layout-slot {
+  min-height: 0;
+}
+
+.layout-slot-board {
+  flex: 1 1 auto;
+}
+
+.detail-maximized .layout-slot-board {
+  display: none;
 }
