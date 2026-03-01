@@ -11,6 +11,10 @@ dist/
 .__mf__temp/
 .angular/
 
+# CodeQL
+.codeql/
+.codeql-reports/
+
 # Terraform
 *.tfstate
 *.tfstate.backup
