@@ -4,31 +4,22 @@ frontend:
     preBuild:
       commands:
         - |
-          backend_count=$(
-            aws amplify list-backend-environments --app-id "$AWS_APP_ID" --region "$AWS_REGION" --output json \
-              | python3.11 - <<'PY'
-          import json
-          import sys
-          data = json.load(sys.stdin)
-          print(len(data.get("backendEnvironments", [])))
-          PY
-          ) || backend_count=""
-          if [ -z "$backend_count" ] || [ "$backend_count" -eq 0 ]; then
+          backend_count="$(aws amplify list-backend-environments --app-id "$AWS_APP_ID" --region "$AWS_REGION" --query 'length(backendEnvironments)' --output text 2>/dev/null || echo 0)"
+          if [ -z "$backend_count" ] || [ "$backend_count" = "0" ] || [ "$backend_count" = "None" ]; then
             echo "No Amplify backend environments; skipping ampx outputs."
           else
             npx --yes --package @aws-amplify/backend-cli@latest ampx generate outputs \
-              --branch "$AWS_BRANCH" --app-id "$AWS_APP_ID" --out-dir .
+              --branch "$AWS_BRANCH" --app-id "$AWS_APP_ID" --out-dir apps/korpor.us
           fi
-        - npm install -g pnpm
-        - pnpm install --frozen-lockfile
+        - cd apps/korpor.us
+        - npm install
     build:
       commands:
-        - pnpm --filter @korporus/site build
+        - npm run build
   artifacts:
     baseDirectory: apps/korpor.us/public
     files:
       - '**/*'
   cache:
     paths:
-      - node_modules/**/*
       - apps/korpor.us/node_modules/**/*
