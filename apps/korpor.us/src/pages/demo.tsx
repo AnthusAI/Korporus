@@ -3,8 +3,8 @@ import { Layout, Section, Hero, CodeBlock } from "../components";
 import { Card, CardContent, CardHeader } from "@korporus/site-ui";
 
 const SHELL_DEMO_URL = process.env.GATSBY_SHELL_DEMO_URL ?? "https://awdmyggmnm.us-east-1.awsapprunner.com";
-const REACT_DEMO_URL = process.env.GATSBY_REACT_DEMO_URL;
-const ANGULAR_DEMO_URL = process.env.GATSBY_ANGULAR_DEMO_URL;
+const REACT_DEMO_URL = process.env.GATSBY_REACT_DEMO_URL ?? "https://dev.d1fajfjif4amni.amplifyapp.com/";
+const ANGULAR_DEMO_URL = process.env.GATSBY_ANGULAR_DEMO_URL ?? "https://dev.dbcd2fnqoxe67.amplifyapp.com/";
 
 const LiveDemoActions = ({ liveUrl, sourcePath }: { liveUrl?: string; sourcePath: string }) => (
   <div className="flex flex-wrap items-center gap-3 pt-2">
