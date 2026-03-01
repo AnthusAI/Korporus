@@ -3,7 +3,7 @@
   "name": "Hello World",
   "icon": "/manifests/hello-app-icon.svg",
   "version": "1.0.0",
-  "remoteEntry": "/apps/hello/remoteEntry.js",
+  "remoteEntry": "/apps/hello/mf-manifest.json",
   "slots": {
     "titlebar": "hello-app-titlebar",
     "main": "hello-app-main",
