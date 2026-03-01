@@ -15,4 +15,3 @@ frontend:
   cache:
     paths:
       - node_modules/**/*
-      - apps/demo-react/node_modules/**/*
