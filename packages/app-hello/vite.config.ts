@@ -7,7 +7,7 @@ const APP_ID = "hello-app";
 const ports = getPortEntry(APP_ID);
 
 export default defineConfig(({ mode }) => ({
-  base: mode === "development" ? "/" : "https://awdmyggmnm.us-east-1.awsapprunner.com/apps/hello/",
+  base: mode === "development" ? "/" : "/apps/hello/",
   plugins: [
     react(),
     federation({

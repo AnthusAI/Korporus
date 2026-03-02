@@ -10,7 +10,7 @@ export default defineConfig(({ mode }) => ({
   base:
     mode === "development"
       ? "/"
-      : "https://awdmyggmnm.us-east-1.awsapprunner.com/apps/settings/",
+      : "/apps/settings/",
   plugins: [
     react(),
     federation({
