@@ -9,8 +9,6 @@ export default function Home() {
   return (
     <main className="flex-1 overflow-auto bg-background p-8">
       <div className="max-w-4xl mx-auto">
-        <h1 className="mb-8 text-2xl font-semibold text-foreground">Your Apps</h1>
-
         {!loaded && (
           <p className="text-sm text-muted-foreground">Loading apps…</p>
         )}
