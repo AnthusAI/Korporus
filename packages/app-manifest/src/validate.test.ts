@@ -81,13 +81,24 @@ describe("validateManifest", () => {
     const result = validateManifest({ ...VALID, slots: { sidebar: "foo" } });
     expect(result.valid).toBe(false);
     expect(result.errors.some((e) => e.includes('"sidebar"'))).toBe(true);
-    expect(result.errors.some((e) => e.includes("menubar, main"))).toBe(true);
+    expect(result.errors.some((e) => e.includes("menubar, main, settings"))).toBe(true);
   });
 
   it("fails when a slot value is an empty string", () => {
     const result = validateManifest({ ...VALID, slots: { main: "" } });
     expect(result.valid).toBe(false);
     expect(result.errors.some((e) => e.includes('"main"'))).toBe(true);
+  });
+
+  it("passes when optional settings slot is provided", () => {
+    const result = validateManifest({
+      ...VALID,
+      slots: {
+        ...VALID.slots,
+        settings: "hello-app-settings",
+      },
+    });
+    expect(result.valid).toBe(true);
   });
 });
 

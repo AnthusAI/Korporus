@@ -4,7 +4,6 @@ import { Loader2, AlertCircle } from "lucide-react";
 import ShellChrome from "../components/ShellChrome";
 import { useRegistry } from "../store/registry.js";
 import { loadAppModule, toRemoteId } from "../services/moduleLoader.js";
-import type { AppManifest } from "@korporus/app-manifest";
 
 type LoadState = "idle" | "loading" | "loaded" | "error";
 
@@ -30,22 +29,12 @@ function SlotContainer({
   return <div ref={ref} className={className} />;
 }
 
-function AppSlots({ manifest }: { manifest: AppManifest }) {
-  return (
-    <>
-      {/* Main content slot */}
-      <div className="flex-1 overflow-auto bg-background">
-        <SlotContainer tagName={manifest.slots.main} className="h-full" />
-      </div>
-    </>
-  );
-}
-
 export default function AppView() {
-  const { appId } = useParams<{ appId: string }>();
+  const { appId, view } = useParams<{ appId: string; view?: string }>();
   const navigate = useNavigate();
   const [loadState, setLoadState] = useState<LoadState>("idle");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const settingsView = view === "settings";
 
   const appKey = appId ?? "";
   const manifestsLoaded = useRegistry((s) => s.loaded);
@@ -99,7 +88,7 @@ export default function AppView() {
 
   return (
     <div className="flex flex-col h-screen">
-      <ShellChrome appName={manifest.name} menubarSlotTag={manifest.slots.menubar} />
+      <ShellChrome appManifest={manifest} menubarSlotTag={manifest.slots.menubar} />
 
       <div className="flex-1 flex flex-col overflow-hidden bg-background relative">
         {loadState === "loading" && (
@@ -128,7 +117,27 @@ export default function AppView() {
           </div>
         )}
 
-        {loadState === "loaded" && <AppSlots manifest={manifest} />}
+        {loadState === "loaded" && settingsView && !manifest.slots.settings && (
+          <div className="flex-1 flex flex-col items-center justify-center gap-3 p-8">
+            <AlertCircle className="text-muted-foreground" size={34} />
+            <p className="text-foreground font-medium">No settings available for {manifest.name}</p>
+            <button
+              onClick={() => navigate(`/app/${manifest.id}`)}
+              className="mt-1 text-sm text-primary underline"
+            >
+              Back to app
+            </button>
+          </div>
+        )}
+
+        {loadState === "loaded" && (!settingsView || !!manifest.slots.settings) && (
+          <div className="flex-1 overflow-auto bg-background">
+            <SlotContainer
+              tagName={settingsView ? manifest.slots.settings : manifest.slots.main}
+              className="h-full"
+            />
+          </div>
+        )}
       </div>
     </div>
   );

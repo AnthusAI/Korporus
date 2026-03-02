@@ -1,6 +1,6 @@
 {
   "id": "docs-app",
-  "name": "Documentation",
+  "name": "Help",
   "icon": "./icon.svg",
   "version": "1.0.0",
   "remoteEntry": "/apps/docs/remoteEntry.js",

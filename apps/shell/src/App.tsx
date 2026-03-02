@@ -32,6 +32,7 @@ export default function App() {
             }
           />
           <Route path="/app/:appId" element={<AppView />} />
+          <Route path="/app/:appId/:view" element={<AppView />} />
         </Routes>
       </ManifestLoader>
     </BrowserRouter>

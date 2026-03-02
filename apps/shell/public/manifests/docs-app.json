@@ -1,6 +1,6 @@
 {
   "id": "docs-app",
-  "name": "Documentation",
+  "name": "Help",
   "icon": "/manifests/docs-app-icon.svg",
   "version": "1.0.0",
   "remoteEntry": "/apps/docs/mf-manifest.json",

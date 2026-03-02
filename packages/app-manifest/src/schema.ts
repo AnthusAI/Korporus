@@ -1,4 +1,4 @@
-export const SLOT_NAMES = ["menubar", "main"] as const;
+export const SLOT_NAMES = ["menubar", "main", "settings"] as const;
 
 export type SlotName = (typeof SLOT_NAMES)[number];
 
@@ -8,7 +8,11 @@ export interface AppManifest {
   icon: string;
   version: string;
   remoteEntry: string;
-  slots: Record<SlotName, string>;
+  slots: {
+    menubar: string;
+    main: string;
+    settings?: string;
+  };
 }
 
 /** Raw JSON schema for AppManifest — usable with any JSON Schema validator. */
@@ -34,6 +38,7 @@ export const APP_MANIFEST_SCHEMA = {
       properties: {
         menubar: { type: "string", minLength: 1 },
         main: { type: "string", minLength: 1 },
+        settings: { type: "string", minLength: 1 },
       },
     },
   },

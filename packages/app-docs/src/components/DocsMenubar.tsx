@@ -32,7 +32,7 @@ export function DocsMenubar() {
   }, [searchQuery, setSearchResults]);
 
   const segments = currentPath === "index" ? [] : currentPath.split("/");
-  const crumbs: { label: string; path: string }[] = [{ label: "Docs", path: "index" }];
+  const crumbs: { label: string; path: string }[] = [{ label: "Help", path: "index" }];
 
   for (let i = 0; i < segments.length; i++) {
     const partialPath = segments.slice(0, i + 1).join("/");
@@ -76,7 +76,7 @@ export function DocsMenubar() {
         <input
           type="text"
           value={searchQuery}
-          placeholder="Search docs..."
+          placeholder="Search help..."
           onChange={(e) => {
             setSearchQuery(e.target.value);
             setResultsOpen(true);
@@ -146,4 +146,3 @@ export function DocsMenubar() {
     </div>
   );
 }
-

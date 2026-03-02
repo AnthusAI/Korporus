@@ -6,6 +6,7 @@
   "remoteEntry": "/apps/hello/mf-manifest.json",
   "slots": {
     "menubar": "hello-app-menubar",
-    "main": "hello-app-main"
+    "main": "hello-app-main",
+    "settings": "hello-app-settings"
   }
 }
