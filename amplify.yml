@@ -3,8 +3,6 @@ frontend:
   phases:
     preBuild:
       commands:
-        - npm install -g pnpm @angular/cli
-        - pnpm install
         - rm -rf deploy
         - mkdir -p deploy
     build:
@@ -12,11 +10,17 @@ frontend:
         - |
           if [ "$AWS_APP_ID" = "d1fajfjif4amni" ]; then
             echo "Building React demo app for Amplify app $AWS_APP_ID"
-            pnpm --filter @korporus/demo-react build
+            cd apps/demo-react
+            npm install
+            npm run build
+            cd ../..
             cp -R apps/demo-react/dist/. deploy/
           elif [ "$AWS_APP_ID" = "dbcd2fnqoxe67" ]; then
             echo "Building Angular demo app for Amplify app $AWS_APP_ID"
-            pnpm --filter @korporus/demo-angular build
+            cd apps/demo-angular
+            npm install
+            npm run build
+            cd ../..
             cp -R apps/demo-angular/dist/demo-angular/browser/. deploy/
           else
             echo "Building korpor.us site fallback for Amplify app $AWS_APP_ID"
@@ -39,5 +43,6 @@ frontend:
       - '**/*'
   cache:
     paths:
-      - node_modules/**/*
       - apps/korpor.us/node_modules/**/*
+      - apps/demo-react/node_modules/**/*
+      - apps/demo-angular/node_modules/**/*
