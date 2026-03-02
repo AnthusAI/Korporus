@@ -16,6 +16,7 @@ const PORT_REGISTRY: Record<string, PortEntry> = {
   shell: { dev: 3000, preview: 4000 },
   "hello-app": { dev: 3001, preview: 4001 },
   "docs-app": { dev: 3002, preview: 4002 },
+  "settings-app": { dev: 3003, preview: 4003 },
 };
 
 /**

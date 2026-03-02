@@ -5,8 +5,7 @@
   "version": "1.0.0",
   "remoteEntry": "/apps/hello/remoteEntry.js",
   "slots": {
-    "titlebar": "hello-app-titlebar",
-    "main": "hello-app-main",
-    "settings": "hello-app-settings"
+    "menubar": "hello-app-menubar",
+    "main": "hello-app-main"
   }
 }

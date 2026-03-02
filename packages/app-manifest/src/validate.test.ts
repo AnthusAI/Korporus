@@ -9,9 +9,8 @@ const VALID: AppManifest = {
   version: "1.0.0",
   remoteEntry: "http://localhost:3001/remoteEntry.js",
   slots: {
-    titlebar: "hello-app-titlebar",
+    menubar: "hello-app-menubar",
     main: "hello-app-main",
-    settings: "hello-app-settings",
   },
 };
 
@@ -20,11 +19,6 @@ describe("validateManifest", () => {
     const result = validateManifest(VALID);
     expect(result.valid).toBe(true);
     expect(result.errors).toHaveLength(0);
-  });
-
-  it("passes when only some slots are defined", () => {
-    const result = validateManifest({ ...VALID, slots: { main: "hello-app-main" } });
-    expect(result.valid).toBe(true);
   });
 
   it("fails when the manifest is not an object", () => {
@@ -68,14 +62,26 @@ describe("validateManifest", () => {
   it("fails when slots is empty", () => {
     const result = validateManifest({ ...VALID, slots: {} });
     expect(result.valid).toBe(false);
-    expect(result.errors.some((e) => e.includes("at least one slot"))).toBe(true);
+    expect(result.errors.some((e) => e.includes('Missing required slot: "menubar"'))).toBe(
+      true,
+    );
+    expect(result.errors.some((e) => e.includes('Missing required slot: "main"'))).toBe(true);
+  });
+
+  it("fails when one required slot is missing", () => {
+    const result = validateManifest({
+      ...VALID,
+      slots: { menubar: "hello-app-menubar" } as unknown as AppManifest["slots"],
+    });
+    expect(result.valid).toBe(false);
+    expect(result.errors.some((e) => e.includes('Missing required slot: "main"'))).toBe(true);
   });
 
   it("fails and names the unknown slot", () => {
     const result = validateManifest({ ...VALID, slots: { sidebar: "foo" } });
     expect(result.valid).toBe(false);
     expect(result.errors.some((e) => e.includes('"sidebar"'))).toBe(true);
-    expect(result.errors.some((e) => e.includes("titlebar, main, settings"))).toBe(true);
+    expect(result.errors.some((e) => e.includes("menubar, main"))).toBe(true);
   });
 
   it("fails when a slot value is an empty string", () => {

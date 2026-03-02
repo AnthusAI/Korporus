@@ -57,16 +57,22 @@
 
 .slots-layout { display: flex; flex-direction: column; gap: 1rem; }
 
-.slot-titlebar {
+.slot-menubar {
   background: white;
   border: 1px solid #e5e7eb;
   border-radius: 8px;
   overflow: hidden;
 }
 
-.slot-body { display: flex; gap: 1rem; min-height: 400px; }
-.slot-main { flex: 1; background: white; border: 1px solid #e5e7eb; border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; }
-.slot-settings { width: 280px; background: white; border: 1px solid #e5e7eb; border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; }
+.slot-main {
+  min-height: 400px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
 
 .slot-label {
   padding: 0.5rem 1rem;

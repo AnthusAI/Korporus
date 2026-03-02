@@ -5,4 +5,5 @@
 export const MANIFEST_URLS: string[] = [
   "/manifests/hello-app.json",
   "/manifests/docs-app.json",
+  "/manifests/settings-app.json",
 ];

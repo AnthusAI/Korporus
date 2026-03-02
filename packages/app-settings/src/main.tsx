@@ -1,16 +1,15 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 
-// Import bootstrap to register all custom elements as a side effect
 import "./bootstrap";
 
 declare module "react" {
   namespace JSX {
     interface IntrinsicElements {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      "hello-app-menubar": Record<string, any>;
+      "settings-app-menubar": Record<string, any>;
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      "hello-app-main": Record<string, any>;
+      "settings-app-main": Record<string, any>;
     }
   }
 }
@@ -21,7 +20,6 @@ function DevShell() {
       style={{
         display: "grid",
         gridTemplateRows: "44px 1fr",
-        gridTemplateColumns: "1fr",
         height: "100vh",
         fontFamily: "system-ui, sans-serif",
       }}
@@ -35,10 +33,10 @@ function DevShell() {
           padding: "0 12px",
         }}
       >
-        <hello-app-menubar style={{ display: "block", width: "100%" }} />
+        <settings-app-menubar style={{ display: "block", width: "100%" }} />
       </div>
       <div style={{ overflow: "auto" }}>
-        <hello-app-main style={{ display: "block", height: "100%" }} />
+        <settings-app-main style={{ display: "block", height: "100%" }} />
       </div>
     </div>
   );

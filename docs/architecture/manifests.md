@@ -12,9 +12,8 @@ Every Korporus app has a manifest — a JSON file that tells the shell how to fi
   "version": "1.0.0",
   "remoteEntry": "/apps/my-app/remoteEntry.js",
   "slots": {
-    "titlebar": "my-app-titlebar",
-    "main": "my-app-main",
-    "settings": "my-app-settings"
+    "menubar": "my-app-menubar",
+    "main": "my-app-main"
   }
 }
 ```
@@ -34,11 +33,9 @@ Every Korporus app has a manifest — a JSON file that tells the shell how to fi
 
 The `slots` object uses these keys:
 
-- `titlebar` — Header bar component
+- `menubar` — App controls rendered inside the shell's top menu bar
 - `main` — Primary content component
-- `settings` — Settings/search sidebar component (optional but the key must exist)
-
-At least one slot must be defined.
+Both slots are required.
 
 ## Where Manifests Live
 

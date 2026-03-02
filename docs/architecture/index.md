@@ -9,7 +9,7 @@ Korporus is built on three key technologies:
 ## How It Works
 
 1. The **shell** starts and fetches app manifests from a known set of URLs
-2. Each manifest describes an app: its name, icon, and the Web Component tag names for its three slots (titlebar, main, settings)
+2. Each manifest describes an app: its name, icon, and the Web Component tag names for its two slots (menubar, main)
 3. When a user opens an app, the shell uses the **Module Federation runtime** to dynamically import the app's `remoteEntry.js`
 4. The remote entry's `bootstrap` module registers the app's **Web Components** as custom elements
 5. The shell creates instances of those custom elements and mounts them in the appropriate layout slots

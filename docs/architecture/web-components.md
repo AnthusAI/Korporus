@@ -2,15 +2,14 @@
 
 Web Components are the boundary contract between the Korporus shell and federated apps. Each app registers custom HTML elements that the shell mounts into its layout slots.
 
-## The Three Slots
+## The Two Slots
 
-Every Korporus app can provide up to three slots:
+Every Korporus app provides two slots:
 
 | Slot | Tag Name Convention | Purpose |
 |------|-------------------|---------|
-| **titlebar** | `{app-id}-titlebar` | Fixed header area (56px height) |
+| **menubar** | `{app-id}-menubar` | App-specific controls rendered in the shell's top menu bar |
 | **main** | `{app-id}-main` | Primary content area (fills remaining space) |
-| **settings** | `{app-id}-settings` | Optional right sidebar (slides in from the shell chrome) |
 
 ## The `registerCustomElement` Wrapper
 
@@ -44,7 +43,7 @@ This triggers the `connectedCallback` and your React component mounts. When the 
 
 ## Shared State Across Slots
 
-Since all three slot components live in the same JavaScript context (they're loaded from the same MF remote), they can share state via Zustand:
+Since both slot components live in the same JavaScript context (they're loaded from the same MF remote), they can share state via Zustand:
 
 ```typescript
 // store.ts — shared by all slots

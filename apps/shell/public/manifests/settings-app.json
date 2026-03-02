@@ -1,0 +1,11 @@
+{
+  "id": "settings-app",
+  "name": "Settings",
+  "icon": "/manifests/settings-app-icon.svg",
+  "version": "1.0.0",
+  "remoteEntry": "/apps/settings/mf-manifest.json",
+  "slots": {
+    "menubar": "settings-app-menubar",
+    "main": "settings-app-main"
+  }
+}

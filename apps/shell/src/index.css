@@ -2,14 +2,64 @@
 
 :root {
   --background: 0 0% 100%;
-  --foreground: 222.2 84% 4.9%;
+  --foreground: 222.2 47.4% 11.2%;
   --card: 0 0% 100%;
-  --card-foreground: 222.2 84% 4.9%;
+  --card-foreground: 222.2 47.4% 11.2%;
   --muted: 210 40% 96.1%;
   --muted-foreground: 215.4 16.3% 46.9%;
   --border: 214.3 31.8% 91.4%;
   --ring: 221.2 83.2% 53.3%;
+  --primary: 221.2 83.2% 53.3%;
   --radius: 0.5rem;
+}
+
+@theme {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-border: hsl(var(--border));
+  --color-primary: hsl(var(--primary));
+}
+
+.dark {
+  --background: 222.2 84% 4.9%;
+  --foreground: 210 40% 98%;
+  --card: 222.2 47.4% 11.2%;
+  --card-foreground: 210 40% 98%;
+  --muted: 217.2 32.6% 17.5%;
+  --muted-foreground: 215 20.2% 65.1%;
+  --border: 217.2 32.6% 17.5%;
+  --ring: 224.3 76.3% 48%;
+  --primary: 214.3 93.9% 67.8%;
+}
+
+.theme-cool {
+  --primary: 217.2 91.2% 59.8%;
+}
+
+.theme-warm {
+  --primary: 24.6 95% 53.1%;
+}
+
+.theme-neutral {
+  --primary: 221.2 83.2% 53.3%;
+}
+
+html[data-motion="off"] *,
+html[data-motion="off"] *::before,
+html[data-motion="off"] *::after {
+  animation-duration: 0ms !important;
+  transition-duration: 0ms !important;
+}
+
+html[data-motion="reduced"] *,
+html[data-motion="reduced"] *::before,
+html[data-motion="reduced"] *::after {
+  animation-duration: 120ms !important;
+  transition-duration: 120ms !important;
 }
 
 body {

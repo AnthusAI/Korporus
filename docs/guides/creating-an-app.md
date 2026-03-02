@@ -6,7 +6,7 @@ This guide covers the full process of adding a new federated app to Korporus.
 
 A Korporus app is a pnpm workspace package that:
 
-1. Exposes three Web Components (titlebar, main, settings)
+1. Exposes two Web Components (menubar, main)
 2. Bundles them as a Module Federation remote
 3. Registers with the shell via a manifest JSON
 
@@ -19,7 +19,8 @@ const PORT_REGISTRY: Record<string, PortEntry> = {
   shell:       { dev: 3000, preview: 4000 },
   "hello-app": { dev: 3001, preview: 4001 },
   "docs-app":  { dev: 3002, preview: 4002 },
-  "my-app":    { dev: 3003, preview: 4003 },  // ← add your app
+  "settings-app": { dev: 3003, preview: 4003 },
+  "my-app":    { dev: 3004, preview: 4004 },  // ← add your app
 };
 ```
 
@@ -110,7 +111,7 @@ export default defineConfig({
 
 ## Step 4: Write Your Components
 
-Create your three slot components. They're just React components — no special API:
+Create your two slot components. They're just React components — no special API:
 
 ```typescript
 // src/components/MyMain.tsx
@@ -126,13 +127,11 @@ Use Zustand for state shared across slots — see [State Management](./state-man
 ```typescript
 // src/bootstrap.ts
 import { registerCustomElement } from "@korporus/web-component-wrapper";
-import { MyTitlebar } from "./components/MyTitlebar";
+import { MyMenubar } from "./components/MyMenubar";
 import { MyMain } from "./components/MyMain";
-import { MySettings } from "./components/MySettings";
 
-registerCustomElement("my-app-titlebar", MyTitlebar);
+registerCustomElement("my-app-menubar", MyMenubar);
 registerCustomElement("my-app-main", MyMain);
-registerCustomElement("my-app-settings", MySettings);
 ```
 
 ## Step 6: Register with the Shell
@@ -147,9 +146,8 @@ registerCustomElement("my-app-settings", MySettings);
   "version": "1.0.0",
   "remoteEntry": "/apps/my-app/remoteEntry.js",
   "slots": {
-    "titlebar": "my-app-titlebar",
-    "main": "my-app-main",
-    "settings": "my-app-settings"
+    "menubar": "my-app-menubar",
+    "main": "my-app-main"
   }
 }
 ```

@@ -24,6 +24,7 @@ describe("getDevPort", () => {
     expect(getDevPort("shell")).toBe(3000);
     expect(getDevPort("hello-app")).toBe(3001);
     expect(getDevPort("docs-app")).toBe(3002);
+    expect(getDevPort("settings-app")).toBe(3003);
   });
 });
 
@@ -43,6 +44,7 @@ describe("getDevRemoteOrigins", () => {
     const origins = getDevRemoteOrigins();
     expect(origins["hello-app"]).toBe("http://localhost:3001");
     expect(origins["docs-app"]).toBe("http://localhost:3002");
+    expect(origins["settings-app"]).toBe("http://localhost:3003");
   });
 });
 

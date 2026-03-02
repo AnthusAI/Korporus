@@ -7,11 +7,9 @@ declare module "react" {
   namespace JSX {
     interface IntrinsicElements {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      "docs-app-titlebar": Record<string, any>;
+      "docs-app-menubar": Record<string, any>;
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       "docs-app-main": Record<string, any>;
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      "docs-app-settings": Record<string, any>;
     }
   }
 }
@@ -21,20 +19,25 @@ function DevShell() {
     <div
       style={{
         display: "grid",
-        gridTemplateRows: "56px 1fr",
-        gridTemplateColumns: "1fr 240px",
+        gridTemplateRows: "44px 1fr",
+        gridTemplateColumns: "1fr",
         height: "100vh",
         fontFamily: "system-ui, sans-serif",
       }}
     >
-      <div style={{ gridColumn: "1 / -1" }}>
-        <docs-app-titlebar style={{ display: "block", height: "100%" }} />
+      <div
+        style={{
+          borderBottom: "1px solid #e2e8f0",
+          background: "#f8fafc",
+          padding: "0 12px",
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        <docs-app-menubar style={{ display: "block", width: "100%" }} />
       </div>
       <div style={{ overflow: "auto" }}>
         <docs-app-main style={{ display: "block", height: "100%" }} />
-      </div>
-      <div style={{ borderLeft: "1px solid #e2e8f0", overflow: "auto" }}>
-        <docs-app-settings style={{ display: "block", height: "100%" }} />
       </div>
     </div>
   );

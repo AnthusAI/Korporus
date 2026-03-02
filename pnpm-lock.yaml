@@ -450,6 +450,43 @@ importers:
         specifier: ^3.0.0
         version: 3.2.4(@types/debug@4.1.12)(@types/node@25.3.2)(jiti@2.6.1)(less@4.2.2)(lightningcss@1.31.1)(sass@1.85.0)(terser@5.39.0)(tsx@4.19.4)(yaml@2.8.2)
 
+  packages/app-settings:
+    dependencies:
+      '@korporus/web-component-wrapper':
+        specifier: workspace:*
+        version: link:../web-component-wrapper
+      react:
+        specifier: ^19.0.0
+        version: 19.2.4
+      react-dom:
+        specifier: ^19.0.0
+        version: 19.2.4(react@19.2.4)
+    devDependencies:
+      '@korporus/platform-config':
+        specifier: workspace:*
+        version: link:../platform-config
+      '@module-federation/enhanced':
+        specifier: ^0.7.0
+        version: 0.7.7(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@5.9.3)(webpack@5.105.0)
+      '@module-federation/vite':
+        specifier: ^1.0.0
+        version: 1.11.0(rollup@4.59.0)(typescript@5.9.3)(vite@6.4.1(@types/node@25.3.2)(jiti@2.6.1)(less@4.2.2)(lightningcss@1.31.1)(sass@1.85.0)(terser@5.39.0)(tsx@4.19.4)(yaml@2.8.2))
+      '@types/react':
+        specifier: ^19.0.0
+        version: 19.2.14
+      '@types/react-dom':
+        specifier: ^19.0.0
+        version: 19.2.3(@types/react@19.2.14)
+      '@vitejs/plugin-react':
+        specifier: ^4.0.0
+        version: 4.7.0(vite@6.4.1(@types/node@25.3.2)(jiti@2.6.1)(less@4.2.2)(lightningcss@1.31.1)(sass@1.85.0)(terser@5.39.0)(tsx@4.19.4)(yaml@2.8.2))
+      typescript:
+        specifier: '*'
+        version: 5.9.3
+      vite:
+        specifier: ^6.0.0
+        version: 6.4.1(@types/node@25.3.2)(jiti@2.6.1)(less@4.2.2)(lightningcss@1.31.1)(sass@1.85.0)(terser@5.39.0)(tsx@4.19.4)(yaml@2.8.2)
+
   packages/platform-config:
     devDependencies:
       typescript:
@@ -16506,7 +16543,7 @@ snapshots:
       upath: 2.0.1
     optionalDependencies:
       typescript: 5.6.3
-      webpack: 5.105.0
+      webpack: 5.105.0(esbuild@0.25.4)
     transitivePeerDependencies:
       - bufferutil
       - debug
@@ -16529,7 +16566,7 @@ snapshots:
       upath: 2.0.1
     optionalDependencies:
       typescript: 5.9.3
-      webpack: 5.105.0
+      webpack: 5.105.0(esbuild@0.25.4)
     transitivePeerDependencies:
       - bufferutil
       - debug
@@ -17208,7 +17245,7 @@ snapshots:
       webpack: 5.98.0
     optionalDependencies:
       type-fest: 0.21.3
-      webpack-dev-server: 5.2.2(webpack@5.105.0)
+      webpack-dev-server: 5.2.2(tslib@2.8.1)(webpack@5.105.0)
 
   '@pnpm/config.env-replace@1.1.0': {}
 
@@ -20748,7 +20785,7 @@ snapshots:
     dependencies:
       loader-utils: 2.0.4
       schema-utils: 3.3.0
-      webpack: 5.105.0
+      webpack: 5.105.0(esbuild@0.25.4)
 
   file-type@16.5.4:
     dependencies:
@@ -23986,7 +24023,7 @@ snapshots:
       jiti: 1.21.7
       postcss: 8.5.6
       semver: 7.7.4
-      webpack: 5.105.0
+      webpack: 5.105.0(esbuild@0.25.4)
     transitivePeerDependencies:
       - typescript
 
@@ -25523,15 +25560,6 @@ snapshots:
     optionalDependencies:
       esbuild: 0.25.4
 
-  terser-webpack-plugin@5.3.16(webpack@5.105.0):
-    dependencies:
-      '@jridgewell/trace-mapping': 0.3.31
-      jest-worker: 27.5.1
-      schema-utils: 4.3.3
-      serialize-javascript: 6.0.2
-      terser: 5.39.0
-      webpack: 5.105.0
-
   terser-webpack-plugin@5.3.16(webpack@5.98.0):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.31
@@ -26036,20 +26064,6 @@ snapshots:
     transitivePeerDependencies:
       - tslib
 
-  webpack-dev-middleware@7.4.2(webpack@5.105.0):
-    dependencies:
-      colorette: 2.0.20
-      memfs: 4.56.10(tslib@2.8.1)
-      mime-types: 2.1.35
-      on-finished: 2.4.1
-      range-parser: 1.2.1
-      schema-utils: 4.3.3
-    optionalDependencies:
-      webpack: 5.105.0
-    transitivePeerDependencies:
-      - tslib
-    optional: true
-
   webpack-dev-server@5.2.2(tslib@2.8.1)(webpack@5.105.0):
     dependencies:
       '@types/bonjour': 3.5.13
@@ -26089,46 +26103,6 @@ snapshots:
       - tslib
       - utf-8-validate
 
-  webpack-dev-server@5.2.2(webpack@5.105.0):
-    dependencies:
-      '@types/bonjour': 3.5.13
-      '@types/connect-history-api-fallback': 1.5.4
-      '@types/express': 4.17.25
-      '@types/express-serve-static-core': 4.19.8
-      '@types/serve-index': 1.9.4
-      '@types/serve-static': 1.15.10
-      '@types/sockjs': 0.3.36
-      '@types/ws': 8.18.1
-      ansi-html-community: 0.0.8
-      bonjour-service: 1.3.0
-      chokidar: 3.6.0
-      colorette: 2.0.20
-      compression: 1.8.1
-      connect-history-api-fallback: 2.0.0
-      express: 4.22.1
-      graceful-fs: 4.2.11
-      http-proxy-middleware: 2.0.9(@types/express@4.17.25)
-      ipaddr.js: 2.3.0
-      launch-editor: 2.13.1
-      open: 10.1.0
-      p-retry: 6.2.1
-      schema-utils: 4.3.3
-      selfsigned: 2.4.1
-      serve-index: 1.9.2
-      sockjs: 0.3.24
-      spdy: 4.0.2
-      webpack-dev-middleware: 7.4.2(webpack@5.105.0)
-      ws: 8.18.0
-    optionalDependencies:
-      webpack: 5.105.0
-    transitivePeerDependencies:
-      - bufferutil
-      - debug
-      - supports-color
-      - tslib
-      - utf-8-validate
-    optional: true
-
   webpack-merge@5.10.0:
     dependencies:
       clone-deep: 4.0.1
@@ -26156,38 +26130,6 @@ snapshots:
       webpack: 5.105.0(esbuild@0.25.4)
 
   webpack-virtual-modules@0.6.2: {}
-
-  webpack@5.105.0:
-    dependencies:
-      '@types/eslint-scope': 3.7.7
-      '@types/estree': 1.0.8
-      '@types/json-schema': 7.0.15
-      '@webassemblyjs/ast': 1.14.1
-      '@webassemblyjs/wasm-edit': 1.14.1
-      '@webassemblyjs/wasm-parser': 1.14.1
-      acorn: 8.16.0
-      acorn-import-phases: 1.0.4(acorn@8.16.0)
-      browserslist: 4.28.1
-      chrome-trace-event: 1.0.4
-      enhanced-resolve: 5.19.0
-      es-module-lexer: 2.0.0
-      eslint-scope: 5.1.1
-      events: 3.3.0
-      glob-to-regexp: 0.4.1
-      graceful-fs: 4.2.11
-      json-parse-even-better-errors: 2.3.1
-      loader-runner: 4.3.1
-      mime-types: 2.1.35
-      neo-async: 2.6.2
-      schema-utils: 4.3.3
-      tapable: 2.3.0
-      terser-webpack-plugin: 5.3.16(webpack@5.105.0)
-      watchpack: 2.5.1
-      webpack-sources: 3.3.4
-    transitivePeerDependencies:
-      - '@swc/core'
-      - esbuild
-      - uglify-js
 
   webpack@5.105.0(esbuild@0.25.4):
     dependencies:

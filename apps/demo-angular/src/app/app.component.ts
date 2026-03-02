@@ -23,9 +23,8 @@ export class AppComponent implements OnInit, AfterViewChecked {
 
   readonly remoteEntry: string = this.resolveRemoteEntry();
 
-  @ViewChild('titlebarsSlot') titlebarsSlot?: ElementRef<HTMLDivElement>;
+  @ViewChild('menubarSlot') menubarSlot?: ElementRef<HTMLDivElement>;
   @ViewChild('mainSlot') mainSlot?: ElementRef<HTMLDivElement>;
-  @ViewChild('settingsSlot') settingsSlot?: ElementRef<HTMLDivElement>;
 
   constructor(private cdr: ChangeDetectorRef) {}
 
@@ -55,7 +54,7 @@ export class AppComponent implements OnInit, AfterViewChecked {
 
   ngAfterViewChecked(): void {
     if (this.loadState() === 'loaded' && !this.slotsMounted) {
-      if (this.titlebarsSlot && this.mainSlot && this.settingsSlot) {
+      if (this.menubarSlot && this.mainSlot) {
         this.slotsMounted = true;
         this.mountSlots();
       }
@@ -63,9 +62,8 @@ export class AppComponent implements OnInit, AfterViewChecked {
   }
 
   private mountSlots(): void {
-    this.appendCustomElement(this.titlebarsSlot!, 'hello-app-titlebar');
+    this.appendCustomElement(this.menubarSlot!, 'hello-app-menubar');
     this.appendCustomElement(this.mainSlot!, 'hello-app-main');
-    this.appendCustomElement(this.settingsSlot!, 'hello-app-settings');
   }
 
   private appendCustomElement(ref: ElementRef<HTMLDivElement>, tagName: string): void {

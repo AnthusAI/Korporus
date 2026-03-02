@@ -7,16 +7,16 @@ export default function Home() {
   const { apps, loaded } = useRegistry();
 
   return (
-    <main className="flex-1 bg-gray-50 overflow-auto p-8">
+    <main className="flex-1 overflow-auto bg-background p-8">
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-2xl font-semibold text-gray-800 mb-8">Your Apps</h1>
+        <h1 className="mb-8 text-2xl font-semibold text-foreground">Your Apps</h1>
 
         {!loaded && (
-          <p className="text-gray-400 text-sm">Loading apps…</p>
+          <p className="text-sm text-muted-foreground">Loading apps…</p>
         )}
 
         {loaded && apps.length === 0 && (
-          <p className="text-gray-400 text-sm">No apps installed.</p>
+          <p className="text-sm text-muted-foreground">No apps installed.</p>
         )}
 
         <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-6">
@@ -29,9 +29,9 @@ export default function Home() {
             >
               <div
                 className={cn(
-                  "w-16 h-16 rounded-2xl flex items-center justify-center shadow-md overflow-hidden",
-                  "group-hover:scale-105 group-hover:shadow-lg transition-all duration-150",
-                  "group-active:scale-95 bg-gray-200",
+                  "h-16 w-16 overflow-hidden rounded-2xl border border-border bg-card flex items-center justify-center shadow-sm",
+                  "group-hover:scale-105 group-hover:shadow transition-all duration-150",
+                  "group-active:scale-95",
                 )}
               >
                 <img
@@ -43,7 +43,7 @@ export default function Home() {
                   }}
                 />
               </div>
-              <span className="text-xs text-gray-700 text-center font-medium leading-tight">
+              <span className="text-center text-xs font-medium leading-tight text-foreground">
                 {app.name}
               </span>
             </button>

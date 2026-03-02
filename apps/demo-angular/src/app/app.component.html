@@ -25,24 +25,17 @@
       <button (click)="retry()" class="retry-btn">Try Again</button>
     </div>
 
-    <!-- Loaded state: three slots -->
+    <!-- Loaded state: menubar + main -->
     <div *ngIf="isLoaded" class="slots-layout">
-      <section class="slot-titlebar">
-        <div class="slot-label">Titlebar</div>
-        <div #titlebarsSlot class="slot-content"></div>
+      <section class="slot-menubar">
+        <div class="slot-label">Menu Bar</div>
+        <div #menubarSlot class="slot-content"></div>
       </section>
 
-      <div class="slot-body">
-        <section class="slot-main">
-          <div class="slot-label">Main Content</div>
-          <div #mainSlot class="slot-content slot-content--main"></div>
-        </section>
-
-        <aside class="slot-settings">
-          <div class="slot-label">Settings</div>
-          <div #settingsSlot class="slot-content"></div>
-        </aside>
-      </div>
+      <section class="slot-main">
+        <div class="slot-label">Main Content</div>
+        <div #mainSlot class="slot-content slot-content--main"></div>
+      </section>
     </div>
   </main>
 

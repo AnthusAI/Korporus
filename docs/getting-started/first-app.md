@@ -19,9 +19,8 @@ packages/my-app/
     main.tsx
     store.ts
     components/
-      MyTitlebar.tsx
+      MyMenubar.tsx
       MyMain.tsx
-      MySettings.tsx
 ```
 
 ## 2. Configure Module Federation
@@ -47,14 +46,13 @@ federation({
 
 ## 3. Register Web Components
 
-In `bootstrap.ts`, register your three slot components:
+In `bootstrap.ts`, register your app slot components:
 
 ```typescript
 import { registerCustomElement } from "@korporus/web-component-wrapper";
 
-registerCustomElement("my-app-titlebar", MyTitlebar);
+registerCustomElement("my-app-menubar", MyMenubar);
 registerCustomElement("my-app-main", MyMain);
-registerCustomElement("my-app-settings", MySettings);
 ```
 
 ## 4. Register with the Shell

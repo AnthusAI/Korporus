@@ -23,9 +23,8 @@ interface AppManifest {
 
   /** Map of slot names to custom element tag names */
   slots: {
-    titlebar?: string;
-    main?: string;
-    settings?: string;
+    menubar: string;
+    main: string;
   };
 }
 ```
@@ -37,7 +36,7 @@ interface AppManifest {
 - `icon`: Must be a non-empty string
 - `version`: Must be a non-empty string
 - `remoteEntry`: Must be a non-empty string
-- `slots`: Must be an object with at least one key from `["titlebar", "main", "settings"]`
+- `slots`: Must be an object with required keys `["menubar", "main"]`
 - Slot values must be non-empty strings (custom element tag names)
 
 ## Example
@@ -50,9 +49,8 @@ interface AppManifest {
   "version": "1.0.0",
   "remoteEntry": "/apps/hello/remoteEntry.js",
   "slots": {
-    "titlebar": "hello-app-titlebar",
-    "main": "hello-app-main",
-    "settings": "hello-app-settings"
+    "menubar": "hello-app-menubar",
+    "main": "hello-app-main"
   }
 }
 ```

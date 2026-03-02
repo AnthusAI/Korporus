@@ -14,6 +14,7 @@ A static array of manifest JSON URLs. Add your app's manifest URL here to regist
 export const MANIFEST_URLS: string[] = [
   "/manifests/hello-app.json",
   "/manifests/docs-app.json",
+  "/manifests/settings-app.json",
 ];
 ```
 
@@ -69,7 +70,7 @@ The plugin auto-discovers all app origins from `@korporus/platform-config`:
 import { getDevRemoteOrigins } from "@korporus/platform-config";
 
 const devRemoteOrigins = getDevRemoteOrigins();
-// { "hello-app": "http://localhost:3001", "docs-app": "http://localhost:3002" }
+// { "hello-app": "http://localhost:3001", "docs-app": "http://localhost:3002", "settings-app": "http://localhost:3003" }
 ```
 
 To add a new app, register it in `packages/platform-config/src/ports.ts` — the shell picks it up automatically.

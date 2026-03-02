@@ -1,6 +1,6 @@
 # State Management
 
-Korporus apps use [Zustand](https://github.com/pmndrs/zustand) for state management. Since all three slot components (titlebar, main, settings) are loaded from the same MF remote, they share a single JavaScript context and can use the same Zustand store.
+Korporus apps use [Zustand](https://github.com/pmndrs/zustand) for state management. Since both slot components (menubar, main) are loaded from the same MF remote, they share a single JavaScript context and can use the same Zustand store.
 
 ## Basic Pattern
 
@@ -38,7 +38,7 @@ export function MyMain() {
 }
 ```
 
-When `MyMain` calls `increment`, the titlebar and settings components will also re-render if they subscribe to `count`.
+When `MyMain` calls `increment`, the menubar component will also re-render if it subscribes to `count`.
 
 ## Why Zustand?
 

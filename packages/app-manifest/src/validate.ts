@@ -1,4 +1,4 @@
-import { APP_MANIFEST_SCHEMA, SLOT_NAMES, type AppManifest, type SlotName } from "./schema.js";
+import { APP_MANIFEST_SCHEMA, SLOT_NAMES, type AppManifest } from "./schema.js";
 
 export interface ValidationResult {
   valid: boolean;
@@ -55,9 +55,11 @@ export function validateManifest(raw: unknown): ValidationResult {
   } else {
     const slots = raw.slots as Record<string, unknown>;
     const keys = Object.keys(slots);
-
-    if (keys.length === 0) {
-      errors.push('"slots" must define at least one slot');
+    const requiredSlots = ["menubar", "main"] as const;
+    for (const slot of requiredSlots) {
+      if (!(slot in slots)) {
+        errors.push(`Missing required slot: "${slot}"`);
+      }
     }
 
     for (const key of keys) {
@@ -91,6 +93,6 @@ export function parseManifest(raw: unknown): AppManifest {
     icon: m.icon as string,
     version: m.version as string,
     remoteEntry: m.remoteEntry as string,
-    slots: m.slots as Partial<Record<SlotName, string>>,
+    slots: m.slots as AppManifest["slots"],
   };
 }

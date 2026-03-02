@@ -1,0 +1,11 @@
+{
+  "id": "settings-app",
+  "name": "Settings",
+  "icon": "./icon.svg",
+  "version": "1.0.0",
+  "remoteEntry": "/apps/settings/remoteEntry.js",
+  "slots": {
+    "menubar": "settings-app-menubar",
+    "main": "settings-app-main"
+  }
+}
