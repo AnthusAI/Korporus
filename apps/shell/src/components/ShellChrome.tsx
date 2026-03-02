@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { CircleHelp, House, Info, Settings2, X } from "lucide-react";
+import { CircleHelp, House, Info, Settings2 } from "lucide-react";
 import type { AppManifest } from "@korporus/app-manifest";
 
 interface ShellChromeProps {
@@ -43,9 +43,6 @@ export default function ShellChrome({ appManifest, menubarSlotTag }: ShellChrome
   }, [appManifest]);
 
   const showHomeButton = location.pathname !== "/";
-  const inAppSettingsView = /^\/app\/[^/]+\/settings\/?$/.test(location.pathname);
-  const inSystemSettingsApp = /^\/app\/settings-app\/?$/.test(location.pathname);
-  const showCloseButton = inAppSettingsView || inSystemSettingsApp;
   const showHelpMenu = !!appManifest && appManifest.id !== "settings-app";
 
   useEffect(() => {
@@ -70,18 +67,6 @@ export default function ShellChrome({ appManifest, menubarSlotTag }: ShellChrome
     window.addEventListener("mousedown", onPointerDown);
     return () => window.removeEventListener("mousedown", onPointerDown);
   }, []);
-
-  function handleCloseSettings() {
-    if (window.history.length > 1) {
-      navigate(-1);
-      return;
-    }
-    if (appManifest) {
-      navigate(`/app/${appManifest.id}`);
-      return;
-    }
-    navigate("/");
-  }
 
   return (
     <>
@@ -126,54 +111,58 @@ export default function ShellChrome({ appManifest, menubarSlotTag }: ShellChrome
           )}
         </div>
 
-        {appManifest && (
-          <div className="relative ml-1" ref={appMenuRef}>
-            <button
-              type="button"
-              onClick={() => {
-                setHelpMenuOpen(false);
-                setAppMenuOpen((prev) => !prev);
-              }}
-              className="rounded-md px-2 py-1 text-sm font-medium hover:bg-muted"
-              aria-label={`Open ${appMenuLabel} menu`}
-              title={`${appMenuLabel} menu`}
-            >
-              {appMenuLabel}
-            </button>
-            {appMenuOpen && (
-              <div className="absolute left-0 top-9 min-w-44 overflow-hidden rounded-md border border-border bg-card p-1 shadow-md">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setAboutTitle(`About ${appMenuLabel}`);
-                    setAboutOpen(true);
-                    setAppMenuOpen(false);
-                  }}
-                  className="flex w-full items-center gap-2 rounded-sm px-2 py-1.5 text-left text-sm hover:bg-muted"
-                >
-                  <Info size={14} />
-                  About {appMenuLabel}
-                </button>
-                {appManifest.slots.settings && (
-                  <>
-                    <div className="my-1 h-px bg-border" />
-                    <button
-                      type="button"
-                      onClick={() => {
-                        navigate(`/app/${appManifest.id}/settings`);
-                        setAppMenuOpen(false);
-                      }}
-                      className="flex w-full items-center gap-2 rounded-sm px-2 py-1.5 text-left text-sm hover:bg-muted"
-                    >
-                      <Settings2 size={14} />
-                      Settings
-                    </button>
-                  </>
-                )}
-              </div>
-            )}
-          </div>
-        )}
+        <div className="relative ml-1" ref={appMenuRef}>
+          {appManifest ? (
+            <>
+              <button
+                type="button"
+                onClick={() => {
+                  setHelpMenuOpen(false);
+                  setAppMenuOpen((prev) => !prev);
+                }}
+                className="rounded-md px-2 py-1 text-sm font-medium hover:bg-muted"
+                aria-label={`Open ${appMenuLabel} menu`}
+                title={`${appMenuLabel} menu`}
+              >
+                {appMenuLabel}
+              </button>
+              {appMenuOpen && (
+                <div className="absolute left-0 top-9 min-w-44 overflow-hidden rounded-md border border-border bg-card p-1 shadow-md">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setAboutTitle(`About ${appMenuLabel}`);
+                      setAboutOpen(true);
+                      setAppMenuOpen(false);
+                    }}
+                    className="flex w-full items-center gap-2 rounded-sm px-2 py-1.5 text-left text-sm hover:bg-muted"
+                  >
+                    <Info size={14} />
+                    About {appMenuLabel}
+                  </button>
+                  {appManifest.slots.settings && (
+                    <>
+                      <div className="my-1 h-px bg-border" />
+                      <button
+                        type="button"
+                        onClick={() => {
+                          navigate(`/app/${appManifest.id}/settings`);
+                          setAppMenuOpen(false);
+                        }}
+                        className="flex w-full items-center gap-2 rounded-sm px-2 py-1.5 text-left text-sm hover:bg-muted"
+                      >
+                        <Settings2 size={14} />
+                        Settings
+                      </button>
+                    </>
+                  )}
+                </div>
+              )}
+            </>
+          ) : (
+            <span className="px-2 py-1 text-sm font-medium text-foreground">Korporus</span>
+          )}
+        </div>
 
         {appManifest && showHelpMenu && (
           <div className="relative ml-1" ref={helpMenuRef}>
@@ -227,17 +216,6 @@ export default function ShellChrome({ appManifest, menubarSlotTag }: ShellChrome
               title="Home"
             >
               <House size={15} />
-            </button>
-          )}
-          {showCloseButton && (
-            <button
-              type="button"
-              onClick={handleCloseSettings}
-              className="flex h-7 w-7 items-center justify-center rounded-md hover:bg-muted"
-              aria-label="Close settings"
-              title="Close settings"
-            >
-              <X size={15} />
             </button>
           )}
         </div>
