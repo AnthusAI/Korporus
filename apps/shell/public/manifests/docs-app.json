@@ -1,7 +1,7 @@
 {
   "id": "docs-app",
   "name": "Help",
-  "icon": "/manifests/docs-app-icon.svg?v=20260302",
+  "icon": "/manifests/docs-app-icon.svg?v=20260302-2",
   "version": "1.0.0",
   "remoteEntry": "/apps/docs/mf-manifest.json",
   "slots": {
