@@ -1,0 +1,31 @@
+{
+  "id": "kor-12085096-a76f-49d8-8ce4-24fa96275295",
+  "title": "Initialize the Korporus monorepo",
+  "description": "",
+  "type": "task",
+  "status": "closed",
+  "priority": 2,
+  "assignee": null,
+  "creator": null,
+  "parent": "kor-b9b026a8-67bc-4390-9a49-7c255562e667",
+  "labels": [],
+  "dependencies": [],
+  "comments": [
+    {
+      "id": "1649353c-2f24-4b38-9001-015b98bccd22",
+      "author": "ryan.porter",
+      "text": "Set up the Korporus monorepo with pnpm workspaces and the initial directory structure:\n\n```\nkorporus/\n├── apps/\n│   ├── shell/              (Epic 2)\n│   ├── demo-angular/       (Epic 4)\n│   └── demo-react/         (Epic 4)\n├── packages/\n│   ├── app-hello/          (Epic 3)\n│   ├── app-manifest/       (Epic 1)\n│   └── web-component-wrapper/  (Epic 1)\n├── infra/                  (Epic 5)\n├── Dockerfile              (Epic 5)\n├── pnpm-workspace.yaml\n├── tsconfig.base.json\n└── README.md\n```\n\nConfigure TypeScript with a shared base config. Set up linting (ESLint + Prettier). Add a root README.md explaining the project structure and how to run things locally.\n\n### Acceptance Criteria\n- `pnpm install` succeeds from the root.\n- Each workspace package can import from sibling packages.\n- TypeScript builds pass with strict mode enabled.\n\n### Dependencies\nNone (first step).",
+      "created_at": "2026-02-28T01:57:52.622376Z"
+    },
+    {
+      "id": "41ef8190-ee0a-437e-8498-d81098aa3226",
+      "author": "ryan.porter",
+      "text": "Monorepo scaffolded. Created:\n- pnpm-workspace.yaml with apps/* and packages/* globs\n- root package.json with workspace scripts (build, dev, lint, typecheck, test, format)\n- tsconfig.base.json with strict mode, ES2022 target, bundler module resolution\n- eslint.config.js (flat config) with @typescript-eslint + prettier\n- .prettierrc.json and .prettierignore\n- Stub package.json + tsconfig.json for all 6 workspace packages\n- Placeholder src/ dirs with .gitkeep for each package\n- infra/ directory\n- Updated README.md with architecture, setup, and manifest contract docs\n- pnpm install succeeds, TypeScript 5.9.3 resolves correctly\n\nTasks 1.2 and 1.3 can now begin in parallel.",
+      "created_at": "2026-02-28T05:35:00.759686Z"
+    }
+  ],
+  "created_at": "2026-02-28T01:57:11.429472Z",
+  "updated_at": "2026-02-28T05:35:00.759686Z",
+  "closed_at": "2026-02-28T05:34:03.687338Z",
+  "custom": {}
+}

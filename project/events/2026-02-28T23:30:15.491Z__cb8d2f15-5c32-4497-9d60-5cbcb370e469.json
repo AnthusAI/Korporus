@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "event_id": "cb8d2f15-5c32-4497-9d60-5cbcb370e469",
+  "issue_id": "kor-56f07451-a26a-4774-b139-ee1f269b91cf",
+  "event_type": "issue_created",
+  "occurred_at": "2026-02-28T23:30:15.491Z",
+  "actor_id": "ryan.porter",
+  "payload": {
+    "assignee": null,
+    "description": "",
+    "issue_type": "task",
+    "labels": [],
+    "parent": null,
+    "priority": 2,
+    "status": "open",
+    "title": "Centralized port registry via @korporus/platform-config"
+  }
+}

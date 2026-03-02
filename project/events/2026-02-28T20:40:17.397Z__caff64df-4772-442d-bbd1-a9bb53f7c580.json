@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "event_id": "caff64df-4772-442d-bbd1-a9bb53f7c580",
+  "issue_id": "kor-d039cd1f-db53-42c7-86d4-560b169bdd0c",
+  "event_type": "issue_created",
+  "occurred_at": "2026-02-28T20:40:17.397Z",
+  "actor_id": "ryan.porter",
+  "payload": {
+    "assignee": null,
+    "description": "Create TableOfContents.tsx and useActiveHeading.ts hook with IntersectionObserver. Show floating TOC on the right for documents with 4+ headings. Highlight current section while scrolling.",
+    "issue_type": "task",
+    "labels": [],
+    "parent": "kor-3138e593-5942-4494-8153-6d4c1e6a5a16",
+    "priority": 2,
+    "status": "open",
+    "title": "Table of contents tracks current section"
+  }
+}

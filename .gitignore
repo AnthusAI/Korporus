@@ -1,7 +1,20 @@
+.DS_Store
 console.log
 *.env
 **/__pycache__/
 *.pyc
+
+# Dependencies & build output
+node_modules/
+dist/
+.cache/
+.__mf__temp/
+.angular/
+**/.vite/
+
+# CodeQL
+.codeql/
+.codeql-reports/
 
 # Terraform
 *.tfstate

@@ -1,0 +1,18 @@
+{
+  "id": "kor-91da8cc2-1484-4352-89e5-2dad0339418b",
+  "title": "Epic: Initial Documentation Content",
+  "description": "Write the actual documentation covering the Korporus platform: getting started, architecture, module federation, web component contract, app manifest, creating an app, state management, styling, deployment modes (dev/container/production), and API reference.",
+  "type": "epic",
+  "status": "closed",
+  "priority": 2,
+  "assignee": null,
+  "creator": null,
+  "parent": null,
+  "labels": [],
+  "dependencies": [],
+  "comments": [],
+  "created_at": "2026-02-28T20:39:45.192115Z",
+  "updated_at": "2026-02-28T21:11:44.854809Z",
+  "closed_at": "2026-02-28T21:11:44.854809Z",
+  "custom": {}
+}

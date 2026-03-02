@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "event_id": "c5963eb9-90cb-4fa3-9ae7-36646888c1bb",
+  "issue_id": "kor-7fb5815f-b307-46ad-9e3a-ad376a674a50",
+  "event_type": "issue_created",
+  "occurred_at": "2026-02-28T20:39:43.721Z",
+  "actor_id": "ryan.porter",
+  "payload": {
+    "assignee": null,
+    "description": "The docs app builds and deploys within the existing container pipeline. Definition of done: docker build produces a container serving the docs app at /apps/docs/ alongside the shell and hello app.",
+    "issue_type": "epic",
+    "labels": [],
+    "parent": null,
+    "priority": 2,
+    "status": "open",
+    "title": "Epic: Docs App Deployment Integration"
+  }
+}

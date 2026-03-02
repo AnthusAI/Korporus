@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1920" y2="1080" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0F172A"/>
+      <stop offset="1" stop-color="#111827"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(980 460) rotate(90) scale(500 760)">
+      <stop stop-color="#22D3EE" stop-opacity="0.34"/>
+      <stop offset="1" stop-color="#22D3EE" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#bg)"/>
+  <rect width="1920" height="1080" fill="url(#glow)"/>
+
+  <g opacity="0.92">
+    <rect x="230" y="160" width="1460" height="760" rx="26" fill="#0B1220" stroke="#334155"/>
+    <rect x="230" y="160" width="1460" height="62" rx="26" fill="#111827"/>
+    <text x="280" y="199" fill="#E2E8F0" font-family="'IBM Plex Sans', sans-serif" font-size="26" font-weight="700">Korporus</text>
+    <text x="430" y="199" fill="#94A3B8" font-family="'IBM Plex Sans', sans-serif" font-size="22">/ Home</text>
+
+    <rect x="280" y="260" width="1360" height="610" rx="20" fill="#F8FAFC"/>
+    <text x="340" y="336" fill="#0F172A" font-family="'Space Grotesk', sans-serif" font-size="52" font-weight="700">Your Apps</text>
+
+    <g transform="translate(340 392)">
+      <g>
+        <rect width="122" height="122" rx="28" fill="#0EA5E9"/>
+        <text x="52" y="75" fill="white" font-family="'Space Grotesk', sans-serif" font-size="44" font-weight="700">H</text>
+        <text x="36" y="154" fill="#334155" font-family="'IBM Plex Sans', sans-serif" font-size="24" font-weight="600">Hello</text>
+      </g>
+      <g transform="translate(188 0)">
+        <rect width="122" height="122" rx="28" fill="#E2E8F0"/>
+        <text x="48" y="75" fill="#0F172A" font-family="'Space Grotesk', sans-serif" font-size="44" font-weight="700">D</text>
+        <text x="42" y="154" fill="#334155" font-family="'IBM Plex Sans', sans-serif" font-size="24" font-weight="600">Docs</text>
+      </g>
+      <g transform="translate(376 0)">
+        <rect width="122" height="122" rx="28" fill="#E2E8F0"/>
+        <text x="46" y="75" fill="#0F172A" font-family="'Space Grotesk', sans-serif" font-size="44" font-weight="700">K</text>
+        <text x="16" y="154" fill="#334155" font-family="'IBM Plex Sans', sans-serif" font-size="24" font-weight="600">Workflow</text>
+      </g>
+      <g transform="translate(564 0)">
+        <rect width="122" height="122" rx="28" fill="#E2E8F0"/>
+        <text x="43" y="75" fill="#0F172A" font-family="'Space Grotesk', sans-serif" font-size="44" font-weight="700">A</text>
+        <text x="11" y="154" fill="#334155" font-family="'IBM Plex Sans', sans-serif" font-size="24" font-weight="600">Analytics</text>
+      </g>
+      <g transform="translate(752 0)">
+        <rect width="122" height="122" rx="28" fill="#E2E8F0"/>
+        <text x="45" y="75" fill="#0F172A" font-family="'Space Grotesk', sans-serif" font-size="44" font-weight="700">O</text>
+        <text x="38" y="154" fill="#334155" font-family="'IBM Plex Sans', sans-serif" font-size="24" font-weight="600">Ops</text>
+      </g>
+      <g transform="translate(940 0)">
+        <rect width="122" height="122" rx="28" fill="#E2E8F0"/>
+        <text x="43" y="75" fill="#0F172A" font-family="'Space Grotesk', sans-serif" font-size="44" font-weight="700">M</text>
+        <text x="25" y="154" fill="#334155" font-family="'IBM Plex Sans', sans-serif" font-size="24" font-weight="600">Admin</text>
+      </g>
+    </g>
+
+    <rect x="340" y="600" width="1240" height="220" rx="20" fill="white" stroke="#CBD5E1"/>
+    <text x="388" y="658" fill="#64748B" font-family="'IBM Plex Sans', sans-serif" font-size="24" letter-spacing="2.4">INTRO VIDEO DRAFT</text>
+    <text x="388" y="716" fill="#0F172A" font-family="'Space Grotesk', sans-serif" font-size="44" font-weight="700">A new OS for a new kind of app</text>
+    <text x="388" y="766" fill="#334155" font-family="'IBM Plex Sans', sans-serif" font-size="28">Asynchronous agents, sandboxed execution, and continuous health monitoring.</text>
+  </g>
+</svg>

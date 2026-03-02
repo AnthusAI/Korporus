@@ -1,0 +1,18 @@
+{
+  "id": "kor-39293c9a-9964-48a7-aabe-5f41d058ea68",
+  "title": "Sidebar navigation shows document tree",
+  "description": "Create Sidebar.tsx that builds a collapsible tree from the manifest. Highlight current document. Integrate into DocsMain.tsx as a two-column layout with expand/collapse sections.",
+  "type": "task",
+  "status": "closed",
+  "priority": 2,
+  "assignee": null,
+  "creator": null,
+  "parent": "kor-3138e593-5942-4494-8153-6d4c1e6a5a16",
+  "labels": [],
+  "dependencies": [],
+  "comments": [],
+  "created_at": "2026-02-28T20:40:17.320425Z",
+  "updated_at": "2026-02-28T21:22:34.286804Z",
+  "closed_at": "2026-02-28T21:22:34.286804Z",
+  "custom": {}
+}

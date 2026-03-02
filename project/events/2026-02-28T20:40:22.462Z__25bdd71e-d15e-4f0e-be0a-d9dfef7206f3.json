@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "event_id": "25bdd71e-d15e-4f0e-be0a-d9dfef7206f3",
+  "issue_id": "kor-11c6e43a-8d9b-4485-b7be-e608d6896f7c",
+  "event_type": "issue_created",
+  "occurred_at": "2026-02-28T20:40:22.462Z",
+  "actor_id": "ryan.porter",
+  "payload": {
+    "assignee": null,
+    "description": "Create searchIndex.ts (FlexSearch), useSearch.ts hook (debounced query), SearchPanel.tsx (input + results with highlighted snippets). Wire DocsSettings.tsx to render SearchPanel. Click result navigates to the matching document.",
+    "issue_type": "task",
+    "labels": [],
+    "parent": "kor-6ad12238-4bbc-407c-982b-fd28fd43ddad",
+    "priority": 2,
+    "status": "open",
+    "title": "Settings slot provides full-text search across docs"
+  }
+}

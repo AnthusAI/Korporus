@@ -1,0 +1,12 @@
+{
+  "id": "docs-app",
+  "name": "Documentation",
+  "icon": "/manifests/docs-app-icon.svg",
+  "version": "1.0.0",
+  "remoteEntry": "/apps/docs/mf-manifest.json",
+  "slots": {
+    "titlebar": "docs-app-titlebar",
+    "main": "docs-app-main",
+    "settings": "docs-app-settings"
+  }
+}

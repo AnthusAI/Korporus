@@ -1,0 +1,25 @@
+{
+  "id": "kor-5ea317b3-0d99-4541-a87e-4c6bcfe426fc",
+  "title": "End-to-end smoke test of the full deployment",
+  "description": "",
+  "type": "task",
+  "status": "closed",
+  "priority": 2,
+  "assignee": null,
+  "creator": null,
+  "parent": "kor-51bc6cb4-1b28-42f3-a3a3-9c2af3545cde",
+  "labels": [],
+  "dependencies": [],
+  "comments": [
+    {
+      "id": "8e3394cb-dcd2-4719-976b-017089cc634c",
+      "author": "ryan.porter",
+      "text": "Validate the complete end-to-end experience across all three entry points:\n\n1. **Korporus shell (App Runner):** Navigate to the App Runner URL. Verify the shell boots, shows the Hello app icon, and clicking it loads the app into the shell slots. Change the language and confirm all three slots update.\n2. **React demo (Amplify):** Navigate to the React demo URL. Verify the Hello app loads and is interactive.\n3. **Angular demo (Amplify):** Navigate to the Angular demo URL. Verify the Hello app loads and is interactive.\n4. **Cold start:** Wait for the App Runner container to scale down. Access one of the Amplify demo apps and verify the loading/warming-up state works and the app eventually loads.\n\nDocument any issues found. Record cold-start times. Capture screenshots for the project record.\n\n### Acceptance Criteria\n- All three entry points render the Hello app correctly.\n- Cross-slot state (language selection) works in all three hosts.\n- Cold-start scenario is handled gracefully with user-visible feedback.\n- No console errors in any browser (Chrome, Firefox, Safari).\n\n### Dependencies\n- Tasks 5.2 and 5.3",
+      "created_at": "2026-02-28T02:02:17.527900Z"
+    }
+  ],
+  "created_at": "2026-02-28T01:59:45.665307Z",
+  "updated_at": "2026-03-01T16:03:41.099965Z",
+  "closed_at": "2026-03-01T16:03:41.099965Z",
+  "custom": {}
+}

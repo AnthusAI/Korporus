@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "event_id": "aaf63cde-da17-4495-ad19-05ac90ce7c9e",
+  "issue_id": "kor-1bb4d6cf-2f55-496a-8393-ec8edddda2d8",
+  "event_type": "issue_created",
+  "occurred_at": "2026-03-01T16:15:34.469Z",
+  "actor_id": "ryan.porter",
+  "payload": {
+    "assignee": null,
+    "description": "Rework korpor.us information architecture so main pages emphasize user outcomes and user-visible features, while technical architecture details move to a dedicated Developers section with its own feature list and navigation entry.",
+    "issue_type": "task",
+    "labels": [],
+    "parent": null,
+    "priority": 2,
+    "status": "open",
+    "title": "Split marketing IA into user-facing main site and developer section"
+  }
+}

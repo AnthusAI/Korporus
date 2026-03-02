@@ -1,0 +1,31 @@
+{
+  "id": "kor-51c8e16d-1858-4796-83d6-cbe92e8bde93",
+  "title": "Runtime federated module loading into shell slots",
+  "description": "",
+  "type": "story",
+  "status": "closed",
+  "priority": 2,
+  "assignee": null,
+  "creator": null,
+  "parent": "kor-58e632a6-7986-4f8e-8e92-60b0763463c8",
+  "labels": [],
+  "dependencies": [],
+  "comments": [
+    {
+      "id": "7b6d9d9e-bee8-4530-b12b-42cadd4ddacb",
+      "author": "ryan.porter",
+      "text": "**As a** user opening an app in the Korporus shell,\n**I want to** see the app's actual content appear in the titlebar, main content area, and settings panel,\n**so that** the app fills the shell's layout the way a native OS app fills its window.\n\nWhen the user clicks an app icon, the shell:\n1. Reads the app's `remoteEntry` URL from its manifest.\n2. Dynamically loads the remote entry bundle using Module Federation 2.0's runtime API.\n3. Resolves each slot's custom element tag name from the manifest's `slots` object.\n4. Renders those custom elements into the corresponding DOM slots.\n\nHandle loading states (show a spinner in each slot while the remote bundle loads) and error states (show an error message if the remote entry fails to load).\n\n### Gherkin\n\n```gherkin\nFeature: Runtime federated module loading into shell slots\n\n  Scenario: App's federated modules load into shell slots\n    Given the user is on the home screen\n    And a valid app manifest with a reachable remoteEntry URL exists\n    When the user clicks the app icon\n    Then the app's federated module bundle is loaded at runtime over HTTP\n    And the app's custom elements render in the titlebar, main content, and settings slots\n\n  Scenario: Loading state while bundle loads\n    Given the user clicks an app icon\n    When the federated module bundle is still loading\n    Then a loading indicator is visible in each slot\n\n  Scenario: Error state when remote entry is unreachable\n    Given an app manifest with an unreachable remoteEntry URL\n    When the user clicks that app icon\n    Then an error message is displayed instead of a blank screen\n\n  Scenario: No build-time coupling\n    Given the shell app is built without the remote app present\n    When the shell loads and the user opens the app\n    Then the app loads successfully at runtime via its remoteEntry URL\n```\n\n### Acceptance Criteria\n- Clicking an app icon loads the app's federated module bundle at runtime (visible in the Network tab as a separate JS request).\n- The app's custom elements render in the correct slots.\n- A loading state is visible while the bundle loads.\n- If the remote entry URL is unreachable, an error message appears instead of a blank screen.\n- No build-time dependency exists between the shell and the app.\n\n### Dependencies\n- Story 2.2",
+      "created_at": "2026-02-28T01:58:48.186560Z"
+    },
+    {
+      "id": "be4d8df3-67d7-4feb-a129-f2f1b885315c",
+      "author": "ryan.porter",
+      "text": "Implemented runtime module loading in the shell. Created:\n- src/services/moduleLoader.ts (init/registerRemotes/loadRemote via @module-federation/runtime)\n- src/types/custom-elements.d.ts (global JSX IntrinsicElements catch-all for runtime WC tags)\nAppView.tsx fully rewritten: loads federated bootstrap on app open, renders custom elements via direct DOM appendChild, shows loading/error states, passes settings slot tag to SettingsPanel.\nSettingsPanel.tsx updated to render settings custom element when slotTag provided.\nShell + MF host config in vite.config.ts.\nAll builds clean. TypeScript passes.",
+      "created_at": "2026-02-28T18:42:00.480099Z"
+    }
+  ],
+  "created_at": "2026-02-28T01:58:00.308503Z",
+  "updated_at": "2026-02-28T18:42:00.480099Z",
+  "closed_at": "2026-02-28T18:42:00.137638Z",
+  "custom": {}
+}

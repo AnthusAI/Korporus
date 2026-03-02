@@ -1,0 +1,25 @@
+{
+  "id": "kor-4fbf602c-cee3-4e74-b21b-674ea2c258fc",
+  "title": "Overhaul all site content and docs for Korporus",
+  "description": "Rewrite all marketing and feature content for Korporus and implement markdown-driven docs ingestion from /docs into website docs routes and navigation.",
+  "type": "task",
+  "status": "closed",
+  "priority": 2,
+  "assignee": null,
+  "creator": null,
+  "parent": "kor-3b94b69b-fe6f-4119-996e-410ff1427f59",
+  "labels": [],
+  "dependencies": [],
+  "comments": [
+    {
+      "id": "04f3d0de-3fee-4ac9-b976-3467f576882a",
+      "author": "ryan.porter",
+      "text": "Completed Korporus content rewrite across marketing pages and video XML drafts; implemented markdown-driven docs ingestion from /docs with sectioned IA and legacy docs route compatibility.",
+      "created_at": "2026-03-01T15:54:33.895408Z"
+    }
+  ],
+  "created_at": "2026-03-01T15:30:20.957566Z",
+  "updated_at": "2026-03-01T15:54:33.895408Z",
+  "closed_at": "2026-03-01T15:54:33.816187Z",
+  "custom": {}
+}

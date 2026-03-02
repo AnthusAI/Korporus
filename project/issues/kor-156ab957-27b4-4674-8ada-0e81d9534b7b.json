@@ -1,0 +1,31 @@
+{
+  "id": "kor-156ab957-27b4-4674-8ada-0e81d9534b7b",
+  "title": "Standalone dev mode for the Hello app",
+  "description": "",
+  "type": "task",
+  "status": "closed",
+  "priority": 2,
+  "assignee": null,
+  "creator": null,
+  "parent": "kor-1c08f5c8-ab84-4a23-bced-04b2ccef776d",
+  "labels": [],
+  "dependencies": [],
+  "comments": [
+    {
+      "id": "2c30a352-39de-4c18-beb5-6b3b0b671c5f",
+      "author": "ryan.porter",
+      "text": "Add a standalone dev mode to `packages/app-hello` so developers can work on it independently, without running the shell. This is a simple HTML page (or React root) that mounts all three Web Components side by side, simulating the slot layout.\n\nThis mirrors how real app teams will develop: they build and test their app independently, then plug it into the shell (or any host) via the manifest.\n\n### Acceptance Criteria\n- `pnpm dev` in `packages/app-hello` opens a standalone page showing all three slot views.\n- Changes to the app's components hot-reload in this standalone mode.\n\n### Dependencies\n- Story 3.1",
+      "created_at": "2026-02-28T01:59:39.123100Z"
+    },
+    {
+      "id": "920dbc86-918f-482a-b046-715b22cb73e1",
+      "author": "ryan.porter",
+      "text": "Standalone dev mode delivered as part of Story 3.1 — src/main.tsx renders all three Web Components (hello-app-titlebar, hello-app-main, hello-app-settings) side-by-side. pnpm dev in packages/app-hello serves on port 3001.",
+      "created_at": "2026-02-28T15:06:06.762156Z"
+    }
+  ],
+  "created_at": "2026-02-28T01:58:50.075987Z",
+  "updated_at": "2026-02-28T15:06:06.762156Z",
+  "closed_at": "2026-02-28T15:06:06.695632Z",
+  "custom": {}
+}

@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "event_id": "7795b1dd-3c7c-4a13-8bfd-95f302b425e3",
+  "issue_id": "kor-3e926987-9aec-4015-abf8-b5155771947c",
+  "event_type": "issue_created",
+  "occurred_at": "2026-02-28T20:40:22.648Z",
+  "actor_id": "ryan.porter",
+  "payload": {
+    "assignee": null,
+    "description": "Update Dockerfile to copy docs/ directory, build the docs app, and copy its dist. Update infra/nginx.conf with /apps/docs/ location block. Update production manifest remoteEntry path.",
+    "issue_type": "task",
+    "labels": [],
+    "parent": "kor-7fb5815f-b307-46ad-9e3a-ad376a674a50",
+    "priority": 2,
+    "status": "open",
+    "title": "Docs app builds and serves in the container"
+  }
+}

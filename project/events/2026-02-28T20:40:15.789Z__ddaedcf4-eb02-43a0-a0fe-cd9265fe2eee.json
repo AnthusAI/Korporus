@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "event_id": "ddaedcf4-eb02-43a0-a0fe-cd9265fe2eee",
+  "issue_id": "kor-045ea81b-ce6a-4218-aa0e-24b40f52ab77",
+  "event_type": "issue_created",
+  "occurred_at": "2026-02-28T20:40:15.789Z",
+  "actor_id": "ryan.porter",
+  "payload": {
+    "assignee": null,
+    "description": "Create packages/app-docs/ with MF remote config, three placeholder slot components, bootstrap.ts, dev shell, and shell integration (manifest, config, dev rewrite). Port 3002.",
+    "issue_type": "task",
+    "labels": [],
+    "parent": "kor-adb0c27d-8bce-442f-840e-4163f1aa5d1c",
+    "priority": 2,
+    "status": "open",
+    "title": "Docs app registers three Web Component slots in the shell"
+  }
+}

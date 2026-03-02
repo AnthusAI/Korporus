@@ -1,0 +1,25 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - |
+          backend_count="$(aws amplify list-backend-environments --app-id "$AWS_APP_ID" --region "$AWS_REGION" --query 'length(backendEnvironments)' --output text 2>/dev/null || echo 0)"
+          if [ -z "$backend_count" ] || [ "$backend_count" = "0" ] || [ "$backend_count" = "None" ]; then
+            echo "No Amplify backend environments; skipping ampx outputs."
+          else
+            npx --yes --package @aws-amplify/backend-cli@latest ampx generate outputs \
+              --branch "$AWS_BRANCH" --app-id "$AWS_APP_ID" --out-dir apps/korpor.us
+          fi
+        - cd apps/korpor.us
+        - npm install
+    build:
+      commands:
+        - npm run build
+  artifacts:
+    baseDirectory: apps/korpor.us/public
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - apps/korpor.us/node_modules/**/*

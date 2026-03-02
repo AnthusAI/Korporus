@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "event_id": "172e8cb2-7269-44bf-b363-0e40d9d12d80",
+  "issue_id": "kor-6ad12238-4bbc-407c-982b-fd28fd43ddad",
+  "event_type": "issue_created",
+  "occurred_at": "2026-02-28T20:39:40.937Z",
+  "actor_id": "ryan.porter",
+  "payload": {
+    "assignee": null,
+    "description": "Full-text client-side search across all documentation content using FlexSearch. Definition of done: settings slot contains a search input with instant results, highlighted snippets, and click-to-navigate.",
+    "issue_type": "epic",
+    "labels": [],
+    "parent": null,
+    "priority": 2,
+    "status": "open",
+    "title": "Epic: Docs Search"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": "kor-1bb4d6cf-2f55-496a-8393-ec8edddda2d8",
+  "title": "Split marketing IA into user-facing main site and developer section",
+  "description": "Rework korpor.us information architecture so main pages emphasize user outcomes and user-visible features, while technical architecture details move to a dedicated Developers section with its own feature list and navigation entry.",
+  "type": "task",
+  "status": "in_progress",
+  "priority": 2,
+  "assignee": null,
+  "creator": null,
+  "parent": null,
+  "labels": [],
+  "dependencies": [],
+  "comments": [],
+  "created_at": "2026-03-01T16:15:34.468857Z",
+  "updated_at": "2026-03-01T16:16:02.117975Z",
+  "closed_at": null,
+  "custom": {}
+}

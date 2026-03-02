@@ -1,0 +1,25 @@
+{
+  "id": "kor-597e7831-ea4b-44f4-8eab-5b8bdb0ced4d",
+  "title": "Scaffold apps/korpor.us from kanb.us with local UI primitives",
+  "description": "Create Gatsby+Tailwind site scaffold by copying apps/kanb.us, remove @kanbus/ui dependency, and provide local UI primitives/components required for parity layout and behavior.",
+  "type": "task",
+  "status": "closed",
+  "priority": 2,
+  "assignee": null,
+  "creator": null,
+  "parent": "kor-3b94b69b-fe6f-4119-996e-410ff1427f59",
+  "labels": [],
+  "dependencies": [],
+  "comments": [
+    {
+      "id": "d45a8623-856b-4073-b1a6-d0d57abe1265",
+      "author": "ryan.porter",
+      "text": "Scaffolded apps/korpor.us from kanb.us structure, replaced @kanbus/ui coupling with local primitives, and preserved Gatsby/Tailwind/theme/navigation topology.",
+      "created_at": "2026-03-01T15:54:33.721281Z"
+    }
+  ],
+  "created_at": "2026-03-01T15:30:20.848626Z",
+  "updated_at": "2026-03-01T15:54:33.721281Z",
+  "closed_at": "2026-03-01T15:54:33.628894Z",
+  "custom": {}
+}

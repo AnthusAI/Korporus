@@ -1,6 +1,7 @@
 # Runtime dependencies (minimal)
 aio-pika==9.4.3
 python-json-logger==2.0.7
+e2b==2.14.0
 
 # Plexus (installed from git for CI builds)
 git+https://github.com/AnthusAI/Plexus.git@main
