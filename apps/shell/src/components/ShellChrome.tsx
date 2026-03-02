@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Info, Settings2 } from "lucide-react";
+import { House, Info, Settings2, X } from "lucide-react";
 import type { AppManifest } from "@korporus/app-manifest";
 
 interface ShellChromeProps {
@@ -40,6 +40,9 @@ export default function ShellChrome({ appManifest, menubarSlotTag }: ShellChrome
     return firstWord || appManifest.name;
   }, [appManifest]);
 
+  const showHomeButton = location.pathname !== "/";
+  const inSettingsView = /^\/app\/[^/]+\/settings\/?$/.test(location.pathname);
+
   useEffect(() => {
     setSystemMenuOpen(false);
     setAppMenuOpen(false);
@@ -58,6 +61,18 @@ export default function ShellChrome({ appManifest, menubarSlotTag }: ShellChrome
     window.addEventListener("mousedown", onPointerDown);
     return () => window.removeEventListener("mousedown", onPointerDown);
   }, []);
+
+  function handleCloseSettings() {
+    if (window.history.length > 1) {
+      navigate(-1);
+      return;
+    }
+    if (appManifest) {
+      navigate(`/app/${appManifest.id}`);
+      return;
+    }
+    navigate("/");
+  }
 
   return (
     <>
@@ -153,6 +168,31 @@ export default function ShellChrome({ appManifest, menubarSlotTag }: ShellChrome
             <div className="min-w-0 flex-1">
               <MenubarSlot tagName={menubarSlotTag} />
             </div>
+          )}
+        </div>
+
+        <div className="ml-2 flex items-center gap-1">
+          {showHomeButton && (
+            <button
+              type="button"
+              onClick={() => navigate("/")}
+              className="flex h-7 w-7 items-center justify-center rounded-md hover:bg-muted"
+              aria-label="Go to Home"
+              title="Home"
+            >
+              <House size={15} />
+            </button>
+          )}
+          {inSettingsView && (
+            <button
+              type="button"
+              onClick={handleCloseSettings}
+              className="flex h-7 w-7 items-center justify-center rounded-md hover:bg-muted"
+              aria-label="Close settings"
+              title="Close settings"
+            >
+              <X size={15} />
+            </button>
           )}
         </div>
       </header>
