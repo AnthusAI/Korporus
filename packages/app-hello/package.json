@@ -10,6 +10,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@korporus/app-shell-ui": "workspace:*",
     "@korporus/system-settings": "workspace:*",
     "@korporus/web-component-wrapper": "workspace:*",
     "react": "^19.0.0",

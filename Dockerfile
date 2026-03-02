@@ -13,6 +13,7 @@ COPY pnpm-workspace.yaml package.json pnpm-lock.yaml ./
 COPY packages/app-manifest/package.json        ./packages/app-manifest/
 COPY packages/platform-config/package.json     ./packages/platform-config/
 COPY packages/system-settings/package.json     ./packages/system-settings/
+COPY packages/app-shell-ui/package.json        ./packages/app-shell-ui/
 COPY packages/web-component-wrapper/package.json ./packages/web-component-wrapper/
 COPY packages/app-hello/package.json            ./packages/app-hello/
 COPY packages/app-docs/package.json             ./packages/app-docs/

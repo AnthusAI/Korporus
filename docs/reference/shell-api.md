@@ -84,6 +84,34 @@ setAppearance(...)
 subscribeAppearance(...)
 ```
 
+## Settings Frame Contract
+
+In settings contexts (`/app/:appId/settings` and `/app/settings-app`), the shell provides:
+
+- Top fixed menu bar
+- Bottom fixed `Cancel` / `Save` action bar
+- App settings custom element in the middle content region
+
+The shell/action bar contract uses events from `@korporus/app-shell-ui`:
+
+- `korporus:settings:save` (shell -> app settings component)
+- `korporus:settings:cancel` (shell -> app settings component)
+- `korporus:settings:session-state` (app settings component -> shell)
+
+See [Settings Session API](./settings-session-api) for payload details and hook usage.
+
+## Help Menu Contract
+
+In app views, the shell adds a final top-level **Help** menu with one v1 item:
+
+- `[App Name] Help`
+
+Selection routes to the centralized docs app with context parameters:
+
+```text
+/app/docs-app?contextAppId=<app-id>&entry=app-help
+```
+
 ## Dev Manifest Rewrite Plugin
 
 **File**: `apps/shell/vite.config.ts`

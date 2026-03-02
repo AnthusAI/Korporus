@@ -39,6 +39,7 @@ interface AppManifest {
 - `remoteEntry`: Must be a non-empty string
 - `slots`: Must be an object with required keys `["menubar", "main"]`
 - `slots.settings`: Optional app settings slot used by `/app/{id}/settings`
+- There is no `help` slot in v1. App help is rendered through the centralized Help app and shell Help menu contract.
 - Slot values must be non-empty strings (custom element tag names)
 
 ## Example

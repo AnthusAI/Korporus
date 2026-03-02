@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   readAppearance,
   resolveEffectiveMode,
@@ -9,6 +9,11 @@ import {
   type AppearanceSettingsV1,
   type AppearanceTheme,
 } from "@korporus/system-settings";
+import {
+  SettingsScaffold,
+  useSettingsSessionBridge,
+  type SidebarItem,
+} from "@korporus/app-shell-ui";
 
 function SegmentButton({
   label,
@@ -78,102 +83,151 @@ function SettingGroup({
   );
 }
 
+const SIDEBAR_ITEMS: SidebarItem[] = [
+  { id: "mode", label: "Mode", keywords: ["light", "dark", "system"] },
+  { id: "theme", label: "Color Theme", keywords: ["neutral", "cool", "warm"] },
+  { id: "motion", label: "Motion", keywords: ["full", "reduced", "off"] },
+];
+
 export function SettingsMain() {
-  const [appearance, setLocalAppearance] = useState<AppearanceSettingsV1>(() => readAppearance());
-  const darkMode = resolveEffectiveMode(appearance.mode) === "dark";
+  const [persisted, setPersisted] = useState<AppearanceSettingsV1>(() => readAppearance());
+  const [draft, setDraft] = useState<AppearanceSettingsV1>(() => readAppearance());
+  const [activeItemId, setActiveItemId] = useState<string>("mode");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [saving, setSaving] = useState(false);
+
+  const darkMode = resolveEffectiveMode(draft.mode) === "dark";
+
+  const dirty = useMemo(
+    () => JSON.stringify(draft) !== JSON.stringify(persisted),
+    [draft, persisted],
+  );
 
   useEffect(() => {
-    return subscribeAppearance((next) => setLocalAppearance(next));
+    return subscribeAppearance((next) => {
+      setPersisted(next);
+      setDraft(next);
+    });
   }, []);
 
-  const updateAppearance = (updater: (prev: AppearanceSettingsV1) => AppearanceSettingsV1) => {
-    const next = setAppearance(updater);
-    setLocalAppearance(next);
-  };
+  useEffect(() => {
+    const filtered = SIDEBAR_ITEMS.filter((item) => {
+      const haystack = [item.label, ...(item.keywords ?? [])].join(" ").toLowerCase();
+      return haystack.includes(searchQuery.toLowerCase());
+    });
+    if (filtered.length > 0 && !filtered.some((item) => item.id === activeItemId)) {
+      setActiveItemId(filtered[0].id);
+    }
+  }, [searchQuery, activeItemId]);
 
-  const setMode = (mode: AppearanceMode) => updateAppearance((prev) => ({ ...prev, mode }));
-  const setTheme = (theme: AppearanceTheme) => updateAppearance((prev) => ({ ...prev, theme }));
-  const setMotion = (motion: AppearanceMotion) =>
-    updateAppearance((prev) => ({ ...prev, motion }));
+  const setMode = (mode: AppearanceMode) => setDraft((prev) => ({ ...prev, mode }));
+  const setTheme = (theme: AppearanceTheme) => setDraft((prev) => ({ ...prev, theme }));
+  const setMotion = (motion: AppearanceMotion) => setDraft((prev) => ({ ...prev, motion }));
+
+  useSettingsSessionBridge({
+    state: {
+      dirty,
+      valid: true,
+      saving,
+    },
+    onSave: async () => {
+      setSaving(true);
+      const next = setAppearance(draft);
+      setPersisted(next);
+      setDraft(next);
+      setSaving(false);
+    },
+    onCancel: () => {
+      const current = readAppearance();
+      setPersisted(current);
+      setDraft(current);
+      setSaving(false);
+    },
+  });
 
   return (
-    <div
-      style={{
-        fontFamily: "system-ui, sans-serif",
-        background: darkMode ? "#0f172a" : "#f8fafc",
-        minHeight: "100%",
-        boxSizing: "border-box",
-        padding: 24,
-      }}
+    <SettingsScaffold
+      title="System Settings"
+      sidebarItems={SIDEBAR_ITEMS}
+      activeItemId={activeItemId}
+      onSelectItem={setActiveItemId}
+      searchQuery={searchQuery}
+      onSearchQueryChange={setSearchQuery}
     >
       <div style={{ maxWidth: 820, margin: "0 auto", display: "grid", gap: 14 }}>
         <h2 style={{ margin: 0, fontSize: 22, color: darkMode ? "#f8fafc" : "#0f172a" }}>
           Appearance
         </h2>
 
-        <SettingGroup title="Mode" darkMode={darkMode}>
-          <SegmentButton
-            label="Light"
-            active={appearance.mode === "light"}
-            darkMode={darkMode}
-            onClick={() => setMode("light")}
-          />
-          <SegmentButton
-            label="Dark"
-            active={appearance.mode === "dark"}
-            darkMode={darkMode}
-            onClick={() => setMode("dark")}
-          />
-          <SegmentButton
-            label="System"
-            active={appearance.mode === "system"}
-            darkMode={darkMode}
-            onClick={() => setMode("system")}
-          />
-        </SettingGroup>
+        {activeItemId === "mode" && (
+          <SettingGroup title="Mode" darkMode={darkMode}>
+            <SegmentButton
+              label="Light"
+              active={draft.mode === "light"}
+              darkMode={darkMode}
+              onClick={() => setMode("light")}
+            />
+            <SegmentButton
+              label="Dark"
+              active={draft.mode === "dark"}
+              darkMode={darkMode}
+              onClick={() => setMode("dark")}
+            />
+            <SegmentButton
+              label="System"
+              active={draft.mode === "system"}
+              darkMode={darkMode}
+              onClick={() => setMode("system")}
+            />
+          </SettingGroup>
+        )}
 
-        <SettingGroup title="Color Theme" darkMode={darkMode}>
-          <SegmentButton
-            label="Neutral"
-            active={appearance.theme === "neutral"}
-            darkMode={darkMode}
-            onClick={() => setTheme("neutral")}
-          />
-          <SegmentButton
-            label="Cool"
-            active={appearance.theme === "cool"}
-            darkMode={darkMode}
-            onClick={() => setTheme("cool")}
-          />
-          <SegmentButton
-            label="Warm"
-            active={appearance.theme === "warm"}
-            darkMode={darkMode}
-            onClick={() => setTheme("warm")}
-          />
-        </SettingGroup>
+        {activeItemId === "theme" && (
+          <SettingGroup title="Color Theme" darkMode={darkMode}>
+            <SegmentButton
+              label="Neutral"
+              active={draft.theme === "neutral"}
+              darkMode={darkMode}
+              onClick={() => setTheme("neutral")}
+            />
+            <SegmentButton
+              label="Cool"
+              active={draft.theme === "cool"}
+              darkMode={darkMode}
+              onClick={() => setTheme("cool")}
+            />
+            <SegmentButton
+              label="Warm"
+              active={draft.theme === "warm"}
+              darkMode={darkMode}
+              onClick={() => setTheme("warm")}
+            />
+          </SettingGroup>
+        )}
 
-        <SettingGroup title="Motion" darkMode={darkMode}>
-          <SegmentButton
-            label="Full"
-            active={appearance.motion === "full"}
-            darkMode={darkMode}
-            onClick={() => setMotion("full")}
-          />
-          <SegmentButton
-            label="Reduced"
-            active={appearance.motion === "reduced"}
-            darkMode={darkMode}
-            onClick={() => setMotion("reduced")}
-          />
-          <SegmentButton
-            label="Off"
-            active={appearance.motion === "off"}
-            darkMode={darkMode}
-            onClick={() => setMotion("off")}
-          />
-        </SettingGroup>
+        {activeItemId === "motion" && (
+          <SettingGroup title="Motion" darkMode={darkMode}>
+            <SegmentButton
+              label="Full"
+              active={draft.motion === "full"}
+              darkMode={darkMode}
+              onClick={() => setMotion("full")}
+            />
+            <SegmentButton
+              label="Reduced"
+              active={draft.motion === "reduced"}
+              darkMode={darkMode}
+              onClick={() => setMotion("reduced")}
+            />
+            <SegmentButton
+              label="Off"
+              active={draft.motion === "off"}
+              darkMode={darkMode}
+              onClick={() => setMotion("off")}
+            />
+          </SettingGroup>
+        )}
       </div>
-    </div>
+    </SettingsScaffold>
   );
 }

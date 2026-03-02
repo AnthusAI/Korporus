@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { House, Info, Settings2, X } from "lucide-react";
+import { CircleHelp, House, Info, Settings2, X } from "lucide-react";
 import type { AppManifest } from "@korporus/app-manifest";
 
 interface ShellChromeProps {
@@ -29,10 +29,12 @@ export default function ShellChrome({ appManifest, menubarSlotTag }: ShellChrome
   const location = useLocation();
   const [systemMenuOpen, setSystemMenuOpen] = useState(false);
   const [appMenuOpen, setAppMenuOpen] = useState(false);
+  const [helpMenuOpen, setHelpMenuOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
   const [aboutTitle, setAboutTitle] = useState("About this Korporus");
   const systemMenuRef = useRef<HTMLDivElement>(null);
   const appMenuRef = useRef<HTMLDivElement>(null);
+  const helpMenuRef = useRef<HTMLDivElement>(null);
 
   const appMenuLabel = useMemo(() => {
     if (!appManifest) return "";
@@ -44,10 +46,12 @@ export default function ShellChrome({ appManifest, menubarSlotTag }: ShellChrome
   const inAppSettingsView = /^\/app\/[^/]+\/settings\/?$/.test(location.pathname);
   const inSystemSettingsApp = /^\/app\/settings-app\/?$/.test(location.pathname);
   const showCloseButton = inAppSettingsView || inSystemSettingsApp;
+  const showHelpMenu = !!appManifest && appManifest.id !== "settings-app";
 
   useEffect(() => {
     setSystemMenuOpen(false);
     setAppMenuOpen(false);
+    setHelpMenuOpen(false);
   }, [location.pathname]);
 
   useEffect(() => {
@@ -58,6 +62,9 @@ export default function ShellChrome({ appManifest, menubarSlotTag }: ShellChrome
       }
       if (appMenuRef.current && !appMenuRef.current.contains(target)) {
         setAppMenuOpen(false);
+      }
+      if (helpMenuRef.current && !helpMenuRef.current.contains(target)) {
+        setHelpMenuOpen(false);
       }
     }
     window.addEventListener("mousedown", onPointerDown);
@@ -123,7 +130,10 @@ export default function ShellChrome({ appManifest, menubarSlotTag }: ShellChrome
           <div className="relative ml-1" ref={appMenuRef}>
             <button
               type="button"
-              onClick={() => setAppMenuOpen((prev) => !prev)}
+              onClick={() => {
+                setHelpMenuOpen(false);
+                setAppMenuOpen((prev) => !prev);
+              }}
               className="rounded-md px-2 py-1 text-sm font-medium hover:bg-muted"
               aria-label={`Open ${appMenuLabel} menu`}
               title={`${appMenuLabel} menu`}
@@ -160,6 +170,40 @@ export default function ShellChrome({ appManifest, menubarSlotTag }: ShellChrome
                     </button>
                   </>
                 )}
+              </div>
+            )}
+          </div>
+        )}
+
+        {appManifest && showHelpMenu && (
+          <div className="relative ml-1" ref={helpMenuRef}>
+            <button
+              type="button"
+              onClick={() => {
+                setAppMenuOpen(false);
+                setHelpMenuOpen((prev) => !prev);
+              }}
+              className="rounded-md px-2 py-1 text-sm font-medium hover:bg-muted"
+              aria-label="Open Help menu"
+              title="Help menu"
+            >
+              Help
+            </button>
+            {helpMenuOpen && (
+              <div className="absolute left-0 top-9 min-w-56 overflow-hidden rounded-md border border-border bg-card p-1 shadow-md">
+                <button
+                  type="button"
+                  onClick={() => {
+                    navigate(
+                      `/app/docs-app?contextAppId=${encodeURIComponent(appManifest.id)}&entry=app-help`,
+                    );
+                    setHelpMenuOpen(false);
+                  }}
+                  className="flex w-full items-center gap-2 rounded-sm px-2 py-1.5 text-left text-sm hover:bg-muted"
+                >
+                  <CircleHelp size={14} />
+                  {appManifest.name} Help
+                </button>
               </div>
             )}
           </div>

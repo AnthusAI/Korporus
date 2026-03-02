@@ -1,4 +1,4 @@
-import { createElement, type ComponentType } from "react";
+import { createElement, createContext, useContext, type ComponentType } from "react";
 import { createRoot, type Root } from "react-dom/client";
 
 export interface WrapOptions {
@@ -7,6 +7,12 @@ export interface WrapOptions {
    * stylesheets can reach into the component. Defaults to true (Shadow DOM off).
    */
   shadowDom?: boolean;
+}
+
+const HostElementContext = createContext<HTMLElement | null>(null);
+
+export function useHostElement(): HTMLElement | null {
+  return useContext(HostElementContext);
 }
 
 /**
@@ -71,7 +77,13 @@ export function registerCustomElement<P extends Record<string, string>>(
     }
 
     private render() {
-      this.root?.render(createElement(Component, this.getProps()));
+      this.root?.render(
+        createElement(
+          HostElementContext.Provider,
+          { value: this },
+          createElement(Component, this.getProps()),
+        ),
+      );
     }
   }
 

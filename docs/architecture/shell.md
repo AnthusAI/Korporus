@@ -18,6 +18,7 @@ The shell uses a fixed layout:
 
 - **Top Menu Bar**: Fixed-height shell chrome with global app menu (left dot) and app-provided menubar slot
 - **Main**: Fills remaining vertical space
+- **Settings Context Footer**: In settings routes, a fixed shell Save/Cancel action bar is rendered at the bottom
 
 ## App Discovery
 
@@ -62,4 +63,5 @@ The home screen (`src/pages/Home.tsx`) displays a grid of app icons from the reg
 `ShellChrome` wraps the app view and provides:
 - A global menu button (solid dot icon) with system-level actions (`About this Korporus`, `System Settings`)
 - An app menu (`About <App>`, and conditional `Settings` for apps with a `settings` slot)
+- A standardized Help menu (last app menu) with `[App Name] Help`
 - An app menubar mount point

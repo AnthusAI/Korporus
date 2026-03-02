@@ -1,6 +1,6 @@
 # Web Component Wrapper API
 
-The `@korporus/web-component-wrapper` package provides a single function that bridges React components to HTML custom elements.
+The `@korporus/web-component-wrapper` package bridges React components to HTML custom elements and exposes the current host element to app code.
 
 ## `registerCustomElement`
 
@@ -52,3 +52,11 @@ Usage in HTML:
 ```html
 <my-greeting name="Korporus"></my-greeting>
 ```
+
+## `useHostElement`
+
+```typescript
+function useHostElement(): HTMLElement | null
+```
+
+Returns the current custom element host when a component is rendered through `registerCustomElement`. Returns `null` when rendered outside a custom element host (for example standalone dev shells).

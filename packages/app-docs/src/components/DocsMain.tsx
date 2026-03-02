@@ -1,8 +1,10 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { useDocsStore } from "../store";
 import { MarkdownRenderer } from "./MarkdownRenderer";
 import { resolveEffectiveMode } from "@korporus/system-settings";
 import { useAppearanceSettings } from "../hooks/useAppearanceSettings";
+import { buildSearchIndex, search } from "../lib/searchIndex";
+import { HelpScaffold, type SidebarItem } from "@korporus/app-shell-ui";
 
 declare const __DOCS_BASE_URL__: string;
 
@@ -15,12 +17,15 @@ export function DocsMain() {
   const setContent = useDocsStore((s) => s.setContent);
   const setLoading = useDocsStore((s) => s.setLoading);
   const setCurrentPath = useDocsStore((s) => s.setCurrentPath);
-  const sidebarOpen = useDocsStore((s) => s.sidebarOpen);
-  const toggleSidebar = useDocsStore((s) => s.toggleSidebar);
-  const initialHashHandled = useRef(false);
+  const searchQuery = useDocsStore((s) => s.searchQuery);
+  const setSearchQuery = useDocsStore((s) => s.setSearchQuery);
+  const searchResults = useDocsStore((s) => s.searchResults);
+  const setSearchResults = useDocsStore((s) => s.setSearchResults);
   const appearance = useAppearanceSettings();
   const darkMode = resolveEffectiveMode(appearance.mode) === "dark";
   const smoothScroll = appearance.motion === "full";
+  const initialContextHandled = useRef(false);
+  const searchIndexBuilt = useRef(false);
 
   // Load manifest on mount
   useEffect(() => {
@@ -31,27 +36,47 @@ export function DocsMain() {
       .catch((err) => console.warn("[Docs] Failed to load manifest:", err));
   }, [manifest, setManifest]);
 
-  // Navigate to the document containing the URL hash anchor
+  // Build search index once manifest is ready.
   useEffect(() => {
-    if (!manifest || initialHashHandled.current) return;
-    initialHashHandled.current = true;
-    const hash = window.location.hash.slice(1);
-    if (!hash) return;
-    const doc = manifest.docs.find((d) =>
-      d.headings.some((h) => h.id === hash)
-    );
-    if (doc && doc.path !== currentPath) {
-      setCurrentPath(doc.path);
+    if (!manifest || searchIndexBuilt.current) return;
+    buildSearchIndex(manifest);
+    searchIndexBuilt.current = true;
+  }, [manifest]);
+
+  // Handle app-context help entry once per mount.
+  useEffect(() => {
+    if (!manifest || initialContextHandled.current) return;
+    initialContextHandled.current = true;
+
+    const params = new URLSearchParams(window.location.search);
+    const contextAppId = params.get("contextAppId");
+    const entry = params.get("entry");
+
+    if (entry === "app-help" && contextAppId) {
+      const preferredPath = `apps/${contextAppId}`;
+      const exists = manifest.docs.some((doc) => doc.path === preferredPath);
+      if (exists) {
+        setCurrentPath(preferredPath);
+      } else {
+        setCurrentPath("index");
+      }
+      return;
+    }
+
+    if (!manifest.docs.some((doc) => doc.path === currentPath)) {
+      setCurrentPath("index");
     }
   }, [manifest, currentPath, setCurrentPath]);
 
-  // Load document content when path changes
+  // Load document content when path changes.
   useEffect(() => {
     setLoading(true);
     fetch(`${__DOCS_BASE_URL__}/docs/${currentPath}.md`)
-      .then((r) => {
-        if (!r.ok) throw new Error(`HTTP ${r.status}`);
-        return r.text();
+      .then(async (r) => {
+        if (r.ok) return r.text();
+        const fallback = await fetch(`${__DOCS_BASE_URL__}/docs/${currentPath}/index.md`);
+        if (!fallback.ok) throw new Error(`HTTP ${fallback.status}`);
+        return fallback.text();
       })
       .then((md) => {
         setContent(md);
@@ -63,12 +88,23 @@ export function DocsMain() {
       });
   }, [currentPath, setContent, setLoading]);
 
-  // Scroll to hash anchor after content renders
+  // Perform docs search from sidebar query.
+  useEffect(() => {
+    if (!searchQuery.trim()) {
+      setSearchResults([]);
+      return;
+    }
+    const timer = setTimeout(() => {
+      setSearchResults(search(searchQuery, 50));
+    }, 120);
+    return () => clearTimeout(timer);
+  }, [searchQuery, setSearchResults]);
+
+  // Scroll to hash anchor after content renders.
   useEffect(() => {
     if (loading || !content) return;
     const hash = window.location.hash.slice(1);
     if (!hash) return;
-    // Wait one frame for the DOM to update after React render
     requestAnimationFrame(() => {
       document.getElementById(hash)?.scrollIntoView({
         behavior: smoothScroll ? "smooth" : "auto",
@@ -76,180 +112,43 @@ export function DocsMain() {
     });
   }, [loading, content, smoothScroll]);
 
-  // Build sidebar sections from manifest
-  const sections = buildSections(manifest);
+  const sidebarItems = useMemo<SidebarItem[]>(() => {
+    if (!manifest) return [];
+
+    if (searchQuery.trim()) {
+      return searchResults.map((result) => ({
+        id: result.path,
+        label: result.title,
+        keywords: [result.section, result.snippet],
+      }));
+    }
+
+    const docs = [...manifest.docs].sort((a, b) => a.path.localeCompare(b.path));
+    return docs.map((doc) => ({
+      id: doc.path,
+      label: doc.path === "index" ? "Help Home" : doc.title,
+      keywords: [doc.path, doc.section],
+    }));
+  }, [manifest, searchQuery, searchResults]);
 
   return (
-    <div
-      style={{
-        display: "flex",
-        height: "100%",
-        fontFamily: "system-ui, sans-serif",
-        color: darkMode ? "#e2e8f0" : "#1e293b",
-        background: darkMode ? "#020617" : "#ffffff",
-      }}
+    <HelpScaffold
+      title="Help"
+      sidebarItems={sidebarItems}
+      activeItemId={currentPath}
+      onSelectItem={setCurrentPath}
+      searchQuery={searchQuery}
+      onSearchQueryChange={setSearchQuery}
     >
-      {/* Sidebar */}
-      {sidebarOpen && (
-        <nav
-          style={{
-            width: 240,
-            minWidth: 240,
-            borderRight: `1px solid ${darkMode ? "#1e293b" : "#e2e8f0"}`,
-            overflowY: "auto",
-            padding: "12px 0",
-            fontSize: 13,
-            background: darkMode ? "#0f172a" : "#ffffff",
-          }}
-        >
-          <div
-            onClick={() => setCurrentPath("index")}
-            style={{
-              padding: "6px 16px",
-              cursor: "pointer",
-              fontWeight: currentPath === "index" ? 600 : 400,
-              color: currentPath === "index" ? (darkMode ? "#93c5fd" : "#3b82f6") : darkMode ? "#cbd5e1" : "#475569",
-            }}
-          >
-            Home
-          </div>
-          {sections.map((section) => (
-            <SidebarSection
-              key={section.name}
-              section={section}
-              currentPath={currentPath}
-              onNavigate={setCurrentPath}
-              darkMode={darkMode}
-            />
-          ))}
-        </nav>
+      {loading && <p style={{ color: darkMode ? "#94a3b8" : "#64748b" }}>Loading...</p>}
+      {!loading && content === null && (
+        <p style={{ color: darkMode ? "#fda4af" : "#ef4444" }}>Document not found.</p>
       )}
-
-      {/* Main content */}
-      <div
-        style={{
-          flex: 1,
-          overflowY: "auto",
-          padding: "24px 32px",
-          background: darkMode ? "#020617" : "#ffffff",
-        }}
-      >
-        <button
-          onClick={toggleSidebar}
-          style={{
-            background: darkMode ? "#0f172a" : "none",
-            border: `1px solid ${darkMode ? "#334155" : "#e2e8f0"}`,
-            borderRadius: 4,
-            padding: "4px 8px",
-            cursor: "pointer",
-            fontSize: 12,
-            color: darkMode ? "#cbd5e1" : "#64748b",
-            marginBottom: 16,
-          }}
-        >
-          {sidebarOpen ? "Hide sidebar" : "Show sidebar"}
-        </button>
-
-        {loading && <p style={{ color: darkMode ? "#94a3b8" : "#64748b" }}>Loading...</p>}
-        {!loading && content === null && (
-          <p style={{ color: darkMode ? "#fda4af" : "#ef4444" }}>Document not found.</p>
-        )}
-        {!loading && content !== null && (
-          <div style={{ maxWidth: 720, lineHeight: 1.7 }}>
-            <MarkdownRenderer markdown={content} />
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
-
-
-interface SectionData {
-  name: string;
-  label: string;
-  docs: { path: string; title: string }[];
-}
-
-function buildSections(manifest: import("../types").DocsManifest | null): SectionData[] {
-  if (!manifest) return [];
-  const map = new Map<string, SectionData>();
-  for (const doc of manifest.docs) {
-    if (doc.path === "index") continue;
-    const section = doc.section || "_root";
-    if (!map.has(section)) {
-      map.set(section, {
-        name: section,
-        label: section.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()),
-        docs: [],
-      });
-    }
-    map.get(section)!.docs.push({ path: doc.path, title: doc.title });
-  }
-  return Array.from(map.values());
-}
-
-function SidebarSection({
-  section,
-  currentPath,
-  onNavigate,
-  darkMode,
-}: {
-  section: SectionData;
-  currentPath: string;
-  onNavigate: (path: string) => void;
-  darkMode: boolean;
-}) {
-  const expanded = useDocsStore((s) => s.expandedSections.has(section.name));
-  const toggleSection = useDocsStore((s) => s.toggleSection);
-  const isActive = currentPath.startsWith(section.name);
-
-  // Auto-expand the active section
-  useEffect(() => {
-    if (isActive && !expanded) {
-      toggleSection(section.name);
-    }
-  }, [isActive]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  return (
-    <div style={{ marginTop: 4 }}>
-      <div
-        onClick={() => toggleSection(section.name)}
-        style={{
-          padding: "6px 16px",
-          cursor: "pointer",
-          fontWeight: 600,
-          fontSize: 12,
-          textTransform: "uppercase",
-          letterSpacing: "0.05em",
-          color: darkMode ? "#94a3b8" : "#64748b",
-          display: "flex",
-          alignItems: "center",
-          gap: 4,
-        }}
-      >
-        <span style={{ fontSize: 10 }}>{expanded ? "▼" : "▶"}</span>
-        {section.label}
-      </div>
-      {expanded &&
-        section.docs.map((doc) => (
-          <div
-            key={doc.path}
-            onClick={() => onNavigate(doc.path)}
-            style={{
-              padding: "4px 16px 4px 28px",
-              cursor: "pointer",
-              fontSize: 13,
-              fontWeight: currentPath === doc.path ? 600 : 400,
-              color: currentPath === doc.path ? (darkMode ? "#93c5fd" : "#3b82f6") : darkMode ? "#cbd5e1" : "#475569",
-              backgroundColor: currentPath === doc.path ? (darkMode ? "#1e293b" : "#eff6ff") : "transparent",
-              borderRadius: 4,
-              margin: "0 4px",
-            }}
-          >
-            {doc.title}
-          </div>
-        ))}
-    </div>
+      {!loading && content !== null && (
+        <div style={{ maxWidth: 760, lineHeight: 1.7 }}>
+          <MarkdownRenderer markdown={content} />
+        </div>
+      )}
+    </HelpScaffold>
   );
 }

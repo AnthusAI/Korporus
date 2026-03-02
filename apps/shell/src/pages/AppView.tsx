@@ -4,27 +4,40 @@ import { Loader2, AlertCircle } from "lucide-react";
 import ShellChrome from "../components/ShellChrome";
 import { useRegistry } from "../store/registry.js";
 import { loadAppModule, toRemoteId } from "../services/moduleLoader.js";
+import {
+  SETTINGS_CANCEL_EVENT,
+  SETTINGS_SAVE_EVENT,
+  SETTINGS_STATE_EVENT,
+  type SettingsSessionState,
+} from "@korporus/app-shell-ui";
 
 type LoadState = "idle" | "loading" | "loaded" | "error";
 
 function SlotContainer({
   tagName,
   className,
+  onElementChange,
 }: {
   tagName: string | undefined;
   className?: string;
+  onElementChange?: (element: HTMLElement | null) => void;
 }) {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!tagName || !ref.current) return;
+    if (!tagName || !ref.current) {
+      onElementChange?.(null);
+      return;
+    }
     const el = document.createElement(tagName);
     ref.current.innerHTML = "";
     ref.current.appendChild(el);
+    onElementChange?.(el);
     return () => {
       if (ref.current) ref.current.innerHTML = "";
+      onElementChange?.(null);
     };
-  }, [tagName]);
+  }, [tagName, onElementChange]);
 
   return <div ref={ref} className={className} />;
 }
@@ -34,6 +47,12 @@ export default function AppView() {
   const navigate = useNavigate();
   const [loadState, setLoadState] = useState<LoadState>("idle");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [settingsHost, setSettingsHost] = useState<HTMLElement | null>(null);
+  const [settingsSession, setSettingsSession] = useState<SettingsSessionState>({
+    dirty: false,
+    valid: true,
+    saving: false,
+  });
   const settingsView = view === "settings";
 
   const appKey = appId ?? "";
@@ -54,6 +73,25 @@ export default function AppView() {
         setLoadState("error");
       });
   }, [manifest]);
+
+  useEffect(() => {
+    setSettingsSession({ dirty: false, valid: true, saving: false });
+  }, [appId, view]);
+
+  useEffect(() => {
+    if (!settingsHost) return;
+    const onState = (event: Event) => {
+      const detail = (event as CustomEvent<{ state?: SettingsSessionState }>).detail;
+      if (!detail?.state) return;
+      setSettingsSession({
+        dirty: !!detail.state.dirty,
+        valid: detail.state.valid !== false,
+        saving: !!detail.state.saving,
+      });
+    };
+    settingsHost.addEventListener(SETTINGS_STATE_EVENT, onState);
+    return () => settingsHost.removeEventListener(SETTINGS_STATE_EVENT, onState);
+  }, [settingsHost]);
 
   // Manifests still loading from server.
   if (!manifestsLoaded) {
@@ -85,6 +123,31 @@ export default function AppView() {
       </div>
     );
   }
+
+  const systemSettingsView = manifest.id === "settings-app" && !settingsView;
+  const hasSettingsSlot = !!manifest.slots.settings;
+  const settingsComponentAvailable = settingsView ? hasSettingsSlot : systemSettingsView;
+  const showSettingsFrame = loadState === "loaded" && settingsComponentAvailable;
+
+  const handleSave = () => {
+    if (!settingsHost || settingsSession.saving) return;
+    settingsHost.dispatchEvent(
+      new CustomEvent(SETTINGS_SAVE_EVENT, {
+        bubbles: true,
+        composed: true,
+      }),
+    );
+  };
+
+  const handleCancel = () => {
+    if (!settingsHost || settingsSession.saving) return;
+    settingsHost.dispatchEvent(
+      new CustomEvent(SETTINGS_CANCEL_EVENT, {
+        bubbles: true,
+        composed: true,
+      }),
+    );
+  };
 
   return (
     <div className="flex flex-col h-screen">
@@ -131,14 +194,38 @@ export default function AppView() {
         )}
 
         {loadState === "loaded" && (!settingsView || !!manifest.slots.settings) && (
-          <div className="flex-1 overflow-auto bg-background">
+          <div className={`flex-1 overflow-auto bg-background ${showSettingsFrame ? "pb-20" : ""}`}>
             <SlotContainer
               tagName={settingsView ? manifest.slots.settings : manifest.slots.main}
               className="h-full"
+              onElementChange={setSettingsHost}
             />
           </div>
         )}
       </div>
+
+      {showSettingsFrame && (
+        <div className="fixed bottom-0 left-0 right-0 z-30 border-t border-border bg-card/95 backdrop-blur-sm">
+          <div className="mx-auto flex max-w-5xl items-center justify-end gap-2 px-4 py-3">
+            <button
+              type="button"
+              onClick={handleCancel}
+              disabled={settingsSession.saving}
+              className="rounded-md border border-border px-3 py-1.5 text-sm hover:bg-muted disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              onClick={handleSave}
+              disabled={!settingsSession.dirty || !settingsSession.valid || settingsSession.saving}
+              className="rounded-md bg-primary px-3 py-1.5 text-sm text-primary-foreground hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              {settingsSession.saving ? "Saving..." : "Save"}
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

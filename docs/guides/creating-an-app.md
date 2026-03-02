@@ -133,6 +133,12 @@ const unsubscribe = subscribeAppearance((next) => {
 });
 ```
 
+To build standardized settings/help layouts, use `@korporus/app-shell-ui`:
+
+```typescript
+import { SettingsScaffold, HelpScaffold } from "@korporus/app-shell-ui";
+```
+
 ## Step 5: Register as Web Components
 
 ```typescript
@@ -145,6 +151,12 @@ import { MySettings } from "./components/MySettings";
 registerCustomElement("my-app-menubar", MyMenubar);
 registerCustomElement("my-app-main", MyMain);
 registerCustomElement("my-app-settings", MySettings); // optional
+```
+
+Inside custom-element-rendered components, you can access the host with:
+
+```typescript
+import { useHostElement } from "@korporus/web-component-wrapper";
 ```
 
 ## Step 6: Register with the Shell
@@ -169,6 +181,42 @@ registerCustomElement("my-app-settings", MySettings); // optional
 2. Add the manifest URL to `apps/shell/src/config/apps.ts`
 
 That's it for the shell — the `devManifestRewritePlugin` automatically discovers all apps registered in `@korporus/platform-config`, so no manual port wiring is needed.
+
+## Settings Save/Cancel Contract
+
+Settings views should buffer edits locally and integrate with shell Save/Cancel actions:
+
+```typescript
+import { useSettingsSessionBridge } from "@korporus/app-shell-ui";
+
+useSettingsSessionBridge({
+  state: { dirty, valid, saving },
+  onSave: async () => {
+    // commit draft -> persisted app state
+  },
+  onCancel: () => {
+    // revert draft to last persisted values
+  },
+});
+```
+
+The shell dispatches save/cancel events to your mounted settings custom element and listens for session state updates.
+
+## App Help Integration
+
+App-specific help content should live in docs under:
+
+```text
+docs/apps/<app-id>/index.md
+```
+
+The shell Help menu routes to the centralized docs app with:
+
+```text
+/app/docs-app?contextAppId=<app-id>&entry=app-help
+```
+
+If no app-specific help page exists, docs falls back to the general help index.
 
 ## Step 7: Install and Run
 

@@ -6,3 +6,4 @@ API and schema reference for Korporus packages.
 - [Web Component Wrapper API](./web-component-wrapper-api) — `registerCustomElement` API reference
 - [Shell API](./shell-api) — Shell integration points and services
 - [System Settings API](./system-settings-api) — Shared appearance settings contract for all apps
+- [Settings Session API](./settings-session-api) — Shell Save/Cancel bridge contract for app settings views

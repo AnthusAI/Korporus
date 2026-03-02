@@ -293,6 +293,9 @@ importers:
       '@korporus/app-manifest':
         specifier: workspace:*
         version: link:../../packages/app-manifest
+      '@korporus/app-shell-ui':
+        specifier: workspace:*
+        version: link:../../packages/app-shell-ui
       '@korporus/system-settings':
         specifier: workspace:*
         version: link:../../packages/system-settings
@@ -351,6 +354,9 @@ importers:
 
   packages/app-docs:
     dependencies:
+      '@korporus/app-shell-ui':
+        specifier: workspace:*
+        version: link:../app-shell-ui
       '@korporus/system-settings':
         specifier: workspace:*
         version: link:../system-settings
@@ -409,6 +415,9 @@ importers:
 
   packages/app-hello:
     dependencies:
+      '@korporus/app-shell-ui':
+        specifier: workspace:*
+        version: link:../app-shell-ui
       '@korporus/system-settings':
         specifier: workspace:*
         version: link:../system-settings
@@ -461,6 +470,9 @@ importers:
 
   packages/app-settings:
     dependencies:
+      '@korporus/app-shell-ui':
+        specifier: workspace:*
+        version: link:../app-shell-ui
       '@korporus/system-settings':
         specifier: workspace:*
         version: link:../system-settings
@@ -498,6 +510,34 @@ importers:
       vite:
         specifier: ^6.0.0
         version: 6.4.1(@types/node@25.3.2)(jiti@2.6.1)(less@4.2.2)(lightningcss@1.31.1)(sass@1.85.0)(terser@5.39.0)(tsx@4.19.4)(yaml@2.8.2)
+
+  packages/app-shell-ui:
+    dependencies:
+      '@korporus/system-settings':
+        specifier: workspace:*
+        version: link:../system-settings
+      '@korporus/web-component-wrapper':
+        specifier: workspace:*
+        version: link:../web-component-wrapper
+      react:
+        specifier: ^19.0.0
+        version: 19.2.4
+    devDependencies:
+      '@types/react':
+        specifier: ^19.0.0
+        version: 19.2.14
+      jsdom:
+        specifier: ^26.1.0
+        version: 26.1.0
+      react-dom:
+        specifier: ^19.0.0
+        version: 19.2.4(react@19.2.4)
+      typescript:
+        specifier: '*'
+        version: 5.9.3
+      vitest:
+        specifier: ^3.0.0
+        version: 3.2.4(@types/debug@4.1.12)(@types/node@25.3.2)(jiti@2.6.1)(jsdom@26.1.0)(less@4.2.2)(lightningcss@1.31.1)(sass@1.85.0)(terser@5.39.0)(tsx@4.19.4)(yaml@2.8.2)
 
   packages/platform-config:
     devDependencies:

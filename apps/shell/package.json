@@ -10,6 +10,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@korporus/app-shell-ui": "workspace:*",
     "@korporus/app-manifest": "workspace:*",
     "@korporus/system-settings": "workspace:*",
     "@module-federation/runtime": "^0.7.0",
