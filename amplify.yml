@@ -3,23 +3,41 @@ frontend:
   phases:
     preBuild:
       commands:
-        - |
-          backend_count="$(aws amplify list-backend-environments --app-id "$AWS_APP_ID" --region "$AWS_REGION" --query 'length(backendEnvironments)' --output text 2>/dev/null || echo 0)"
-          if [ -z "$backend_count" ] || [ "$backend_count" = "0" ] || [ "$backend_count" = "None" ]; then
-            echo "No Amplify backend environments; skipping ampx outputs."
-          else
-            npx --yes --package @aws-amplify/backend-cli@latest ampx generate outputs \
-              --branch "$AWS_BRANCH" --app-id "$AWS_APP_ID" --out-dir apps/korpor.us
-          fi
-        - cd apps/korpor.us
-        - npm install
+        - npm install -g pnpm @angular/cli
+        - pnpm install
+        - rm -rf deploy
+        - mkdir -p deploy
     build:
       commands:
-        - npm run build
+        - |
+          if [ "$AWS_APP_ID" = "d1fajfjif4amni" ]; then
+            echo "Building React demo app for Amplify app $AWS_APP_ID"
+            pnpm --filter @korporus/demo-react build
+            cp -R apps/demo-react/dist/. deploy/
+          elif [ "$AWS_APP_ID" = "dbcd2fnqoxe67" ]; then
+            echo "Building Angular demo app for Amplify app $AWS_APP_ID"
+            pnpm --filter @korporus/demo-angular build
+            cp -R apps/demo-angular/dist/demo-angular/browser/. deploy/
+          else
+            echo "Building korpor.us site fallback for Amplify app $AWS_APP_ID"
+            backend_count="$(aws amplify list-backend-environments --app-id "$AWS_APP_ID" --region "$AWS_REGION" --query 'length(backendEnvironments)' --output text 2>/dev/null || echo 0)"
+            if [ -z "$backend_count" ] || [ "$backend_count" = "0" ] || [ "$backend_count" = "None" ]; then
+              echo "No Amplify backend environments; skipping ampx outputs."
+            else
+              npx --yes --package @aws-amplify/backend-cli@latest ampx generate outputs \
+                --branch "$AWS_BRANCH" --app-id "$AWS_APP_ID" --out-dir apps/korpor.us
+            fi
+            cd apps/korpor.us
+            npm install
+            npm run build
+            cd ../..
+            cp -R apps/korpor.us/public/. deploy/
+          fi
   artifacts:
-    baseDirectory: apps/korpor.us/public
+    baseDirectory: deploy
     files:
       - '**/*'
   cache:
     paths:
+      - node_modules/**/*
       - apps/korpor.us/node_modules/**/*
