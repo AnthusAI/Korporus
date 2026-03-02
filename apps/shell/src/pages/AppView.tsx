@@ -128,6 +128,7 @@ export default function AppView() {
   const hasSettingsSlot = !!manifest.slots.settings;
   const settingsComponentAvailable = settingsView ? hasSettingsSlot : systemSettingsView;
   const showSettingsFrame = loadState === "loaded" && settingsComponentAvailable;
+  const settingsReturnPath = `/app/${manifest.id}`;
 
   const handleSave = () => {
     if (!settingsHost || settingsSession.saving) return;
@@ -137,6 +138,9 @@ export default function AppView() {
         composed: true,
       }),
     );
+    if (settingsView) {
+      navigate(settingsReturnPath);
+    }
   };
 
   const handleCancel = () => {
@@ -147,6 +151,9 @@ export default function AppView() {
         composed: true,
       }),
     );
+    if (settingsView) {
+      navigate(settingsReturnPath);
+    }
   };
 
   return (
@@ -218,7 +225,7 @@ export default function AppView() {
             <button
               type="button"
               onClick={handleSave}
-              disabled={!settingsSession.dirty || !settingsSession.valid || settingsSession.saving}
+              disabled={!settingsSession.valid || settingsSession.saving}
               className="rounded-md bg-primary px-3 py-1.5 text-sm text-primary-foreground hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
             >
               {settingsSession.saving ? "Saving..." : "Save"}
