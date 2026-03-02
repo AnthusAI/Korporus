@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "event_id": "eb53ff4a-ef3d-4a4a-adf6-80c516d56050",
+  "issue_id": "kor-597e7831-ea4b-44f4-8eab-5b8bdb0ced4d",
+  "event_type": "issue_created",
+  "occurred_at": "2026-03-01T15:30:20.848Z",
+  "actor_id": "ryan.porter",
+  "payload": {
+    "assignee": null,
+    "description": "Create Gatsby+Tailwind site scaffold by copying apps/kanb.us, remove @kanbus/ui dependency, and provide local UI primitives/components required for parity layout and behavior.",
+    "issue_type": "task",
+    "labels": [],
+    "parent": "kor-3b94b69b-fe6f-4119-996e-410ff1427f59",
+    "priority": 2,
+    "status": "open",
+    "title": "Scaffold apps/korpor.us from kanb.us with local UI primitives"
+  }
+}

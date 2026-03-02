@@ -1,0 +1,25 @@
+{
+  "id": "kor-34811075-6938-429f-bd90-728a02129e7b",
+  "title": "Fix @korporus/site Gatsby develop missing module dependencies",
+  "description": "Resolve missing module errors during gatsby develop in apps/korpor.us under pnpm workspace isolation (query-string, lodash/merge, react-is and any related runtime peer imports).",
+  "type": "bug",
+  "status": "closed",
+  "priority": 2,
+  "assignee": null,
+  "creator": null,
+  "parent": "kor-3b94b69b-fe6f-4119-996e-410ff1427f59",
+  "labels": [],
+  "dependencies": [],
+  "comments": [
+    {
+      "id": "cc75baa5-3053-49cd-928e-a47c2363f0ef",
+      "author": "ryan.porter",
+      "text": "Fixed Gatsby dev module resolution under pnpm by removing the restrictive resolve.modules override in apps/korpor.us/gatsby-node.js and adding required runtime dependencies (query-string, lodash, react-is and related Gatsby/framer query-string transitive requirements). Verified with gatsby develop on port 8011 plus successful typecheck/build.",
+      "created_at": "2026-03-01T16:08:40.237852Z"
+    }
+  ],
+  "created_at": "2026-03-01T16:06:46.228881Z",
+  "updated_at": "2026-03-01T16:08:40.237852Z",
+  "closed_at": "2026-03-01T16:08:40.142900Z",
+  "custom": {}
+}

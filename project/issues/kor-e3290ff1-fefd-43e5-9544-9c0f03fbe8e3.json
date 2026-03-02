@@ -1,0 +1,18 @@
+{
+  "id": "kor-e3290ff1-fefd-43e5-9544-9c0f03fbe8e3",
+  "title": "Initial documentation content structure",
+  "description": "Create docs/ directory at repo root with index.md, getting-started/, architecture/, guides/, reference/ sections, each with an index.md placeholder.",
+  "type": "task",
+  "status": "closed",
+  "priority": 2,
+  "assignee": null,
+  "creator": null,
+  "parent": "kor-566b5893-7930-414c-ad3c-5df5170d1096",
+  "labels": [],
+  "dependencies": [],
+  "comments": [],
+  "created_at": "2026-02-28T20:40:15.949829Z",
+  "updated_at": "2026-02-28T21:22:37.235074Z",
+  "closed_at": "2026-02-28T21:22:37.235074Z",
+  "custom": {}
+}

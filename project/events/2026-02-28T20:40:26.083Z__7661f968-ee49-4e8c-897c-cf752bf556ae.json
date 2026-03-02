@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "event_id": "7661f968-ee49-4e8c-897c-cf752bf556ae",
+  "issue_id": "kor-e07ebb23-a648-4b6a-b89e-8a996f73f432",
+  "event_type": "issue_created",
+  "occurred_at": "2026-02-28T20:40:26.083Z",
+  "actor_id": "ryan.porter",
+  "payload": {
+    "assignee": null,
+    "description": "Write docs/guides/creating-an-app.md, state-management.md, styling.md, deployment.md. The deployment guide must cover all runtime modes: dev (two Vite servers, manifest rewrite), container (nginx, single origin), and production (App Runner, Amplify).",
+    "issue_type": "task",
+    "labels": [],
+    "parent": "kor-91da8cc2-1484-4352-89e5-2dad0339418b",
+    "priority": 2,
+    "status": "open",
+    "title": "Developer guides documentation"
+  }
+}

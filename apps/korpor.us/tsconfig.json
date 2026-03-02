@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "lib": ["DOM", "ES2020"],
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "jsx": "react-jsx",
+    "strict": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@korporus/site-ui": ["src/components/ui/index.tsx"]
+    }
+  },
+  "include": ["src/**/*", "gatsby-*.js", "gatsby-*.ts", "gatsby-*.tsx"]
+}

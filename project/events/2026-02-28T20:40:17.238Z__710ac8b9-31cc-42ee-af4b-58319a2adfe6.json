@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "event_id": "710ac8b9-31cc-42ee-af4b-58319a2adfe6",
+  "issue_id": "kor-3a3a9678-d37b-4702-bf5c-311501b1c4b9",
+  "event_type": "issue_created",
+  "occurred_at": "2026-02-28T20:40:17.238Z",
+  "actor_id": "ryan.porter",
+  "payload": {
+    "assignee": null,
+    "description": "Create MarkdownRenderer.tsx wrapping react-markdown with remark-gfm. Wire DocsMain.tsx to fetch manifest, load current document, and render. Add inline styles for all markdown elements, loading/error states.",
+    "issue_type": "task",
+    "labels": [],
+    "parent": "kor-3138e593-5942-4494-8153-6d4c1e6a5a16",
+    "priority": 2,
+    "status": "open",
+    "title": "Main slot renders markdown documents"
+  }
+}

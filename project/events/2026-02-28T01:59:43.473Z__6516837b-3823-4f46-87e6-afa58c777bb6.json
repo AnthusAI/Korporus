@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "event_id": "6516837b-3823-4f46-87e6-afa58c777bb6",
+  "issue_id": "kor-32ad3cbc-79b0-4773-8650-83c5b8e11709",
+  "event_type": "issue_created",
+  "occurred_at": "2026-02-28T01:59:43.473Z",
+  "actor_id": "ryan.porter",
+  "payload": {
+    "assignee": null,
+    "description": "",
+    "issue_type": "task",
+    "labels": [],
+    "parent": "kor-51bc6cb4-1b28-42f3-a3a3-9c2af3545cde",
+    "priority": 2,
+    "status": "open",
+    "title": "Deploy Korporus container to AWS App Runner"
+  }
+}

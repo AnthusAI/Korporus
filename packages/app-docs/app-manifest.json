@@ -1,0 +1,11 @@
+{
+  "id": "docs-app",
+  "name": "Help",
+  "icon": "./icon.svg",
+  "version": "1.0.0",
+  "remoteEntry": "/apps/docs/remoteEntry.js",
+  "slots": {
+    "menubar": "docs-app-menubar",
+    "main": "docs-app-main"
+  }
+}

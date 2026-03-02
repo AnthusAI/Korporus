@@ -1,0 +1,18 @@
+{
+  "id": "kor-56f07451-a26a-4774-b139-ee1f269b91cf",
+  "title": "Centralized port registry via @korporus/platform-config",
+  "description": "",
+  "type": "task",
+  "status": "closed",
+  "priority": 2,
+  "assignee": null,
+  "creator": null,
+  "parent": null,
+  "labels": [],
+  "dependencies": [],
+  "comments": [],
+  "created_at": "2026-02-28T23:30:15.491447Z",
+  "updated_at": "2026-02-28T23:43:44.330679Z",
+  "closed_at": "2026-02-28T23:43:44.330679Z",
+  "custom": {}
+}

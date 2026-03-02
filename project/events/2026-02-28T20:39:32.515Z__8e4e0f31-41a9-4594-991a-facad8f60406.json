@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "event_id": "8e4e0f31-41a9-4594-991a-facad8f60406",
+  "issue_id": "kor-adb0c27d-8bce-442f-840e-4163f1aa5d1c",
+  "event_type": "issue_created",
+  "occurred_at": "2026-02-28T20:39:32.515Z",
+  "actor_id": "ryan.porter",
+  "payload": {
+    "assignee": null,
+    "description": "Stand up the bare app-docs package with the federated module contract. Three empty Web Component slots loading in the shell. Definition of done: docs app loads in the shell at /app/docs-app showing placeholder content in all three slots.",
+    "issue_type": "epic",
+    "labels": [],
+    "parent": null,
+    "priority": 2,
+    "status": "open",
+    "title": "Epic: Docs App Scaffold"
+  }
+}

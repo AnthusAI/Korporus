@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "event_id": "8a64efe1-547d-4ae3-b4bb-4eb453c673d5",
+  "issue_id": "kor-a4415671-0135-40ad-8d3b-84c003e8f524",
+  "event_type": "issue_created",
+  "occurred_at": "2026-02-28T20:39:39.402Z",
+  "actor_id": "ryan.porter",
+  "payload": {
+    "assignee": null,
+    "description": "Relative links between documents work correctly within the app, headers have anchor links with copy functionality. Definition of done: relative markdown links navigate within the app, every heading has a hoverable anchor link with copy-to-clipboard.",
+    "issue_type": "epic",
+    "labels": [],
+    "parent": null,
+    "priority": 2,
+    "status": "open",
+    "title": "Epic: Navigation, Linking, and Header Anchors"
+  }
+}

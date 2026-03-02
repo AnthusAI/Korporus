@@ -1,0 +1,31 @@
+{
+  "id": "kor-51bc6cb4-1b28-42f3-a3a3-9c2af3545cde",
+  "title": "Containerization & Cloud Deployment",
+  "description": "",
+  "type": "epic",
+  "status": "closed",
+  "priority": 2,
+  "assignee": null,
+  "creator": null,
+  "parent": "kor-2d290612-7a8b-4512-b052-c7e40771482b",
+  "labels": [],
+  "dependencies": [],
+  "comments": [
+    {
+      "id": "66d107f5-57ed-4842-bcd2-4ba30c69e673",
+      "author": "ryan.porter",
+      "text": "Package the Korporus shell and its hosted apps into a Docker container and deploy it to AWS App Runner. Set up the Amplify demo apps to point at the App Runner URL. Validate the full end-to-end flow: user hits an Amplify demo URL → browser loads the SPA from CDN → SPA fetches federated modules from App Runner (waking the container if scaled to zero) → app renders.\n\n### Depends on\n- Epic 2 and Epic 3 (shell + toy app working locally)\n\n### Children\n- Task 5.1: Dockerfile for the Korporus container (after Epics 2 and 3)\n- Task 5.2: Deploy Korporus container to AWS App Runner (after 5.1)\n- Task 5.3: Deploy demo apps to Amplify Gen2 (after 5.2)\n- Task 5.4: End-to-end smoke test of the full deployment (after 5.2 and 5.3)",
+      "created_at": "2026-02-28T01:56:59.283299Z"
+    },
+    {
+      "id": "7f1aeec7-64d0-42be-b373-68ed4b5fe169",
+      "author": "ryan.porter",
+      "text": "Epic complete. All four tasks closed:\n- kor-1a087e (5.1): Dockerfile + nginx.conf\n- kor-32ad3c (5.2): Terraform for ECR + App Runner (infra/shell/)\n- kor-4c01c4 (5.3): Amplify build configs in both demo apps\n- kor-5ea317 (5.4): Smoke test checklist (in_progress — requires live deployment)",
+      "created_at": "2026-02-28T19:34:11.983911Z"
+    }
+  ],
+  "created_at": "2026-02-28T01:41:42.240482Z",
+  "updated_at": "2026-02-28T19:34:11.983911Z",
+  "closed_at": "2026-02-28T19:34:11.904502Z",
+  "custom": {}
+}

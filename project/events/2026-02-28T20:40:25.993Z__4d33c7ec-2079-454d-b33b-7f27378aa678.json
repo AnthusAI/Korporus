@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "event_id": "4d33c7ec-2079-454d-b33b-7f27378aa678",
+  "issue_id": "kor-cc9ab014-667a-4c99-9ed3-33aab28bf86f",
+  "event_type": "issue_created",
+  "occurred_at": "2026-02-28T20:40:25.993Z",
+  "actor_id": "ryan.porter",
+  "payload": {
+    "assignee": null,
+    "description": "Write docs/architecture/module-federation.md, web-components.md, shell.md, manifests.md. Cover how MF2 works in Korporus, the slot/custom-element contract, shell internals, and manifest schema.",
+    "issue_type": "task",
+    "labels": [],
+    "parent": "kor-91da8cc2-1484-4352-89e5-2dad0339418b",
+    "priority": 2,
+    "status": "open",
+    "title": "Architecture documentation"
+  }
+}

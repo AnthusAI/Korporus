@@ -1,0 +1,91 @@
+<vml id="intro" title="Intro to Korporus" fps="24" width="1920" height="1080" poster="18s">
+  <voiceover provider="openai" model="gpt-4o-mini-tts" voice="echo" sampleRateHz="24000" leadInSeconds="0s" trimEndSeconds="0s" />
+
+  <scene id="hook" title="What is Korporus?" duration="16s">
+    <layer id="background" z="-1">
+      <background props='{"color":"#fdfdfd"}' />
+    </layer>
+
+    <layer id="content" z="0">
+      <intro-scene />
+    </layer>
+
+    <cue id="hook" label="Hook">
+      <voice>Korporus is a federated application platform built around a shell host and runtime-loaded remotes.</voice>
+      <pause seconds="0.3s" />
+      <voice>Apps ship independently, then compose live through manifests and Web Component slot contracts.</voice>
+    </cue>
+  </scene>
+
+  <transition id="push-1" effect="slide" duration="12f" mode="insert" ease="power2.inOut" props='{"direction":"left"}' />
+
+  <scene id="runtime" title="Runtime Composition" duration="18s">
+    <layer id="background" z="-1">
+      <background props='{"color":"#fdfdfd"}' />
+    </layer>
+
+    <layer id="title" z="1">
+      <title props='{"text":"Runtime Composition","x":960,"y":150}' />
+    </layer>
+
+    <cue id="federation" label="Federation Runtime">
+      <voice>The host reads manifests, imports remote bootstrap modules, and mounts titlebar, main, and settings slots.</voice>
+      <pause seconds="0.3s" />
+      <voice>This keeps host and app delivery decoupled while preserving a stable integration boundary.</voice>
+    </cue>
+  </scene>
+
+  <transition id="push-2" effect="slide" duration="12f" mode="insert" ease="power2.inOut" props='{"direction":"left"}' />
+
+  <scene id="contract" title="Contract-First" duration="18s">
+    <layer id="background" z="-1">
+      <background props='{"color":"#fdfdfd"}' />
+    </layer>
+
+    <layer id="title" z="1">
+      <title props='{"text":"Manifest and Slot Contract","x":960,"y":150}' />
+    </layer>
+
+    <cue id="contract_intro" label="Contract First">
+      <voice>Korporus validates app manifests before loading and keeps integration explicit through named slot elements.</voice>
+      <pause seconds="0.3s" />
+      <voice>The same app remote can run in the shell and in external React or Angular host demos.</voice>
+    </cue>
+  </scene>
+
+  <transition id="push-3" effect="slide" duration="12f" mode="insert" ease="power2.inOut" props='{"direction":"left"}' />
+
+  <scene id="deploy" title="Deployment Topology" duration="16s">
+    <layer id="background" z="-1">
+      <background props='{"color":"#fdfdfd"}' />
+    </layer>
+
+    <layer id="title" z="1">
+      <title props='{"text":"Deploy Independently","x":960,"y":150}' />
+    </layer>
+
+    <cue id="deploy_intro" label="Deployment Model">
+      <voice>Hosts can be shipped as static frontends while remote runtimes and media infrastructure evolve independently.</voice>
+      <pause seconds="0.3s" />
+      <voice>That separation makes releases faster and reduces cross-team coupling.</voice>
+    </cue>
+  </scene>
+
+  <transition id="push-4" effect="slide" duration="12f" mode="insert" ease="power2.inOut" props='{"direction":"left"}' />
+
+  <scene id="cta" title="Get Started" duration="10s">
+    <layer id="background" z="-1">
+      <background props='{"color":"#fdfdfd"}' />
+    </layer>
+
+    <layer id="title" z="1">
+      <title props='{"text":"Get Started","x":960,"y":150}' />
+    </layer>
+
+    <cue id="cta" label="Get Started">
+      <voice>Korporus brings runtime composition, explicit contracts, and framework-agnostic app embedding into one platform.</voice>
+      <pause seconds="0.3s" />
+      <voice>Explore the docs to build your first app.</voice>
+    </cue>
+  </scene>
+</vml>

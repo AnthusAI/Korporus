@@ -1,0 +1,46 @@
+<div class="demo-page">
+  <header class="demo-header">
+    <div class="demo-header__inner">
+      <h1>Korporus Platform Demo</h1>
+      <p>Hello World app running as a federated module — Angular host</p>
+    </div>
+  </header>
+
+  <main class="demo-main">
+    <!-- Loading state -->
+    <div *ngIf="isLoading" class="state-container">
+      <div class="spinner"></div>
+      <p>Loading Hello World app…</p>
+    </div>
+
+    <!-- Error state -->
+    <div *ngIf="isError" class="state-container error">
+      <div class="error-icon">&#9888;&#65039;</div>
+      <p class="error-title">Failed to load app</p>
+      <p class="error-detail">{{ errorMessage() }}</p>
+      <p class="cold-start-msg">
+        The Korporus container may still be starting up.
+        This usually takes 10–30 seconds.
+      </p>
+      <button (click)="retry()" class="retry-btn">Try Again</button>
+    </div>
+
+    <!-- Loaded state: menubar + main -->
+    <div *ngIf="isLoaded" class="slots-layout">
+      <section class="slot-menubar">
+        <div class="slot-label">Menu Bar</div>
+        <div #menubarSlot class="slot-content"></div>
+      </section>
+
+      <section class="slot-main">
+        <div class="slot-label">Main Content</div>
+        <div #mainSlot class="slot-content slot-content--main"></div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="demo-footer">
+    <p>Remote entry: <code>{{ remoteEntry }}</code></p>
+    <p>Federated modules load at runtime — no React runtime in this Angular app.</p>
+  </footer>
+</div>

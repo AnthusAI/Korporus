@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "event_id": "a7979697-5dae-4616-b4d0-5747ddfee6dd",
+  "issue_id": "kor-5ea317b3-0d99-4541-a87e-4c6bcfe426fc",
+  "event_type": "issue_created",
+  "occurred_at": "2026-02-28T01:59:45.665Z",
+  "actor_id": "ryan.porter",
+  "payload": {
+    "assignee": null,
+    "description": "",
+    "issue_type": "task",
+    "labels": [],
+    "parent": "kor-51bc6cb4-1b28-42f3-a3a3-9c2af3545cde",
+    "priority": 2,
+    "status": "open",
+    "title": "End-to-end smoke test of the full deployment"
+  }
+}

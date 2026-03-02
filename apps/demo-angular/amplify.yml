@@ -1,0 +1,17 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - npm install -g pnpm @angular/cli
+        - pnpm install
+    build:
+      commands:
+        - pnpm --filter @korporus/demo-angular build
+  artifacts:
+    baseDirectory: apps/demo-angular/dist/demo-angular/browser
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*

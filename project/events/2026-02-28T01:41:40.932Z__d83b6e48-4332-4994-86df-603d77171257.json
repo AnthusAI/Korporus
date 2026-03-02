@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "event_id": "d83b6e48-4332-4994-86df-603d77171257",
+  "issue_id": "kor-9e5a09b6-0b4d-4c57-aa3a-4ef0bbb14147",
+  "event_type": "issue_created",
+  "occurred_at": "2026-02-28T01:41:40.932Z",
+  "actor_id": "ryan.porter",
+  "payload": {
+    "assignee": null,
+    "description": "",
+    "issue_type": "epic",
+    "labels": [],
+    "parent": "kor-2d290612-7a8b-4512-b052-c7e40771482b",
+    "priority": 2,
+    "status": "open",
+    "title": "Demo Host Applications (Angular + React on Amplify)"
+  }
+}

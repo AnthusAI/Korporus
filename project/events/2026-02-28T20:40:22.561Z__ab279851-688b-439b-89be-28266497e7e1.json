@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "event_id": "ab279851-688b-439b-89be-28266497e7e1",
+  "issue_id": "kor-4b5bc709-bae6-4953-9f03-3ac9f2c6916e",
+  "event_type": "issue_created",
+  "occurred_at": "2026-02-28T20:40:22.561Z",
+  "actor_id": "ryan.porter",
+  "payload": {
+    "assignee": null,
+    "description": "Create Breadcrumb.tsx that computes segments from currentPath and the manifest. Wire DocsTitlebar.tsx to render breadcrumb with book icon prefix. Segments are clickable, navigating to section index pages.",
+    "issue_type": "task",
+    "labels": [],
+    "parent": "kor-d122d376-a8bd-477e-ae1e-f79ecbfc5d45",
+    "priority": 2,
+    "status": "open",
+    "title": "Titlebar shows breadcrumb navigation for current document"
+  }
+}

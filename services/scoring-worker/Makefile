@@ -1,4 +1,4 @@
-.PHONY: help build test test-install clean push publish \
+.PHONY: help build test test-install clean push publish e2b-workload \
 	tf-backend-init tf-backend-apply tf-init-backend tf-plan-local tf-apply-local \
 	tf-init tf-plan tf-apply tf-destroy
 
@@ -72,6 +72,9 @@ publish: ## Publish a test scoring job to the live RabbitMQ broker (SCORING_JOB_
 	@echo "  REQUEST_ID     = $(REQUEST_ID)"
 	@$(REPO_ROOT)/services/scoring-worker/scripts/publish.sh \
 		"$(SCORING_JOB_ID)" "$(REQUEST_ID)" "$(_CLUSTER)" "$(_SUBNET)" "$(_SG)" "$(AWS_REGION)" "$(_RABBITMQ_ARN)" "$(_EXECUTION_ROLE)"
+
+e2b-workload: ## Run a sandboxed workload in E2B (requires E2B_API_KEY + TEMPLATE_ID)
+	@python $(REPO_ROOT)/services/scoring-worker/scripts/run_e2b_workload.py
 
 # ── Terraform targets ─────────────────────────────────────────────────────────
 tf-init: ## Initialize Terraform (download providers)

@@ -1,0 +1,25 @@
+{
+  "id": "kor-3b94b69b-fe6f-4119-996e-410ff1427f59",
+  "title": "Korporus marketing website parity with kanb.us",
+  "description": "Implement apps/korpor.us by mirroring apps/kanb.us architecture and styling, replacing all content/docs for Korporus, adding frame-parameterized pictogram compatibility for VideoML, and wiring Amplify Gen2 deployment with video CDN outputs.",
+  "type": "epic",
+  "status": "closed",
+  "priority": 2,
+  "assignee": null,
+  "creator": null,
+  "parent": "kor-2d290612-7a8b-4512-b052-c7e40771482b",
+  "labels": [],
+  "dependencies": [],
+  "comments": [
+    {
+      "id": "c286ded5-30b9-4fae-a51e-8b53aeee13cf",
+      "author": "ryan.porter",
+      "text": "Epic completed: Korporus marketing/docs website parity implementation landed with copied architecture, Korporus content/docs overhaul, frame-compatible pictogram, and Amplify Gen2 deployment wiring.",
+      "created_at": "2026-03-01T15:54:34.590585Z"
+    }
+  ],
+  "created_at": "2026-03-01T15:30:01.994451Z",
+  "updated_at": "2026-03-01T15:54:34.590585Z",
+  "closed_at": "2026-03-01T15:54:34.518123Z",
+  "custom": {}
+}

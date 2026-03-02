@@ -1,0 +1,18 @@
+{
+  "id": "kor-6ad12238-4bbc-407c-982b-fd28fd43ddad",
+  "title": "Epic: Docs Search",
+  "description": "Full-text client-side search across all documentation content using FlexSearch. Definition of done: settings slot contains a search input with instant results, highlighted snippets, and click-to-navigate.",
+  "type": "epic",
+  "status": "closed",
+  "priority": 2,
+  "assignee": null,
+  "creator": null,
+  "parent": null,
+  "labels": [],
+  "dependencies": [],
+  "comments": [],
+  "created_at": "2026-02-28T20:39:40.937379Z",
+  "updated_at": "2026-02-28T21:14:54.978960Z",
+  "closed_at": "2026-02-28T21:14:54.978960Z",
+  "custom": {}
+}

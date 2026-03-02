@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "event_id": "afceb2fd-3bbc-4e98-9e87-ea189f43e6fa",
+  "issue_id": "kor-a953da83-8ed0-43ce-af84-15a0fd8beaba",
+  "event_type": "issue_created",
+  "occurred_at": "2026-02-28T20:40:19.050Z",
+  "actor_id": "ryan.porter",
+  "payload": {
+    "assignee": null,
+    "description": "Create pathUtils.ts for relative path resolution (./foo, ../bar/baz, strip .md extensions). Create useDocNavigation.ts hook. Custom 'a' renderer for react-markdown that intercepts internal links and navigates via Zustand store.",
+    "issue_type": "task",
+    "labels": [],
+    "parent": "kor-a4415671-0135-40ad-8d3b-84c003e8f524",
+    "priority": 2,
+    "status": "open",
+    "title": "Relative links in markdown navigate within the app"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "event_id": "249ad13d-15b5-4d9e-aace-217fc5f0a234",
+  "issue_id": "kor-d7c40521-7e6e-41a7-b294-d22d46666003",
+  "event_type": "issue_created",
+  "occurred_at": "2026-03-01T15:30:21.259Z",
+  "actor_id": "ryan.porter",
+  "payload": {
+    "assignee": null,
+    "description": "Run site typecheck/build and manual parity checks for navigation, theme, routes, docs behavior, media fallback, and frame pictogram stability; close tasks and epic after validation.",
+    "issue_type": "task",
+    "labels": [],
+    "parent": "kor-3b94b69b-fe6f-4119-996e-410ff1427f59",
+    "priority": 2,
+    "status": "open",
+    "title": "Verify parity, build, typecheck, and close website epic"
+  }
+}

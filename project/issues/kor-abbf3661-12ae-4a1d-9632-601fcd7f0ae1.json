@@ -1,0 +1,25 @@
+{
+  "id": "kor-abbf3661-12ae-4a1d-9632-601fcd7f0ae1",
+  "title": "Mirror Amplify Gen2 website deployment and backend video outputs",
+  "description": "Add root amplify.yml and amplify/backend.ts mirroring Kanbus website pattern targeting apps/korpor.us/public and custom videos CDN outputs.",
+  "type": "task",
+  "status": "closed",
+  "priority": 2,
+  "assignee": null,
+  "creator": null,
+  "parent": "kor-3b94b69b-fe6f-4119-996e-410ff1427f59",
+  "labels": [],
+  "dependencies": [],
+  "comments": [
+    {
+      "id": "12c3e7ba-5c61-4930-87c3-61748b55c747",
+      "author": "ryan.porter",
+      "text": "Added root amplify.yml and Amplify Gen2 backend stack outputs for videos bucket/CDN URL, with site runtime consumption via amplify_outputs.json and GATSBY_VIDEOS_BASE_URL.",
+      "created_at": "2026-03-01T15:54:34.241463Z"
+    }
+  ],
+  "created_at": "2026-03-01T15:30:21.132212Z",
+  "updated_at": "2026-03-01T15:54:34.241463Z",
+  "closed_at": "2026-03-01T15:54:34.165105Z",
+  "custom": {}
+}

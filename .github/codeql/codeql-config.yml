@@ -1,0 +1,7 @@
+paths-ignore:
+  - ".codeql/**"
+  - ".codeql-tools/**"
+  - "node_modules/**"
+  - "**/dist/**"
+  - "**/public/**"
+  - "apps/korpor.us/public/**"

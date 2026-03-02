@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "event_id": "e293b13a-216c-46c7-b8ab-403f4438196b",
+  "issue_id": "kor-4fbf602c-cee3-4e74-b21b-674ea2c258fc",
+  "event_type": "issue_created",
+  "occurred_at": "2026-03-01T15:30:20.957Z",
+  "actor_id": "ryan.porter",
+  "payload": {
+    "assignee": null,
+    "description": "Rewrite all marketing and feature content for Korporus and implement markdown-driven docs ingestion from /docs into website docs routes and navigation.",
+    "issue_type": "task",
+    "labels": [],
+    "parent": "kor-3b94b69b-fe6f-4119-996e-410ff1427f59",
+    "priority": 2,
+    "status": "open",
+    "title": "Overhaul all site content and docs for Korporus"
+  }
+}

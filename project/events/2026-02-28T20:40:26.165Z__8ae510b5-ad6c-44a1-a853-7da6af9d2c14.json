@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "event_id": "8ae510b5-ad6c-44a1-a853-7da6af9d2c14",
+  "issue_id": "kor-7cbb7528-21e6-4086-b7e0-2d3675cdd0da",
+  "event_type": "issue_created",
+  "occurred_at": "2026-02-28T20:40:26.165Z",
+  "actor_id": "ryan.porter",
+  "payload": {
+    "assignee": null,
+    "description": "Write docs/reference/app-manifest-schema.md (full schema reference), web-component-wrapper-api.md (registerCustomElement API), shell-api.md (shell integration points).",
+    "issue_type": "task",
+    "labels": [],
+    "parent": "kor-91da8cc2-1484-4352-89e5-2dad0339418b",
+    "priority": 2,
+    "status": "open",
+    "title": "API reference documentation"
+  }
+}

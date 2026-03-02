@@ -1,0 +1,18 @@
+{
+  "id": "kor-4b5bc709-bae6-4953-9f03-3ac9f2c6916e",
+  "title": "Titlebar shows breadcrumb navigation for current document",
+  "description": "Create Breadcrumb.tsx that computes segments from currentPath and the manifest. Wire DocsTitlebar.tsx to render breadcrumb with book icon prefix. Segments are clickable, navigating to section index pages.",
+  "type": "task",
+  "status": "closed",
+  "priority": 2,
+  "assignee": null,
+  "creator": null,
+  "parent": "kor-d122d376-a8bd-477e-ae1e-f79ecbfc5d45",
+  "labels": [],
+  "dependencies": [],
+  "comments": [],
+  "created_at": "2026-02-28T20:40:22.560962Z",
+  "updated_at": "2026-02-28T21:22:35.586734Z",
+  "closed_at": "2026-02-28T21:22:35.586734Z",
+  "custom": {}
+}

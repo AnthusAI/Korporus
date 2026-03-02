@@ -1,0 +1,3 @@
+Korporus is a new operating system for AI agents.
+Launch agent apps, monitor long running work in the background,
+and manage progress, blockers, and settings from one clear workspace.

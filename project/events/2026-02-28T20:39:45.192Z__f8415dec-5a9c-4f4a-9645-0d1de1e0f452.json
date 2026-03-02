@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "event_id": "f8415dec-5a9c-4f4a-9645-0d1de1e0f452",
+  "issue_id": "kor-91da8cc2-1484-4352-89e5-2dad0339418b",
+  "event_type": "issue_created",
+  "occurred_at": "2026-02-28T20:39:45.192Z",
+  "actor_id": "ryan.porter",
+  "payload": {
+    "assignee": null,
+    "description": "Write the actual documentation covering the Korporus platform: getting started, architecture, module federation, web component contract, app manifest, creating an app, state management, styling, deployment modes (dev/container/production), and API reference.",
+    "issue_type": "epic",
+    "labels": [],
+    "parent": null,
+    "priority": 2,
+    "status": "open",
+    "title": "Epic: Initial Documentation Content"
+  }
+}

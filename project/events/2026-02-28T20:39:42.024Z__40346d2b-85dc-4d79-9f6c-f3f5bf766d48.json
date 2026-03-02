@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "event_id": "40346d2b-85dc-4d79-9f6c-f3f5bf766d48",
+  "issue_id": "kor-d122d376-a8bd-477e-ae1e-f79ecbfc5d45",
+  "event_type": "issue_created",
+  "occurred_at": "2026-02-28T20:39:42.024Z",
+  "actor_id": "ryan.porter",
+  "payload": {
+    "assignee": null,
+    "description": "The titlebar shows contextual breadcrumb navigation reflecting the user's position in the docs tree. Definition of done: titlebar displays clickable Docs > Section > Page breadcrumbs.",
+    "issue_type": "epic",
+    "labels": [],
+    "parent": null,
+    "priority": 2,
+    "status": "open",
+    "title": "Epic: Titlebar Breadcrumb"
+  }
+}
