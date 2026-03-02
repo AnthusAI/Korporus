@@ -43,11 +43,13 @@ export function bindSettingsSessionEvents(
 }
 
 export function useSettingsSessionBridge(options: {
+  hostElement?: HTMLElement | null;
   state: SettingsSessionState;
   onSave: () => Promise<void> | void;
   onCancel: () => void;
 }): void {
-  const host = useHostElement();
+  const contextHost = useHostElement();
+  const host = options.hostElement ?? contextHost;
   const onSaveRef = useRef(options.onSave);
   const onCancelRef = useRef(options.onCancel);
 

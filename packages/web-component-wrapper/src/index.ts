@@ -9,6 +9,10 @@ export interface WrapOptions {
   shadowDom?: boolean;
 }
 
+export interface HostElementProp {
+  __hostElement?: HTMLElement;
+}
+
 const HostElementContext = createContext<HTMLElement | null>(null);
 
 export function useHostElement(): HTMLElement | null {
@@ -27,7 +31,7 @@ export function useHostElement(): HTMLElement | null {
  * @param Component  The React component to render inside the element.
  * @param options  Optional configuration.
  */
-export function registerCustomElement<P extends Record<string, string>>(
+export function registerCustomElement<P extends Record<string, unknown>>(
   tagName: string,
   Component: ComponentType<P>,
   options: WrapOptions = {},
@@ -77,11 +81,16 @@ export function registerCustomElement<P extends Record<string, string>>(
     }
 
     private render() {
+      const props = {
+        ...(this.getProps() as object),
+        __hostElement: this,
+      } as unknown as P;
+
       this.root?.render(
         createElement(
           HostElementContext.Provider,
           { value: this },
-          createElement(Component, this.getProps()),
+          createElement(Component, props),
         ),
       );
     }

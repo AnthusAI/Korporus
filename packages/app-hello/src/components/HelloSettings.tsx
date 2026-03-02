@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { SettingsScaffold, useSettingsSessionBridge, type SidebarItem } from "@korporus/app-shell-ui";
 import { resolveEffectiveMode } from "@korporus/system-settings";
+import type { HostElementProp } from "@korporus/web-component-wrapper";
 import { GREETINGS } from "../data/greetings";
 import { useHelloStore } from "../store";
 import { useAppearanceSettings } from "../hooks/useAppearanceSettings";
@@ -9,7 +10,7 @@ const SIDEBAR_ITEMS: SidebarItem[] = [
   { id: "language", label: "Language", keywords: ["greeting", "locale"] },
 ];
 
-export function HelloSettings() {
+export function HelloSettings(props: HostElementProp) {
   const language = useHelloStore((s) => s.language);
   const setLanguage = useHelloStore((s) => s.setLanguage);
   const [draftLanguage, setDraftLanguage] = useState(language);
@@ -24,6 +25,7 @@ export function HelloSettings() {
   const dirty = useMemo(() => draftLanguage !== language, [draftLanguage, language]);
 
   useSettingsSessionBridge({
+    hostElement: props.__hostElement ?? null,
     state: {
       dirty,
       valid: true,

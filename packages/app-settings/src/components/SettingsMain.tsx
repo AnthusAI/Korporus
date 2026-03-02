@@ -14,6 +14,7 @@ import {
   useSettingsSessionBridge,
   type SidebarItem,
 } from "@korporus/app-shell-ui";
+import type { HostElementProp } from "@korporus/web-component-wrapper";
 
 function SegmentButton({
   label,
@@ -89,7 +90,7 @@ const SIDEBAR_ITEMS: SidebarItem[] = [
   { id: "motion", label: "Motion", keywords: ["full", "reduced", "off"] },
 ];
 
-export function SettingsMain() {
+export function SettingsMain(props: HostElementProp) {
   const [persisted, setPersisted] = useState<AppearanceSettingsV1>(() => readAppearance());
   const [draft, setDraft] = useState<AppearanceSettingsV1>(() => readAppearance());
   const [activeItemId, setActiveItemId] = useState<string>("mode");
@@ -125,6 +126,7 @@ export function SettingsMain() {
   const setMotion = (motion: AppearanceMotion) => setDraft((prev) => ({ ...prev, motion }));
 
   useSettingsSessionBridge({
+    hostElement: props.__hostElement ?? null,
     state: {
       dirty,
       valid: true,
