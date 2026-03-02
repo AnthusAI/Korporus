@@ -48,10 +48,8 @@ export default function AppView() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const appKey = appId ?? "";
-  const { loaded: manifestsLoaded, manifest } = useRegistry((s) => ({
-    loaded: s.loaded,
-    manifest: s.apps.find((a) => a.id === appKey),
-  }));
+  const manifestsLoaded = useRegistry((s) => s.loaded);
+  const manifest = useRegistry((s) => s.apps.find((a) => a.id === appKey));
 
   useEffect(() => {
     if (!manifest) return;

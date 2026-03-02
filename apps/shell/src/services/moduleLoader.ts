@@ -14,6 +14,8 @@ function ensureInit() {
 
 /** Loaded remote IDs so we only register each remote once. */
 const loadedRemotes = new Set<string>();
+const registeredRemotes = new Set<string>();
+const inFlightLoads = new Map<string, Promise<void>>();
 
 /**
  * Loads a federated app's bootstrap module.
@@ -38,13 +40,32 @@ export async function loadAppModule(remoteId: string, remoteEntry: string): Prom
 
   if (loadedRemotes.has(remoteId)) return;
 
-  registerRemotes(
-    [{ name: remoteId, entry: resolveEntry(remoteEntry) }],
-    { force: true },
-  );
+  const existingLoad = inFlightLoads.get(remoteId);
+  if (existingLoad) return existingLoad;
 
-  await loadRemote(`${remoteId}/bootstrap`);
-  loadedRemotes.add(remoteId);
+  const loadPromise = (async () => {
+    if (!registeredRemotes.has(remoteId)) {
+      registerRemotes(
+        [{ name: remoteId, entry: resolveEntry(remoteEntry) }],
+        { force: true },
+      );
+      registeredRemotes.add(remoteId);
+    }
+
+    await loadRemote(`${remoteId}/bootstrap`);
+    loadedRemotes.add(remoteId);
+  })();
+
+  inFlightLoads.set(remoteId, loadPromise);
+
+  try {
+    await loadPromise;
+  } catch (error) {
+    registeredRemotes.delete(remoteId);
+    throw error;
+  } finally {
+    inFlightLoads.delete(remoteId);
+  }
 }
 
 /** Convert an app id to a valid MF remote name (replaces hyphens with underscores). */
