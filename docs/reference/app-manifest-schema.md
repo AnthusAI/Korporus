@@ -25,6 +25,7 @@ interface AppManifest {
   slots: {
     menubar: string;
     main: string;
+    settings?: string;
   };
 }
 ```
@@ -37,6 +38,7 @@ interface AppManifest {
 - `version`: Must be a non-empty string
 - `remoteEntry`: Must be a non-empty string
 - `slots`: Must be an object with required keys `["menubar", "main"]`
+- `slots.settings`: Optional app settings slot used by `/app/{id}/settings`
 - Slot values must be non-empty strings (custom element tag names)
 
 ## Example
@@ -50,7 +52,8 @@ interface AppManifest {
   "remoteEntry": "/apps/hello/remoteEntry.js",
   "slots": {
     "menubar": "hello-app-menubar",
-    "main": "hello-app-main"
+    "main": "hello-app-main",
+    "settings": "hello-app-settings"
   }
 }
 ```
@@ -64,4 +67,4 @@ import { type AppManifest, parseManifest, validateManifest } from "@korporus/app
 ```
 
 - `parseManifest(raw: unknown): AppManifest` — Validates and returns a typed manifest. Throws on invalid input.
-- `validateManifest(raw: unknown): ValidationResult` — Returns `{ valid: true, manifest }` or `{ valid: false, errors }`.
+- `validateManifest(raw: unknown): ValidationResult` — Returns `{ valid: boolean, errors: string[] }`.

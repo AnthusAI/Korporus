@@ -5,7 +5,9 @@ import Home from "./pages/Home";
 import AppView from "./pages/AppView";
 import { loadManifests } from "./services/manifestLoader.js";
 import { useRegistry } from "./store/registry.js";
-import { useAppearanceSync } from "./hooks/useAppearance";
+import { ensureSystemSettingsProvider } from "./services/systemSettingsProvider";
+
+ensureSystemSettingsProvider();
 
 function ManifestLoader({ children }: { children: React.ReactNode }) {
   const setApps = useRegistry((s) => s.setApps);
@@ -16,8 +18,6 @@ function ManifestLoader({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  useAppearanceSync();
-
   return (
     <BrowserRouter>
       <ManifestLoader>

@@ -2,14 +2,15 @@
 
 Web Components are the boundary contract between the Korporus shell and federated apps. Each app registers custom HTML elements that the shell mounts into its layout slots.
 
-## The Two Slots
+## Slot Contract
 
-Every Korporus app provides two slots:
+Every Korporus app provides these slots:
 
 | Slot | Tag Name Convention | Purpose |
 |------|-------------------|---------|
 | **menubar** | `{app-id}-menubar` | App-specific controls rendered in the shell's top menu bar |
 | **main** | `{app-id}-main` | Primary content area (fills remaining space) |
+| **settings** (optional) | `{app-id}-settings` | App-specific settings view mounted at `/app/{app-id}/settings` |
 
 ## The `registerCustomElement` Wrapper
 

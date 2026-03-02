@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@korporus/app-manifest": "workspace:*",
+    "@korporus/system-settings": "workspace:*",
     "@module-federation/runtime": "^0.7.0",
     "clsx": "^2.1.0",
     "lucide-react": "^0.511.0",

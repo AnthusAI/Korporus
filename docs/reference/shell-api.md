@@ -58,6 +58,32 @@ const useRegistry: () => { apps: AppManifest[] }
 const useAppManifest: (id: string) => AppManifest | undefined
 ```
 
+## System Settings Provider
+
+The shell initializes `window.korporus.systemSettings` as the canonical provider for appearance settings:
+
+```typescript
+interface KorporusSystemSettingsApi {
+  getAppearance(): AppearanceSettingsV1;
+  setAppearance(
+    next:
+      | AppearanceSettingsV1
+      | ((prev: AppearanceSettingsV1) => AppearanceSettingsV1)
+  ): AppearanceSettingsV1;
+  subscribeAppearance(
+    listener: (next: AppearanceSettingsV1) => void
+  ): () => void;
+}
+```
+
+Apps should consume this through `@korporus/system-settings`:
+
+```typescript
+readAppearance()
+setAppearance(...)
+subscribeAppearance(...)
+```
+
 ## Dev Manifest Rewrite Plugin
 
 **File**: `apps/shell/vite.config.ts`

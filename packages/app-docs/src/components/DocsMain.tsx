@@ -1,6 +1,8 @@
 import { useEffect, useRef } from "react";
 import { useDocsStore } from "../store";
 import { MarkdownRenderer } from "./MarkdownRenderer";
+import { resolveEffectiveMode } from "@korporus/system-settings";
+import { useAppearanceSettings } from "../hooks/useAppearanceSettings";
 
 declare const __DOCS_BASE_URL__: string;
 
@@ -16,6 +18,9 @@ export function DocsMain() {
   const sidebarOpen = useDocsStore((s) => s.sidebarOpen);
   const toggleSidebar = useDocsStore((s) => s.toggleSidebar);
   const initialHashHandled = useRef(false);
+  const appearance = useAppearanceSettings();
+  const darkMode = resolveEffectiveMode(appearance.mode) === "dark";
+  const smoothScroll = appearance.motion === "full";
 
   // Load manifest on mount
   useEffect(() => {
@@ -65,9 +70,11 @@ export function DocsMain() {
     if (!hash) return;
     // Wait one frame for the DOM to update after React render
     requestAnimationFrame(() => {
-      document.getElementById(hash)?.scrollIntoView({ behavior: "smooth" });
+      document.getElementById(hash)?.scrollIntoView({
+        behavior: smoothScroll ? "smooth" : "auto",
+      });
     });
-  }, [loading, content]);
+  }, [loading, content, smoothScroll]);
 
   // Build sidebar sections from manifest
   const sections = buildSections(manifest);
@@ -78,7 +85,8 @@ export function DocsMain() {
         display: "flex",
         height: "100%",
         fontFamily: "system-ui, sans-serif",
-        color: "#1e293b",
+        color: darkMode ? "#e2e8f0" : "#1e293b",
+        background: darkMode ? "#020617" : "#ffffff",
       }}
     >
       {/* Sidebar */}
@@ -87,10 +95,11 @@ export function DocsMain() {
           style={{
             width: 240,
             minWidth: 240,
-            borderRight: "1px solid #e2e8f0",
+            borderRight: `1px solid ${darkMode ? "#1e293b" : "#e2e8f0"}`,
             overflowY: "auto",
             padding: "12px 0",
             fontSize: 13,
+            background: darkMode ? "#0f172a" : "#ffffff",
           }}
         >
           <div
@@ -99,7 +108,7 @@ export function DocsMain() {
               padding: "6px 16px",
               cursor: "pointer",
               fontWeight: currentPath === "index" ? 600 : 400,
-              color: currentPath === "index" ? "#3b82f6" : "#475569",
+              color: currentPath === "index" ? (darkMode ? "#93c5fd" : "#3b82f6") : darkMode ? "#cbd5e1" : "#475569",
             }}
           >
             Home
@@ -110,32 +119,40 @@ export function DocsMain() {
               section={section}
               currentPath={currentPath}
               onNavigate={setCurrentPath}
+              darkMode={darkMode}
             />
           ))}
         </nav>
       )}
 
       {/* Main content */}
-      <div style={{ flex: 1, overflowY: "auto", padding: "24px 32px" }}>
+      <div
+        style={{
+          flex: 1,
+          overflowY: "auto",
+          padding: "24px 32px",
+          background: darkMode ? "#020617" : "#ffffff",
+        }}
+      >
         <button
           onClick={toggleSidebar}
           style={{
-            background: "none",
-            border: "1px solid #e2e8f0",
+            background: darkMode ? "#0f172a" : "none",
+            border: `1px solid ${darkMode ? "#334155" : "#e2e8f0"}`,
             borderRadius: 4,
             padding: "4px 8px",
             cursor: "pointer",
             fontSize: 12,
-            color: "#64748b",
+            color: darkMode ? "#cbd5e1" : "#64748b",
             marginBottom: 16,
           }}
         >
           {sidebarOpen ? "Hide sidebar" : "Show sidebar"}
         </button>
 
-        {loading && <p style={{ color: "#94a3b8" }}>Loading...</p>}
+        {loading && <p style={{ color: darkMode ? "#94a3b8" : "#64748b" }}>Loading...</p>}
         {!loading && content === null && (
-          <p style={{ color: "#ef4444" }}>Document not found.</p>
+          <p style={{ color: darkMode ? "#fda4af" : "#ef4444" }}>Document not found.</p>
         )}
         {!loading && content !== null && (
           <div style={{ maxWidth: 720, lineHeight: 1.7 }}>
@@ -176,10 +193,12 @@ function SidebarSection({
   section,
   currentPath,
   onNavigate,
+  darkMode,
 }: {
   section: SectionData;
   currentPath: string;
   onNavigate: (path: string) => void;
+  darkMode: boolean;
 }) {
   const expanded = useDocsStore((s) => s.expandedSections.has(section.name));
   const toggleSection = useDocsStore((s) => s.toggleSection);
@@ -203,7 +222,7 @@ function SidebarSection({
           fontSize: 12,
           textTransform: "uppercase",
           letterSpacing: "0.05em",
-          color: "#94a3b8",
+          color: darkMode ? "#94a3b8" : "#64748b",
           display: "flex",
           alignItems: "center",
           gap: 4,
@@ -222,8 +241,8 @@ function SidebarSection({
               cursor: "pointer",
               fontSize: 13,
               fontWeight: currentPath === doc.path ? 600 : 400,
-              color: currentPath === doc.path ? "#3b82f6" : "#475569",
-              backgroundColor: currentPath === doc.path ? "#eff6ff" : "transparent",
+              color: currentPath === doc.path ? (darkMode ? "#93c5fd" : "#3b82f6") : darkMode ? "#cbd5e1" : "#475569",
+              backgroundColor: currentPath === doc.path ? (darkMode ? "#1e293b" : "#eff6ff") : "transparent",
               borderRadius: 4,
               margin: "0 4px",
             }}

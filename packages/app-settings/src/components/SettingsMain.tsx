@@ -1,20 +1,24 @@
 import { useEffect, useState } from "react";
 import {
-  applyAppearance,
+  readAppearance,
+  resolveEffectiveMode,
+  setAppearance,
+  subscribeAppearance,
   type AppearanceMode,
   type AppearanceMotion,
-  type AppearanceState,
+  type AppearanceSettingsV1,
   type AppearanceTheme,
-  readAppearance,
-} from "../lib/appearance";
+} from "@korporus/system-settings";
 
 function SegmentButton({
   label,
   active,
+  darkMode,
   onClick,
 }: {
   label: string;
   active: boolean;
+  darkMode: boolean;
   onClick: () => void;
 }) {
   return (
@@ -22,9 +26,11 @@ function SegmentButton({
       type="button"
       onClick={onClick}
       style={{
-        border: active ? "1px solid #0f172a" : "1px solid #cbd5e1",
-        background: active ? "#0f172a" : "#ffffff",
-        color: active ? "#f8fafc" : "#0f172a",
+        border: active
+          ? `1px solid ${darkMode ? "#e2e8f0" : "#0f172a"}`
+          : `1px solid ${darkMode ? "#334155" : "#cbd5e1"}`,
+        background: active ? (darkMode ? "#f8fafc" : "#0f172a") : darkMode ? "#111827" : "#ffffff",
+        color: active ? (darkMode ? "#0f172a" : "#f8fafc") : darkMode ? "#e2e8f0" : "#0f172a",
         borderRadius: 8,
         padding: "8px 12px",
         fontSize: 13,
@@ -37,12 +43,20 @@ function SegmentButton({
   );
 }
 
-function SettingGroup({ title, children }: { title: string; children: React.ReactNode }) {
+function SettingGroup({
+  title,
+  darkMode,
+  children,
+}: {
+  title: string;
+  darkMode: boolean;
+  children: React.ReactNode;
+}) {
   return (
     <section
       style={{
-        border: "1px solid #e2e8f0",
-        background: "#ffffff",
+        border: `1px solid ${darkMode ? "#334155" : "#e2e8f0"}`,
+        background: darkMode ? "#0b1220" : "#ffffff",
         borderRadius: 12,
         padding: 16,
       }}
@@ -53,7 +67,7 @@ function SettingGroup({ title, children }: { title: string; children: React.Reac
           fontSize: 12,
           textTransform: "uppercase",
           letterSpacing: "0.08em",
-          color: "#64748b",
+          color: darkMode ? "#94a3b8" : "#64748b",
           fontWeight: 700,
         }}
       >
@@ -65,74 +79,99 @@ function SettingGroup({ title, children }: { title: string; children: React.Reac
 }
 
 export function SettingsMain() {
-  const [appearance, setAppearance] = useState<AppearanceState>(() => readAppearance());
+  const [appearance, setLocalAppearance] = useState<AppearanceSettingsV1>(() => readAppearance());
+  const darkMode = resolveEffectiveMode(appearance.mode) === "dark";
 
   useEffect(() => {
-    applyAppearance(appearance);
-  }, [appearance]);
-
-  useEffect(() => {
-    const query = window.matchMedia("(prefers-color-scheme: dark)");
-    const onChange = () => {
-      setAppearance((current) => {
-        if (current.mode !== "system") return current;
-        return { ...current };
-      });
-    };
-    query.addEventListener("change", onChange);
-    return () => query.removeEventListener("change", onChange);
+    return subscribeAppearance((next) => setLocalAppearance(next));
   }, []);
 
-  const setMode = (mode: AppearanceMode) => setAppearance((prev) => ({ ...prev, mode }));
-  const setTheme = (theme: AppearanceTheme) => setAppearance((prev) => ({ ...prev, theme }));
+  const updateAppearance = (updater: (prev: AppearanceSettingsV1) => AppearanceSettingsV1) => {
+    const next = setAppearance(updater);
+    setLocalAppearance(next);
+  };
+
+  const setMode = (mode: AppearanceMode) => updateAppearance((prev) => ({ ...prev, mode }));
+  const setTheme = (theme: AppearanceTheme) => updateAppearance((prev) => ({ ...prev, theme }));
   const setMotion = (motion: AppearanceMotion) =>
-    setAppearance((prev) => ({ ...prev, motion }));
+    updateAppearance((prev) => ({ ...prev, motion }));
 
   return (
     <div
       style={{
         fontFamily: "system-ui, sans-serif",
-        background: "#f8fafc",
+        background: darkMode ? "#0f172a" : "#f8fafc",
         minHeight: "100%",
         boxSizing: "border-box",
         padding: 24,
       }}
     >
       <div style={{ maxWidth: 820, margin: "0 auto", display: "grid", gap: 14 }}>
-        <h2 style={{ margin: 0, fontSize: 22, color: "#0f172a" }}>Appearance</h2>
+        <h2 style={{ margin: 0, fontSize: 22, color: darkMode ? "#f8fafc" : "#0f172a" }}>
+          Appearance
+        </h2>
 
-        <SettingGroup title="Mode">
-          <SegmentButton label="Light" active={appearance.mode === "light"} onClick={() => setMode("light")} />
-          <SegmentButton label="Dark" active={appearance.mode === "dark"} onClick={() => setMode("dark")} />
+        <SettingGroup title="Mode" darkMode={darkMode}>
+          <SegmentButton
+            label="Light"
+            active={appearance.mode === "light"}
+            darkMode={darkMode}
+            onClick={() => setMode("light")}
+          />
+          <SegmentButton
+            label="Dark"
+            active={appearance.mode === "dark"}
+            darkMode={darkMode}
+            onClick={() => setMode("dark")}
+          />
           <SegmentButton
             label="System"
             active={appearance.mode === "system"}
+            darkMode={darkMode}
             onClick={() => setMode("system")}
           />
         </SettingGroup>
 
-        <SettingGroup title="Color Theme">
+        <SettingGroup title="Color Theme" darkMode={darkMode}>
           <SegmentButton
             label="Neutral"
             active={appearance.theme === "neutral"}
+            darkMode={darkMode}
             onClick={() => setTheme("neutral")}
           />
-          <SegmentButton label="Cool" active={appearance.theme === "cool"} onClick={() => setTheme("cool")} />
-          <SegmentButton label="Warm" active={appearance.theme === "warm"} onClick={() => setTheme("warm")} />
+          <SegmentButton
+            label="Cool"
+            active={appearance.theme === "cool"}
+            darkMode={darkMode}
+            onClick={() => setTheme("cool")}
+          />
+          <SegmentButton
+            label="Warm"
+            active={appearance.theme === "warm"}
+            darkMode={darkMode}
+            onClick={() => setTheme("warm")}
+          />
         </SettingGroup>
 
-        <SettingGroup title="Motion">
+        <SettingGroup title="Motion" darkMode={darkMode}>
           <SegmentButton
             label="Full"
             active={appearance.motion === "full"}
+            darkMode={darkMode}
             onClick={() => setMotion("full")}
           />
           <SegmentButton
             label="Reduced"
             active={appearance.motion === "reduced"}
+            darkMode={darkMode}
             onClick={() => setMotion("reduced")}
           />
-          <SegmentButton label="Off" active={appearance.motion === "off"} onClick={() => setMotion("off")} />
+          <SegmentButton
+            label="Off"
+            active={appearance.motion === "off"}
+            darkMode={darkMode}
+            onClick={() => setMotion("off")}
+          />
         </SettingGroup>
       </div>
     </div>

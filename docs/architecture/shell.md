@@ -33,6 +33,16 @@ export const MANIFEST_URLS: string[] = [
 
 Each manifest is validated against the `@korporus/app-manifest` schema. Valid manifests are stored in a Zustand registry at `src/store/registry.ts`.
 
+## System Settings Provider
+
+At startup, the shell installs `window.korporus.systemSettings` and becomes the canonical provider for global appearance settings.
+
+- Canonical event: `korporus:system-settings:appearance-changed`
+- Legacy compatibility event: `korporus:appearance-change`
+- Storage key: `korporus.appearance.v1`
+
+Apps consume this through `@korporus/system-settings` (`readAppearance`, `setAppearance`, `subscribeAppearance`) instead of reading storage directly.
+
 ## App Loading
 
 When a user clicks an app icon on the home screen:
@@ -50,5 +60,6 @@ The home screen (`src/pages/Home.tsx`) displays a grid of app icons from the reg
 ## Shell Chrome
 
 `ShellChrome` wraps the app view and provides:
-- A global menu button (solid dot icon) with app-level actions (Home, Settings)
-- A host title area and app menubar mount point
+- A global menu button (solid dot icon) with system-level actions (`About this Korporus`, `System Settings`)
+- An app menu (`About <App>`, and conditional `Settings` for apps with a `settings` slot)
+- An app menubar mount point

@@ -6,7 +6,7 @@ This guide covers the full process of adding a new federated app to Korporus.
 
 A Korporus app is a pnpm workspace package that:
 
-1. Exposes two Web Components (menubar, main)
+1. Exposes required Web Components (`menubar`, `main`) and optional `settings`
 2. Bundles them as a Module Federation remote
 3. Registers with the shell via a manifest JSON
 
@@ -111,7 +111,7 @@ export default defineConfig({
 
 ## Step 4: Write Your Components
 
-Create your two slot components. They're just React components — no special API:
+Create your slot components. They're just React components — no special API:
 
 ```typescript
 // src/components/MyMain.tsx
@@ -122,6 +122,17 @@ export function MyMain() {
 
 Use Zustand for state shared across slots — see [State Management](./state-management).
 
+To consume system-wide appearance settings, use `@korporus/system-settings`:
+
+```typescript
+import { readAppearance, subscribeAppearance } from "@korporus/system-settings";
+
+const initial = readAppearance();
+const unsubscribe = subscribeAppearance((next) => {
+  // react to global mode/theme/motion changes
+});
+```
+
 ## Step 5: Register as Web Components
 
 ```typescript
@@ -129,9 +140,11 @@ Use Zustand for state shared across slots — see [State Management](./state-man
 import { registerCustomElement } from "@korporus/web-component-wrapper";
 import { MyMenubar } from "./components/MyMenubar";
 import { MyMain } from "./components/MyMain";
+import { MySettings } from "./components/MySettings";
 
 registerCustomElement("my-app-menubar", MyMenubar);
 registerCustomElement("my-app-main", MyMain);
+registerCustomElement("my-app-settings", MySettings); // optional
 ```
 
 ## Step 6: Register with the Shell
@@ -147,7 +160,8 @@ registerCustomElement("my-app-main", MyMain);
   "remoteEntry": "/apps/my-app/remoteEntry.js",
   "slots": {
     "menubar": "my-app-menubar",
-    "main": "my-app-main"
+    "main": "my-app-main",
+    "settings": "my-app-settings"
   }
 }
 ```

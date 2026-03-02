@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { useDocsStore } from "../store";
 import { buildSearchIndex, search } from "../lib/searchIndex";
+import { resolveEffectiveMode } from "@korporus/system-settings";
+import { useAppearanceSettings } from "../hooks/useAppearanceSettings";
 
 export function DocsMenubar() {
   const currentPath = useDocsStore((s) => s.currentPath);
@@ -12,6 +14,8 @@ export function DocsMenubar() {
   const setCurrentPath = useDocsStore((s) => s.setCurrentPath);
   const indexBuilt = useRef(false);
   const [resultsOpen, setResultsOpen] = useState(false);
+  const appearance = useAppearanceSettings();
+  const darkMode = resolveEffectiveMode(appearance.mode) === "dark";
 
   useEffect(() => {
     if (!manifest || indexBuilt.current) return;
@@ -50,17 +54,18 @@ export function DocsMenubar() {
         gap: 16,
         width: "100%",
         fontFamily: "system-ui, sans-serif",
+        color: darkMode ? "#e2e8f0" : "#0f172a",
       }}
     >
       <div style={{ display: "flex", alignItems: "center", gap: 8, minWidth: 0, overflow: "hidden" }}>
         {crumbs.map((crumb, i) => (
           <span key={crumb.path} style={{ display: "flex", alignItems: "center", gap: 8 }}>
-            {i > 0 && <span style={{ color: "#94a3b8" }}>/</span>}
+            {i > 0 && <span style={{ color: darkMode ? "#64748b" : "#94a3b8" }}>/</span>}
             <span
               onClick={() => setCurrentPath(crumb.path)}
               style={{
                 cursor: i < crumbs.length - 1 ? "pointer" : "default",
-                color: i < crumbs.length - 1 ? "#2563eb" : "#0f172a",
+                color: i < crumbs.length - 1 ? (darkMode ? "#93c5fd" : "#2563eb") : darkMode ? "#e2e8f0" : "#0f172a",
                 fontWeight: i === crumbs.length - 1 ? 600 : 500,
                 fontSize: 13,
                 whiteSpace: "nowrap",
@@ -85,12 +90,13 @@ export function DocsMenubar() {
           onBlur={() => setTimeout(() => setResultsOpen(false), 120)}
           style={{
             width: "100%",
-            border: "1px solid #cbd5e1",
+            border: `1px solid ${darkMode ? "#334155" : "#cbd5e1"}`,
             borderRadius: 8,
             padding: "6px 10px",
             fontSize: 13,
             boxSizing: "border-box",
-            background: "#ffffff",
+            background: darkMode ? "#0f172a" : "#ffffff",
+            color: darkMode ? "#e2e8f0" : "#0f172a",
           }}
         />
         {resultsOpen && searchQuery.trim() && (
@@ -102,10 +108,12 @@ export function DocsMenubar() {
               right: 0,
               maxHeight: 320,
               overflowY: "auto",
-              border: "1px solid #cbd5e1",
+              border: `1px solid ${darkMode ? "#334155" : "#cbd5e1"}`,
               borderRadius: 8,
-              background: "#ffffff",
-              boxShadow: "0 10px 30px rgba(15, 23, 42, 0.08)",
+              background: darkMode ? "#0b1220" : "#ffffff",
+              boxShadow: darkMode
+                ? "0 10px 30px rgba(2, 6, 23, 0.45)"
+                : "0 10px 30px rgba(15, 23, 42, 0.08)",
               zIndex: 100,
             }}
           >
@@ -125,20 +133,28 @@ export function DocsMenubar() {
                     textAlign: "left",
                     padding: "10px 12px",
                     border: 0,
-                    borderBottom: "1px solid #f1f5f9",
+                    borderBottom: `1px solid ${darkMode ? "#1e293b" : "#f1f5f9"}`,
                     background: "transparent",
                     cursor: "pointer",
                   }}
                 >
-                  <div style={{ fontSize: 13, fontWeight: 600, color: "#0f172a" }}>{result.title}</div>
-                  <div style={{ fontSize: 11, color: "#64748b", marginTop: 2 }}>{result.section}</div>
+                  <div style={{ fontSize: 13, fontWeight: 600, color: darkMode ? "#e2e8f0" : "#0f172a" }}>
+                    {result.title}
+                  </div>
+                  <div style={{ fontSize: 11, color: darkMode ? "#94a3b8" : "#64748b", marginTop: 2 }}>
+                    {result.section}
+                  </div>
                   {result.snippet && (
-                    <div style={{ fontSize: 12, color: "#475569", marginTop: 4 }}>{result.snippet}</div>
+                    <div style={{ fontSize: 12, color: darkMode ? "#cbd5e1" : "#475569", marginTop: 4 }}>
+                      {result.snippet}
+                    </div>
                   )}
                 </button>
               ))
             ) : (
-              <div style={{ padding: "10px 12px", fontSize: 12, color: "#64748b" }}>No results found.</div>
+              <div style={{ padding: "10px 12px", fontSize: 12, color: darkMode ? "#94a3b8" : "#64748b" }}>
+                No results found.
+              </div>
             )}
           </div>
         )}

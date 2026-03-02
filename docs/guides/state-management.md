@@ -49,3 +49,16 @@ When `MyMain` calls `increment`, the menubar component will also re-render if it
 ## State Doesn't Persist
 
 By default, Zustand state is in-memory only. When the user navigates away from the app and back, the state resets. If you need persistence, use Zustand's `persist` middleware with `localStorage`.
+
+## System-Wide Settings
+
+For global appearance settings (`mode`, `theme`, `motion`), use `@korporus/system-settings` instead of reading local storage directly:
+
+```typescript
+import { readAppearance, subscribeAppearance } from "@korporus/system-settings";
+
+const initialAppearance = readAppearance();
+const unsubscribe = subscribeAppearance((next) => {
+  // update UI based on next.mode / next.theme / next.motion
+});
+```
