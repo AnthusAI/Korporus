@@ -46,6 +46,20 @@ pnpm lint
 pnpm format
 ```
 
+## Run as one container (single command)
+
+```bash
+docker compose up --build
+```
+
+Then open:
+
+```text
+http://localhost:8080
+```
+
+This runs the shell and bundled federated remotes (Hello, Help, Settings) behind nginx in one container.
+
 ## Running a single app
 
 ```bash

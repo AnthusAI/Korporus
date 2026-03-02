@@ -12,9 +12,11 @@ WORKDIR /app
 COPY pnpm-workspace.yaml package.json pnpm-lock.yaml ./
 COPY packages/app-manifest/package.json        ./packages/app-manifest/
 COPY packages/platform-config/package.json     ./packages/platform-config/
+COPY packages/system-settings/package.json     ./packages/system-settings/
 COPY packages/web-component-wrapper/package.json ./packages/web-component-wrapper/
 COPY packages/app-hello/package.json            ./packages/app-hello/
 COPY packages/app-docs/package.json             ./packages/app-docs/
+COPY packages/app-settings/package.json         ./packages/app-settings/
 COPY apps/shell/package.json                    ./apps/shell/
 
 RUN pnpm install --frozen-lockfile
@@ -37,6 +39,9 @@ RUN pnpm --filter @korporus/app-hello build
 # Build the docs app (produces packages/app-docs/dist/)
 RUN pnpm --filter @korporus/app-docs build
 
+# Build the settings app (produces packages/app-settings/dist/)
+RUN pnpm --filter @korporus/app-settings build
+
 # ─────────────────────────────────────────────────────────────────────────────
 # Stage 2 – runtime (nginx)
 # ─────────────────────────────────────────────────────────────────────────────
@@ -56,6 +61,9 @@ COPY --from=build /app/packages/app-hello/dist/ /usr/share/nginx/html/apps/hello
 
 # Docs app remote assets → served at /apps/docs/
 COPY --from=build /app/packages/app-docs/dist/ /usr/share/nginx/html/apps/docs/
+
+# Settings app remote assets → served at /apps/settings/
+COPY --from=build /app/packages/app-settings/dist/ /usr/share/nginx/html/apps/settings/
 
 # App manifests → served at /manifests/ (already embedded in shell dist from public/)
 # The shell's public/manifests/ directory is copied into the shell dist by Vite.
