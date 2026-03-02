@@ -41,7 +41,9 @@ export default function ShellChrome({ appManifest, menubarSlotTag }: ShellChrome
   }, [appManifest]);
 
   const showHomeButton = location.pathname !== "/";
-  const inSettingsView = /^\/app\/[^/]+\/settings\/?$/.test(location.pathname);
+  const inAppSettingsView = /^\/app\/[^/]+\/settings\/?$/.test(location.pathname);
+  const inSystemSettingsApp = /^\/app\/settings-app\/?$/.test(location.pathname);
+  const showCloseButton = inAppSettingsView || inSystemSettingsApp;
 
   useEffect(() => {
     setSystemMenuOpen(false);
@@ -183,7 +185,7 @@ export default function ShellChrome({ appManifest, menubarSlotTag }: ShellChrome
               <House size={15} />
             </button>
           )}
-          {inSettingsView && (
+          {showCloseButton && (
             <button
               type="button"
               onClick={handleCloseSettings}
