@@ -1,7 +1,7 @@
 {
   "id": "settings-app",
   "name": "Settings",
-  "icon": "/manifests/settings-app-icon.svg",
+  "icon": "/manifests/settings-app-icon.svg?v=20260302",
   "version": "1.0.0",
   "remoteEntry": "/apps/settings/mf-manifest.json",
   "slots": {

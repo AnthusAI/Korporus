@@ -1,7 +1,7 @@
 {
   "id": "hello-app",
   "name": "Hello World",
-  "icon": "/manifests/hello-app-icon.svg",
+  "icon": "/manifests/hello-app-icon.svg?v=20260302",
   "version": "1.0.0",
   "remoteEntry": "/apps/hello/mf-manifest.json",
   "slots": {
