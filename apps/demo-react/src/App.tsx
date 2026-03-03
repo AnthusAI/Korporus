@@ -7,9 +7,18 @@ import { useEffect } from "react";
 
 type LoadState = "idle" | "loading" | "loaded" | "error";
 
+const DEFAULT_REMOTE_ENTRY =
+  "https://awdmyggmnm.us-east-1.awsapprunner.com/apps/hello/mf-manifest.json";
+const LOCAL_REMOTE_ENTRY = "/apps/hello/mf-manifest.json";
+
+const isLocalHost =
+  typeof window !== "undefined" &&
+  (window.location.hostname === "localhost" ||
+    window.location.hostname === "127.0.0.1");
+
 const remoteEntry =
   import.meta.env.VITE_KORPORUS_REMOTE_ENTRY ??
-  "https://awdmyggmnm.us-east-1.awsapprunner.com/apps/hello/mf-manifest.json";
+  (isLocalHost ? LOCAL_REMOTE_ENTRY : DEFAULT_REMOTE_ENTRY);
 
 export default function App() {
   const [loadState, setLoadState] = useState<LoadState>("idle");

@@ -29,12 +29,20 @@
     <div *ngIf="isLoaded" class="slots-layout">
       <section class="slot-menubar">
         <div class="slot-label">Menu Bar</div>
-        <div #menubarSlot class="slot-content"></div>
+        <div #menubarSlot class="slot-content slot-content--padded"></div>
       </section>
 
       <section class="slot-main">
         <div class="slot-label">Main Content</div>
         <div #mainSlot class="slot-content slot-content--main"></div>
+      </section>
+
+      <section class="slot-settings">
+        <div class="slot-label">Settings</div>
+        <div #settingsSlot class="slot-content slot-content--padded"></div>
+        <div class="settings-actions">
+          <button (click)="saveSettings()" class="settings-btn settings-btn--save">Save</button>
+        </div>
       </section>
     </div>
   </main>

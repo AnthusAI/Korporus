@@ -7,6 +7,14 @@ import { CommonModule } from '@angular/common';
 import { loadAppModule } from './module-loader';
 
 type LoadState = 'idle' | 'loading' | 'loaded' | 'error';
+const DEFAULT_REMOTE_ENTRY =
+  'https://awdmyggmnm.us-east-1.awsapprunner.com/apps/hello/mf-manifest.json';
+const LOCAL_REMOTE_ENTRY = '/apps/hello/mf-manifest.json';
+
+type AngularImportMetaEnv = {
+  KORPORUS_REMOTE_ENTRY?: string;
+  VITE_KORPORUS_REMOTE_ENTRY?: string;
+};
 
 @Component({
   selector: 'app-root',
@@ -25,11 +33,27 @@ export class AppComponent implements OnInit, AfterViewChecked {
 
   @ViewChild('menubarSlot') menubarSlot?: ElementRef<HTMLDivElement>;
   @ViewChild('mainSlot') mainSlot?: ElementRef<HTMLDivElement>;
+  @ViewChild('settingsSlot') settingsSlot?: ElementRef<HTMLDivElement>;
 
   constructor(private cdr: ChangeDetectorRef) {}
 
   private resolveRemoteEntry(): string {
-    return 'https://awdmyggmnm.us-east-1.awsapprunner.com/apps/hello/mf-manifest.json';
+    const importMetaEnv = (import.meta as ImportMeta & { env?: AngularImportMetaEnv }).env;
+    const windowConfig = window as Window & {
+      KORPORUS_REMOTE_ENTRY?: string;
+      __KORPORUS_REMOTE_ENTRY__?: string;
+    };
+    const isLocalHost =
+      window.location.hostname === 'localhost' ||
+      window.location.hostname === '127.0.0.1';
+
+    return (
+      windowConfig.__KORPORUS_REMOTE_ENTRY__ ??
+      windowConfig.KORPORUS_REMOTE_ENTRY ??
+      importMetaEnv?.KORPORUS_REMOTE_ENTRY ??
+      importMetaEnv?.VITE_KORPORUS_REMOTE_ENTRY ??
+      (isLocalHost ? LOCAL_REMOTE_ENTRY : DEFAULT_REMOTE_ENTRY)
+    );
   }
 
   ngOnInit(): void {
@@ -54,7 +78,7 @@ export class AppComponent implements OnInit, AfterViewChecked {
 
   ngAfterViewChecked(): void {
     if (this.loadState() === 'loaded' && !this.slotsMounted) {
-      if (this.menubarSlot && this.mainSlot) {
+      if (this.menubarSlot && this.mainSlot && this.settingsSlot) {
         this.slotsMounted = true;
         this.mountSlots();
       }
@@ -62,13 +86,27 @@ export class AppComponent implements OnInit, AfterViewChecked {
   }
 
   private mountSlots(): void {
-    this.appendCustomElement(this.menubarSlot!, 'hello-app-menubar');
+    const titlebarTag = customElements.get('hello-app-titlebar')
+      ? 'hello-app-titlebar'
+      : 'hello-app-menubar';
+    this.appendCustomElement(this.menubarSlot!, titlebarTag);
     this.appendCustomElement(this.mainSlot!, 'hello-app-main');
+    this.appendCustomElement(this.settingsSlot!, 'hello-app-settings');
   }
 
   private appendCustomElement(ref: ElementRef<HTMLDivElement>, tagName: string): void {
     ref.nativeElement.innerHTML = '';
-    ref.nativeElement.appendChild(document.createElement(tagName));
+    const el = document.createElement(tagName) as HTMLElement;
+    el.style.display = 'block';
+    el.style.width = '100%';
+    ref.nativeElement.appendChild(el);
+  }
+
+  saveSettings(): void {
+    const settingsEl = this.settingsSlot?.nativeElement.querySelector('hello-app-settings');
+    settingsEl?.dispatchEvent(
+      new CustomEvent('korporus:settings:save', { bubbles: true, composed: true }),
+    );
   }
 
   retry(): void {
