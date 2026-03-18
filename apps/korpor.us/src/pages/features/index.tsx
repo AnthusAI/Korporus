@@ -84,6 +84,24 @@ const USER_SECTIONS = [
       "Deployment infrastructure prioritizes stable host delivery and dependable runtime access.",
       "The result is a calmer user experience with fewer edge-case failures during daily use."
     ]
+  },
+  {
+    id: "tactus-architecture",
+    title: "Tactus Architecture",
+    subtitle: "Native support for the Tactus programming language.",
+    body: [
+      "Korporus is an AI agent operating system designed specifically as a platform for installing and running apps that leverage Tactus.",
+      "Benefit from a purpose-built environment that understands and optimizes Tactus-based agent orchestration out of the box."
+    ]
+  },
+  {
+    id: "logging-and-alerting",
+    title: "Logging and Alerting",
+    subtitle: "Deep visibility into your background agent workflows.",
+    body: [
+      "Korporus provides structured logging and instant alerts when things go wrong, giving you the visibility needed to trust autonomous processes.",
+      "Identify execution errors, track performance bottlenecks, and resolve issues before they impact your business processes."
+    ]
   }
 ] as const;
 
