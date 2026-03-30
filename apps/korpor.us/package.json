@@ -23,6 +23,7 @@
     "@radix-ui/colors": "^3.0.0",
     "@tailwindcss/postcss": "^4.1.18",
     "@types/dompurify": "^3.2.0",
+    "anthus-footer": "git+https://github.com/AnthusAI/anthus-footer.git#feature/shared-anthus-footer",
     "boolbase": "^1.0.0",
     "clsx": "^2.1.1",
     "css-select": "^6.0.0",

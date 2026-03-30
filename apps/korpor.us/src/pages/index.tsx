@@ -199,8 +199,8 @@ const IndexPage = () => {
   return (
     <Layout>
       <Hero
-        title="A new OS for a new kind of app"
-        subtitle="Run AI agents like apps: one place to launch them, monitor long-running background work, and manage settings and progress in a consistent interface."
+        title="A new AI Agent Operating System"
+        subtitle="A platform for installing and running apps that generally leverage the Tactus programming language. Manage your agents, monitor background work, and stay on top of execution."
         rightPane={<ShellHomePreview scale={0.4} className="max-w-full" />}
         actions={
           <>
@@ -308,6 +308,26 @@ const IndexPage = () => {
             </div>
           </div>
           <CopilotArtifactsPictogram className="h-full" />
+        </div>
+      </Section>
+
+      <Section
+        title="Logging and Alerting"
+        subtitle="Real-time visibility into background agent workflows, errors, and health."
+      >
+        <div className="grid gap-6 md:grid-cols-2">
+          <div className="rounded-xl border border-border/60 bg-card p-6">
+            <h3 className="text-lg font-semibold text-foreground mb-2">Keep your agents healthy</h3>
+            <p className="text-muted leading-relaxed">
+              Agents shouldn't be black boxes. Korporus provides structured logging and instant alerts when things go wrong, giving you the visibility needed to trust autonomous processes.
+            </p>
+          </div>
+          <div className="rounded-xl border border-border/60 bg-card p-6">
+            <h3 className="text-lg font-semibold text-foreground mb-2">Proactive issue resolution</h3>
+            <p className="text-muted leading-relaxed">
+              Identify execution errors, track performance bottlenecks, and resolve issues before they impact your business processes.
+            </p>
+          </div>
         </div>
       </Section>
 

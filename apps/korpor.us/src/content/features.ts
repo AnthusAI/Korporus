@@ -53,6 +53,16 @@ export const FEATURE_ENTRIES: FeatureEntry[] = [
     href: "/features#reliable-delivery"
   },
   {
+    title: "Tactus Architecture",
+    description: "A platform built from the ground up to run Tactus-based agent applications seamlessly.",
+    href: "/features#tactus-architecture"
+  },
+  {
+    title: "Logging & Alerting",
+    description: "Real-time visibility and proactive alerts for your background agent workflows and health.",
+    href: "/features#logging-and-alerting"
+  },
+  {
     title: "Developer Platform Included",
     description: "Behind the scenes, Korporus has a full technical platform when your team is ready to extend it.",
     href: "/developers",
