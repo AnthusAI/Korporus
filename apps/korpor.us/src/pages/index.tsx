@@ -215,6 +215,28 @@ const IndexPage = () => {
       />
 
       <Section
+        title="Where Korporus fits in the Anthus Platform"
+        subtitle="Korporus is the standard container and shell for Anthus-powered services."
+        variant="alt"
+      >
+        <Card className="p-8 bg-card">
+          <CardContent className="p-0 space-y-4 text-muted leading-relaxed">
+            <p>
+              Korporus is where multiple Anthus building blocks come together as one application surface. It often
+              hosts <a href="https://plexus.anth.us" className="text-selected hover:underline">Plexus</a>-powered control planes,
+              <a href="https://tactus.anth.us" className="text-selected hover:underline"> Tactus</a>-driven procedures, and
+              <a href="https://anth.us/platform/caducus" className="text-selected hover:underline"> Caducus</a>-style operator views.
+            </p>
+            <p>
+              Common recipe: use Korporus as the shell around a Tactus workflow, connect Plexus for evaluation and
+              deployment discipline, and add Kanbus or Caducus when humans need planning context and operational
+              visibility.
+            </p>
+          </CardContent>
+        </Card>
+      </Section>
+
+      <Section
         title="Your agent workspace works like an operating system"
         subtitle="Find apps, open them quickly, and use familiar layout patterns so you always know where controls and settings live."
       >

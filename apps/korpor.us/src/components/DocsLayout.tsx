@@ -107,7 +107,23 @@ const DocsLayout = ({ children, currentPath }: DocsLayoutProps) => {
           </nav>
         </aside>
 
-        <div className="flex-1 min-w-0 space-y-12">{children}</div>
+        <div className="flex-1 min-w-0 space-y-12">
+          <div className="rounded-2xl bg-card p-2">
+            <div className="rounded-xl bg-background p-6">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-foreground/60">
+                Anthus Platform map
+              </p>
+              <p className="mt-3 text-sm leading-7 text-muted">
+                Korporus is the Anthus host shell. It is where products like
+                <a href="https://plexus.anth.us" className="font-semibold text-foreground hover:text-selected"> Plexus</a>,
+                <a href="https://kanb.us" className="font-semibold text-foreground hover:text-selected"> Kanbus</a>, and
+                <a href="https://tactus.anth.us" className="font-semibold text-foreground hover:text-selected"> Tactus</a> can show up
+                together as one coherent service surface.
+              </p>
+            </div>
+          </div>
+          {children}
+        </div>
       </div>
     </Layout>
   );

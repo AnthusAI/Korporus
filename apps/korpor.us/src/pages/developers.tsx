@@ -74,6 +74,28 @@ const DevelopersPage = () => {
 
       <div className="space-y-16">
         <Section
+          title="Where this fits in the Anthus Platform"
+          subtitle="Korporus is the runtime shell that lets Anthus components show up as one coherent product."
+          variant="alt"
+        >
+          <Card className="p-8 bg-card">
+            <CardContent className="p-0 space-y-4 text-muted leading-relaxed">
+              <p>
+                Developers reach for Korporus when an Anthus workflow needs a standard place to live. It is the natural
+                host for <a href="https://plexus.anth.us" className="text-selected hover:underline">Plexus</a> dashboards,
+                <a href="https://tactus.anth.us" className="text-selected hover:underline"> Tactus</a>-driven procedure tooling, and
+                future interfaces around <a href="https://anth.us/platform/biblicus" className="text-selected hover:underline">Biblicus</a> or
+                <a href="https://kanb.us" className="text-selected hover:underline"> Kanbus</a>.
+              </p>
+              <p>
+                Common recipe: package a Tactus-based workflow inside Korporus, use Plexus to measure and refine it,
+                and expose operator-facing controls and background status in one shared shell.
+              </p>
+            </CardContent>
+          </Card>
+        </Section>
+
+        <Section
           title="Architecture at a glance"
           subtitle="The shell host discovers manifests, loads remotes over Module Federation runtime, and mounts slot components."
         >
