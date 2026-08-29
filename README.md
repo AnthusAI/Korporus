@@ -94,3 +94,11 @@ The `slots` object maps shell slot names to the custom element tag names exposed
 ## Project management
 
 Tasks and issues are tracked in Kanbus. See [CONTRIBUTING_AGENT.md](./CONTRIBUTING_AGENT.md) for the workflow.
+
+---
+
+Built by [Anthus AI Solutions](https://anth.us). We run this class of system in production.
+
+The application shell we use when agents have to live in a real product.
+
+If you need this operated, not just cloned, [talk to us](https://anth.us).
